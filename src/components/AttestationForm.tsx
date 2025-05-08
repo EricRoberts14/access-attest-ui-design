@@ -7,7 +7,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Check } from 'lucide-react';
+import { Check, Lock } from 'lucide-react';
 
 const AttestationForm = () => {
   return (
@@ -21,7 +21,7 @@ const AttestationForm = () => {
       <CardContent>
         <Alert className="mb-6">
           <AlertTitle className="flex items-center">
-            <Clock className="h-4 w-4 mr-2" />
+            <Lock className="h-4 w-4 mr-2" />
             Attestation Period: September 1-30, 2025
           </AlertTitle>
           <AlertDescription>
