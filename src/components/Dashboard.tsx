@@ -74,14 +74,6 @@ const Dashboard = () => {
                 <span className="font-medium">20</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm">Organizations</span>
-                <span className="font-medium">8</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm">Individuals</span>
-                <span className="font-medium">12</span>
-              </div>
-              <div className="flex justify-between items-center">
                 <span className="text-sm">Pending Attestations</span>
                 <Badge variant="outline" className="bg-attestation-pending/10 text-attestation-pending">8</Badge>
               </div>
