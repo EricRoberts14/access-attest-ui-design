@@ -53,69 +53,53 @@ const Dashboard = () => {
         </div>
       </div>
       
-      {/* Attestation Summary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-lg">Next Attestation Period</CardTitle>
-            <CardDescription>September 1-30, 2025</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="flex items-center gap-2 mb-2">
-              <Calendar className="h-5 w-5 text-muted-foreground" />
-              <span className="text-sm">14 items require attestation</span>
-            </div>
-            <Progress value={42} className="h-2" />
-          </CardContent>
-          <CardFooter>
-            <Button variant="outline" size="sm" className="w-full">Prepare Attestations</Button>
-          </CardFooter>
-        </Card>
-        
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-lg">Organization Associations</CardTitle>
-            <CardDescription>Active connections to organizations</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2">
-              <div className="flex justify-between items-center">
-                <span className="text-sm">Total Organizations</span>
-                <span className="font-medium">8</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm">Pending Attestations</span>
-                <Badge variant="outline" className="bg-attestation-pending/10 text-attestation-pending">3</Badge>
+      {/* Combined Attestation and Associations Summary Card */}
+      <Card>
+        <CardHeader className="pb-2">
+          <CardTitle className="text-lg">Next Attestation Period</CardTitle>
+          <CardDescription>September 1-30, 2025</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="flex items-center gap-2 mb-3">
+            <Calendar className="h-5 w-5 text-muted-foreground" />
+            <span className="text-sm">14 items require attestation</span>
+          </div>
+          <Progress value={42} className="h-2 mb-5" />
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3">
+            <div className="space-y-4">
+              <h3 className="text-sm font-medium">Organizations</h3>
+              <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm">Total Organizations</span>
+                  <span className="font-medium">8</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm">Pending Attestations</span>
+                  <Badge variant="outline" className="bg-attestation-pending/10 text-attestation-pending">3</Badge>
+                </div>
               </div>
             </div>
-          </CardContent>
-          <CardFooter>
-            <Button variant="outline" size="sm" className="w-full">Manage Organizations</Button>
-          </CardFooter>
-        </Card>
-        
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-lg">Individual Associations</CardTitle>
-            <CardDescription>Direct access grants to individuals</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2">
-              <div className="flex justify-between items-center">
-                <span className="text-sm">Total Individuals</span>
-                <span className="font-medium">12</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm">Pending Attestations</span>
-                <Badge variant="outline" className="bg-attestation-pending/10 text-attestation-pending">5</Badge>
+            
+            <div className="space-y-4">
+              <h3 className="text-sm font-medium">Individuals</h3>
+              <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm">Total Individuals</span>
+                  <span className="font-medium">12</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm">Pending Attestations</span>
+                  <Badge variant="outline" className="bg-attestation-pending/10 text-attestation-pending">5</Badge>
+                </div>
               </div>
             </div>
-          </CardContent>
-          <CardFooter>
-            <Button variant="outline" size="sm" className="w-full">Manage Individuals</Button>
-          </CardFooter>
-        </Card>
-      </div>
+          </div>
+        </CardContent>
+        <CardFooter>
+          <Button variant="default" className="w-full">Prepare All Attestations</Button>
+        </CardFooter>
+      </Card>
       
       {/* Main Tabs */}
       <Tabs defaultValue="associations" className="w-full">
