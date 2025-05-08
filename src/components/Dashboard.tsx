@@ -66,32 +66,24 @@ const Dashboard = () => {
           </div>
           <Progress value={42} className="h-2 mb-5" />
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3">
-            <div className="space-y-4">
-              <h3 className="text-sm font-medium">Organizations</h3>
-              <div className="space-y-2">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm">Total Organizations</span>
-                  <span className="font-medium">8</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm">Pending Attestations</span>
-                  <Badge variant="outline" className="bg-attestation-pending/10 text-attestation-pending">3</Badge>
-                </div>
+          <div className="space-y-4 mt-3">
+            <h3 className="text-sm font-medium">Accounts</h3>
+            <div className="space-y-2">
+              <div className="flex justify-between items-center">
+                <span className="text-sm">Total Accounts</span>
+                <span className="font-medium">20</span>
               </div>
-            </div>
-            
-            <div className="space-y-4">
-              <h3 className="text-sm font-medium">Individuals</h3>
-              <div className="space-y-2">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm">Total Individuals</span>
-                  <span className="font-medium">12</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm">Pending Attestations</span>
-                  <Badge variant="outline" className="bg-attestation-pending/10 text-attestation-pending">5</Badge>
-                </div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm">Organizations</span>
+                <span className="font-medium">8</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm">Individuals</span>
+                <span className="font-medium">12</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm">Pending Attestations</span>
+                <Badge variant="outline" className="bg-attestation-pending/10 text-attestation-pending">8</Badge>
               </div>
             </div>
           </div>
