@@ -27,6 +27,7 @@ const HistoryTab = () => {
       id: '101',
       entityName: 'Acme Corporation',
       contractType: 'RIA',
+      commissionAccess: 'Yes',
       attestedDate: 'November 25, 2024',
       attestedBy: 'John Smith',
       action: 'Approved',
@@ -36,6 +37,7 @@ const HistoryTab = () => {
       id: '102',
       entityName: 'James Smith',
       contractType: 'Agent',
+      commissionAccess: 'No',
       attestedDate: 'November 23, 2024',
       attestedBy: 'Maria Garcia',
       action: 'Approved',
@@ -45,6 +47,7 @@ const HistoryTab = () => {
       id: '103',
       entityName: 'Quantum Systems',
       contractType: 'RIA',
+      commissionAccess: 'Yes',
       attestedDate: 'November 20, 2024',
       attestedBy: 'John Smith',
       action: 'Rejected',
@@ -54,6 +57,7 @@ const HistoryTab = () => {
       id: '104',
       entityName: 'Emily Chen',
       contractType: 'Agent',
+      commissionAccess: 'No',
       attestedDate: 'November 18, 2024',
       attestedBy: 'Robert Johnson',
       action: 'Approved',
@@ -63,6 +67,7 @@ const HistoryTab = () => {
       id: '105',
       entityName: 'Global Innovations Inc.',
       contractType: 'RIA',
+      commissionAccess: 'Yes',
       attestedDate: 'November 15, 2024',
       attestedBy: 'Maria Garcia',
       action: 'Approved',
@@ -72,6 +77,7 @@ const HistoryTab = () => {
       id: '106',
       entityName: 'Michael Brown',
       contractType: 'Agent',
+      commissionAccess: 'No',
       attestedDate: 'November 10, 2024',
       attestedBy: 'John Smith',
       action: 'Rejected',
@@ -81,6 +87,7 @@ const HistoryTab = () => {
       id: '107',
       entityName: 'Tech Partners LLC',
       contractType: 'RIA',
+      commissionAccess: 'Yes',
       attestedDate: 'November 8, 2024',
       attestedBy: 'Robert Johnson',
       action: 'Approved',
@@ -90,6 +97,7 @@ const HistoryTab = () => {
       id: '108',
       entityName: 'Jennifer Wilson',
       contractType: 'Agent',
+      commissionAccess: 'No',
       attestedDate: 'November 5, 2024',
       attestedBy: 'Maria Garcia',
       action: 'Approved',
@@ -110,9 +118,10 @@ const HistoryTab = () => {
               <TableRow>
                 <TableHead>Entity Name</TableHead>
                 <TableHead>Contract Type</TableHead>
+                <TableHead>Commission Access</TableHead>
+                <TableHead>Enabled</TableHead>
                 <TableHead>Attested Date</TableHead>
                 <TableHead>Attested By</TableHead>
-                <TableHead>Enabled</TableHead>
                 <TableHead>Action</TableHead>
               </TableRow>
             </TableHeader>
@@ -121,6 +130,8 @@ const HistoryTab = () => {
                 <TableRow key={item.id}>
                   <TableCell className="font-medium">{item.entityName}</TableCell>
                   <TableCell>{item.contractType}</TableCell>
+                  <TableCell>{item.commissionAccess}</TableCell>
+                  <TableCell>{item.enabled ? "Enabled" : "Disabled"}</TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
                       <History className="h-4 w-4 text-muted-foreground" />
@@ -128,7 +139,6 @@ const HistoryTab = () => {
                     </div>
                   </TableCell>
                   <TableCell>{item.attestedBy}</TableCell>
-                  <TableCell>{item.enabled ? "Enabled" : "Disabled"}</TableCell>
                   <TableCell>
                     <Badge variant={item.action === 'Approved' ? 'outline' : 'destructive'}>
                       {item.action}
