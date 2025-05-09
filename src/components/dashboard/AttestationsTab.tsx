@@ -124,7 +124,10 @@ const AttestationsTab = () => {
                   <TableCell>{attestation.commissionAccess}</TableCell>
                   <TableCell>{attestation.enabled}</TableCell>
                   <TableCell>
-                    <Button size="sm">Attest</Button>
+                    <div className="flex space-x-2">
+                      <Button size="sm">Attest</Button>
+                      <Button size="sm" variant="destructive">Reject</Button>
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}
