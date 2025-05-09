@@ -28,7 +28,7 @@ const Dashboard = () => {
       
       {/* Dialog for creating a new association */}
       <Dialog open={showCreateForm} onOpenChange={setShowCreateForm}>
-        <DialogContent className="max-w-4xl">
+        <DialogContent className="max-w-2xl">
           <DialogHeader>
             <DialogTitle>Create New Association</DialogTitle>
             <DialogDescription>
