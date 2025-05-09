@@ -82,7 +82,7 @@ const MobileAttestationAccordion = ({ attestations }: MobileAttestationAccordion
                     <CardContent className="p-3">
                       <div className="space-y-2 text-sm">
                         <div className="flex justify-between">
-                          <span className="font-medium">Association(s)</span>
+                          <span className="font-medium">Association</span>
                           <span>{attestation.entityName}</span>
                         </div>
                         <div className="flex justify-between">

@@ -82,7 +82,7 @@ const AssociationAccordion = ({
                 <table className="w-full">
                   <thead className="bg-muted">
                     <tr>
-                      <th className="text-xs font-medium text-left p-3">Association(s)</th>
+                      <th className="text-xs font-medium text-left p-3">Association</th>
                       <th className="text-xs font-medium text-left p-3">Contract Type</th>
                       <th className="text-xs font-medium text-left p-3">Attestation Status</th>
                       <th className="text-xs font-medium text-left p-3">Commission Access</th>
