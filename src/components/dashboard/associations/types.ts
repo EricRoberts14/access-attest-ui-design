@@ -4,6 +4,7 @@ export type Association = {
   name: string;
   accountHolder: string;
   accountEmail: string;
+  userName?: string;
   contractType: 'RIA' | 'Agent';
   lastAttested: string;
   status: 'valid' | 'pending' | 'expired';
@@ -14,3 +15,4 @@ export type Association = {
 export interface AssociationsTabProps {
   onCreateNew?: () => void;
 }
+

@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { useIsMobile } from "@/hooks/use-mobile";
-import AssociationTable from './associations/AssociationTable';
-import MobileAssociationCard from './associations/MobileAssociationCard';
+import AssociationAccordion from './associations/AssociationAccordion';
+import MobileAssociationAccordion from './associations/MobileAssociationAccordion';
 import AssociationsPagination from './associations/AssociationsPagination';
 import { Association, AssociationsTabProps } from './associations/types';
 import { mockAssociations } from './associations/mockData';
@@ -60,21 +60,14 @@ const AssociationsTab = ({ onCreateNew }: AssociationsTabProps) => {
       <CardContent>
         <div className="space-y-4">
           {isMobile ? (
-            <div className="space-y-4">
-              {paginatedAssociations.map((association) => (
-                <MobileAssociationCard 
-                  key={association.id}
-                  association={association}
-                  onCommissionAccessChange={handleCommissionAccessChange}
-                  onEnabledChange={handleEnabledChange}
-                />
-              ))}
-            </div>
+            <MobileAssociationAccordion 
+              associations={paginatedAssociations}
+              onCommissionAccessChange={handleCommissionAccessChange}
+              onEnabledChange={handleEnabledChange}
+            />
           ) : (
-            <AssociationTable 
-              associations={associations} 
-              startIndex={startIndex} 
-              pageSize={pageSize}
+            <AssociationAccordion 
+              associations={paginatedAssociations}
               onCommissionAccessChange={handleCommissionAccessChange}
               onEnabledChange={handleEnabledChange}
             />
