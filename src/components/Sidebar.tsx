@@ -18,7 +18,7 @@ const NavItem = ({ icon: Icon, text, active, notification, onClick }: NavItemPro
         "flex items-center gap-3 px-4 py-3 rounded-md cursor-pointer transition-colors",
         active 
           ? "bg-massmutual-blue text-white" 
-          : "hover:bg-massmutual-gray-light text-massmutual-blue-dark"
+          : "hover:bg-massmutual-gray-light text-white"
       )}
       onClick={onClick}
     >
@@ -43,6 +43,15 @@ const Sidebar = () => {
     }
   };
 
+  // Function to click on history tab
+  const handleHistoryClick = () => {
+    // Find the history tab and click it
+    const historyTab = document.querySelector('[value="history"]');
+    if (historyTab) {
+      (historyTab as HTMLElement).click();
+    }
+  };
+
   return (
     <aside className="bg-massmutual-blue-dark w-64 min-h-screen py-6 flex flex-col">
       <div className="px-4 mb-6">
@@ -54,7 +63,7 @@ const Sidebar = () => {
         <NavItem icon={User} text="My Account" active={true} />
         <NavItem icon={LinkIcon} text="Associations" />
         <NavItem icon={Check} text="Attestations" notification={8} onClick={handleAttestationsClick} />
-        <NavItem icon={Clock} text="History" />
+        <NavItem icon={Clock} text="History" onClick={handleHistoryClick} />
       </div>
       
       <div className="mt-auto px-4 pt-6 border-t border-massmutual-blue">
