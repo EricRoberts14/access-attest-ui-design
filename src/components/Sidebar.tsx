@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { User, Users, Clock, Link, Check } from 'lucide-react';
+import { User, Link as LinkIcon, Check, Clock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 type NavItemProps = {
@@ -8,14 +8,18 @@ type NavItemProps = {
   text: string;
   active?: boolean;
   notification?: number;
+  onClick?: () => void;
 }
 
-const NavItem = ({ icon: Icon, text, active, notification }: NavItemProps) => {
+const NavItem = ({ icon: Icon, text, active, notification, onClick }: NavItemProps) => {
   return (
-    <div className={cn(
-      "flex items-center gap-3 px-4 py-3 rounded-md cursor-pointer transition-colors",
-      active ? "bg-sidebar-primary text-sidebar-primary-foreground" : "hover:bg-sidebar-accent text-sidebar-foreground"
-    )}>
+    <div 
+      className={cn(
+        "flex items-center gap-3 px-4 py-3 rounded-md cursor-pointer transition-colors",
+        active ? "bg-sidebar-primary text-sidebar-primary-foreground" : "hover:bg-sidebar-accent text-sidebar-foreground"
+      )}
+      onClick={onClick}
+    >
       <Icon className="h-5 w-5" />
       <span className="text-sm font-medium flex-1">{text}</span>
       {notification && (
@@ -28,6 +32,15 @@ const NavItem = ({ icon: Icon, text, active, notification }: NavItemProps) => {
 };
 
 const Sidebar = () => {
+  // Function to click on attestations tab
+  const handleAttestationsClick = () => {
+    // Find the attestations tab and click it
+    const attestationsTab = document.querySelector('[value="attestations"]');
+    if (attestationsTab) {
+      (attestationsTab as HTMLElement).click();
+    }
+  };
+
   return (
     <aside className="bg-sidebar w-64 min-h-screen py-6 flex flex-col">
       <div className="px-4 mb-6">
@@ -37,9 +50,8 @@ const Sidebar = () => {
       
       <div className="space-y-1 px-3 flex-1">
         <NavItem icon={User} text="My Account" active={true} />
-        <NavItem icon={Users} text="Organizations" notification={2} />
-        <NavItem icon={Link} text="Associations" />
-        <NavItem icon={Check} text="Attestations" notification={1} />
+        <NavItem icon={LinkIcon} text="Associations" />
+        <NavItem icon={Check} text="Attestations" notification={8} onClick={handleAttestationsClick} />
         <NavItem icon={Clock} text="History" />
       </div>
       
@@ -48,7 +60,7 @@ const Sidebar = () => {
           <h4 className="text-sm font-medium text-sidebar-foreground mb-2">Current Attestation Period</h4>
           <p className="text-xs text-sidebar-foreground/70 mb-2">May 1-31, 2025</p>
           <div className="h-1.5 w-full bg-sidebar-border rounded-full overflow-hidden">
-            <div className="h-full bg-attestation-pending w-3/4 rounded-full"></div>
+            <div className="h-full bg-attestation-pending w-3/5 rounded-full"></div>
           </div>
         </div>
       </div>
