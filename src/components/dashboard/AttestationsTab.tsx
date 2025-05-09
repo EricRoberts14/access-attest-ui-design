@@ -18,6 +18,7 @@ const AttestationsTab = () => {
     {
       id: '1',
       entityName: 'Global Tech Partners',
+      accountHolder: 'Michael Johnson',
       contractType: 'RIA',
       commissionAccess: 'Yes',
       expirationDate: 'May 31, 2025',
@@ -27,6 +28,7 @@ const AttestationsTab = () => {
     {
       id: '2',
       entityName: 'Sarah Johnson',
+      accountHolder: 'Sarah Johnson',
       contractType: 'Agent',
       commissionAccess: 'No',
       expirationDate: 'May 31, 2025',
@@ -36,6 +38,7 @@ const AttestationsTab = () => {
     {
       id: '3',
       entityName: 'Accenture Technologies',
+      accountHolder: 'Robert Williams',
       contractType: 'RIA',
       commissionAccess: 'Yes',
       expirationDate: 'May 31, 2025',
@@ -45,6 +48,7 @@ const AttestationsTab = () => {
     {
       id: '4',
       entityName: 'David Miller',
+      accountHolder: 'David Miller',
       contractType: 'Agent',
       commissionAccess: 'No',
       expirationDate: 'May 31, 2025',
@@ -54,6 +58,7 @@ const AttestationsTab = () => {
     {
       id: '5',
       entityName: 'Quantum Systems',
+      accountHolder: 'Jennifer Adams',
       contractType: 'RIA',
       commissionAccess: 'Yes',
       expirationDate: 'May 31, 2025',
@@ -63,6 +68,7 @@ const AttestationsTab = () => {
     {
       id: '6',
       entityName: 'Emily Chen',
+      accountHolder: 'Emily Chen',
       contractType: 'Agent',
       commissionAccess: 'No',
       expirationDate: 'May 31, 2025',
@@ -72,6 +78,7 @@ const AttestationsTab = () => {
     {
       id: '7',
       entityName: 'Global Innovations Inc.',
+      accountHolder: 'Thomas Wilson',
       contractType: 'RIA',
       commissionAccess: 'Yes',
       expirationDate: 'May 31, 2025',
@@ -81,6 +88,7 @@ const AttestationsTab = () => {
     {
       id: '8',
       entityName: 'Michael Brown',
+      accountHolder: 'Michael Brown',
       contractType: 'Agent',
       commissionAccess: 'No',
       expirationDate: 'May 31, 2025',
@@ -104,6 +112,7 @@ const AttestationsTab = () => {
             <TableHeader>
               <TableRow>
                 <TableHead>Entity Name</TableHead>
+                <TableHead>Account Holder</TableHead>
                 <TableHead>Contract Type</TableHead>
                 <TableHead>Expires</TableHead>
                 <TableHead>Status</TableHead>
@@ -116,6 +125,7 @@ const AttestationsTab = () => {
               {pendingAttestations.map((attestation) => (
                 <TableRow key={attestation.id}>
                   <TableCell className="font-medium">{attestation.entityName}</TableCell>
+                  <TableCell>{attestation.accountHolder}</TableCell>
                   <TableCell>{attestation.contractType}</TableCell>
                   <TableCell>{attestation.expirationDate}</TableCell>
                   <TableCell>
