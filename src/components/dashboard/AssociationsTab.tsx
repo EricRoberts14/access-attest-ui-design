@@ -1,10 +1,65 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { useToast } from "@/hooks/use-toast";
 import AttestationStatus from './AttestationStatus';
 
+// Define a type for the association entity
+type Association = {
+  id: number;
+  name: string;
+  contractType: 'RIA' | 'Agent';
+  lastAttested: string;
+  status: 'valid' | 'pending' | 'expired';
+  commissionAccess: boolean;
+  enabled: boolean;
+};
+
 const AssociationsTab = () => {
+  const { toast } = useToast();
+  // Sample data
+  const [associations, setAssociations] = useState<Association[]>([
+    { id: 1, name: 'Acme Corporation', contractType: 'RIA', lastAttested: 'May 1, 2025', status: 'valid', commissionAccess: true, enabled: true },
+    { id: 2, name: 'James Smith', contractType: 'Agent', lastAttested: 'May 20, 2025', status: 'valid', commissionAccess: false, enabled: true },
+    { id: 3, name: 'Global Tech Partners', contractType: 'RIA', lastAttested: 'November 30, 2024', status: 'pending', commissionAccess: true, enabled: true },
+    { id: 4, name: 'Sarah Johnson', contractType: 'Agent', lastAttested: 'November 25, 2024', status: 'expired', commissionAccess: false, enabled: true },
+  ]);
+  
+  // Track which row is being edited
+  const [editingId, setEditingId] = useState<number | null>(null);
+  
+  // Toggle edit mode for a row
+  const toggleEdit = (id: number) => {
+    if (editingId === id) {
+      // Save changes
+      toast({
+        title: "Changes saved",
+        description: "Association settings have been updated",
+      });
+      setEditingId(null);
+    } else {
+      setEditingId(id);
+    }
+  };
+  
+  // Handle commission access change
+  const handleCommissionAccessChange = (id: number, value: boolean) => {
+    setAssociations(associations.map(assoc => 
+      assoc.id === id ? { ...assoc, commissionAccess: value } : assoc
+    ));
+  };
+  
+  // Handle enabled state change
+  const handleEnabledChange = (id: number, value: boolean) => {
+    setAssociations(associations.map(assoc => 
+      assoc.id === id ? { ...assoc, enabled: value } : assoc
+    ));
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -27,58 +82,58 @@ const AssociationsTab = () => {
                 </tr>
               </thead>
               <tbody className="divide-y">
-                <tr>
-                  <td className="p-3 text-sm">Acme Corporation</td>
-                  <td className="p-3 text-sm">RIA</td>
-                  <td className="p-3 text-sm">May 1, 2025</td>
-                  <td className="p-3">
-                    <AttestationStatus status="valid" />
-                  </td>
-                  <td className="p-3 text-sm">Yes</td>
-                  <td className="p-3 text-sm">Enabled</td>
-                  <td className="p-3">
-                    <Button variant="ghost" size="sm">Manage</Button>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="p-3 text-sm">James Smith</td>
-                  <td className="p-3 text-sm">Agent</td>
-                  <td className="p-3 text-sm">May 20, 2025</td>
-                  <td className="p-3">
-                    <AttestationStatus status="valid" />
-                  </td>
-                  <td className="p-3 text-sm">No</td>
-                  <td className="p-3 text-sm">Enabled</td>
-                  <td className="p-3">
-                    <Button variant="ghost" size="sm">Manage</Button>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="p-3 text-sm">Global Tech Partners</td>
-                  <td className="p-3 text-sm">RIA</td>
-                  <td className="p-3 text-sm">November 30, 2024</td>
-                  <td className="p-3">
-                    <AttestationStatus status="pending" />
-                  </td>
-                  <td className="p-3 text-sm">Yes</td>
-                  <td className="p-3 text-sm">Enabled</td>
-                  <td className="p-3">
-                    <Button variant="ghost" size="sm">Manage</Button>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="p-3 text-sm">Sarah Johnson</td>
-                  <td className="p-3 text-sm">Agent</td>
-                  <td className="p-3 text-sm">November 25, 2024</td>
-                  <td className="p-3">
-                    <AttestationStatus status="expired" />
-                  </td>
-                  <td className="p-3 text-sm">No</td>
-                  <td className="p-3 text-sm">Enabled</td>
-                  <td className="p-3">
-                    <Button variant="ghost" size="sm">Manage</Button>
-                  </td>
-                </tr>
+                {associations.map((association) => (
+                  <tr key={association.id}>
+                    <td className="p-3 text-sm">{association.name}</td>
+                    <td className="p-3 text-sm">{association.contractType}</td>
+                    <td className="p-3 text-sm">{association.lastAttested}</td>
+                    <td className="p-3">
+                      <AttestationStatus status={association.status} />
+                    </td>
+                    <td className="p-3 text-sm">
+                      {editingId === association.id ? (
+                        <RadioGroup 
+                          defaultValue={association.commissionAccess ? "yes" : "no"}
+                          className="flex gap-4"
+                          onValueChange={(value) => handleCommissionAccessChange(association.id, value === "yes")}
+                        >
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="yes" id={`yes-${association.id}`} />
+                            <Label htmlFor={`yes-${association.id}`}>Yes</Label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="no" id={`no-${association.id}`} />
+                            <Label htmlFor={`no-${association.id}`}>No</Label>
+                          </div>
+                        </RadioGroup>
+                      ) : (
+                        association.commissionAccess ? "Yes" : "No"
+                      )}
+                    </td>
+                    <td className="p-3 text-sm">
+                      {editingId === association.id ? (
+                        <div className="flex items-center space-x-2">
+                          <Switch 
+                            checked={association.enabled}
+                            onCheckedChange={(checked) => handleEnabledChange(association.id, checked)}
+                          />
+                          <Label>{association.enabled ? "Enabled" : "Disabled"}</Label>
+                        </div>
+                      ) : (
+                        association.enabled ? "Enabled" : "Disabled"
+                      )}
+                    </td>
+                    <td className="p-3">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        onClick={() => toggleEdit(association.id)}
+                      >
+                        {editingId === association.id ? "Save" : "Manage"}
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
