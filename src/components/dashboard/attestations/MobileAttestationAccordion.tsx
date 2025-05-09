@@ -105,7 +105,7 @@ const MobileAttestationAccordion = ({ attestations }: MobileAttestationAccordion
                         </div>
                         <div className="flex justify-between">
                           <span className="font-medium">Enabled</span>
-                          <span>{attestation.enabled === "true" ? "Yes" : "No"}</span>
+                          <span>Yes</span>
                         </div>
                         <div className="pt-1 flex justify-end gap-2">
                           <Button size="sm">Attest</Button>
