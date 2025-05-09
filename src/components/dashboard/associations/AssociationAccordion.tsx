@@ -80,10 +80,10 @@ const AssociationAccordion = ({
                     <tr>
                       <th className="text-xs font-medium text-left p-3">Association(s)</th>
                       <th className="text-xs font-medium text-left p-3">Contract Type</th>
+                      <th className="text-xs font-medium text-left p-3">Attestation Status</th>
                       <th className="text-xs font-medium text-left p-3">Commission Access</th>
                       <th className="text-xs font-medium text-left p-3">Enabled</th>
                       <th className="text-xs font-medium text-left p-3">Actions</th>
-                      <th className="text-xs font-medium text-left p-3">Attestation Status</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y">
@@ -91,6 +91,9 @@ const AssociationAccordion = ({
                       <tr key={association.id} className="hover:bg-muted/50">
                         <td className="p-3 text-sm">{association.name}</td>
                         <td className="p-3 text-sm">{association.contractType}</td>
+                        <td className="p-3">
+                          <AttestationStatus status={association.status} />
+                        </td>
                         <td className="p-3 text-sm">
                           {editingId === association.id ? (
                             <RadioGroup 
@@ -132,9 +135,6 @@ const AssociationAccordion = ({
                           >
                             {editingId === association.id ? "Save" : "Manage"}
                           </Button>
-                        </td>
-                        <td className="p-3">
-                          <AttestationStatus status={association.status} />
                         </td>
                       </tr>
                     ))}

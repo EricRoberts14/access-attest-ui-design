@@ -88,6 +88,12 @@ const MobileAssociationAccordion = ({
                           <span className="font-medium">Contract Type</span>
                           <span>{association.contractType}</span>
                         </div>
+                        <div className="flex justify-between">
+                          <span className="font-medium">Attestation Status</span>
+                          <div className="flex items-center">
+                            <AttestationStatus status={association.status} />
+                          </div>
+                        </div>
                         <div className="flex justify-between items-center">
                           <span className="font-medium">Commission Access</span>
                           <div>
@@ -124,12 +130,6 @@ const MobileAssociationAccordion = ({
                           ) : (
                             <span>{association.enabled ? "Enabled" : "Disabled"}</span>
                           )}
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="font-medium">Attestation Status</span>
-                          <div className="flex items-center">
-                            <AttestationStatus status={association.status} />
-                          </div>
                         </div>
                         <div className="pt-1 flex justify-end">
                           <Button 
