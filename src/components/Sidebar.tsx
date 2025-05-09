@@ -16,14 +16,16 @@ const NavItem = ({ icon: Icon, text, active, notification, onClick }: NavItemPro
     <div 
       className={cn(
         "flex items-center gap-3 px-4 py-3 rounded-md cursor-pointer transition-colors",
-        active ? "bg-sidebar-primary text-sidebar-primary-foreground" : "hover:bg-sidebar-accent text-sidebar-foreground"
+        active 
+          ? "bg-massmutual-blue text-white" 
+          : "hover:bg-massmutual-gray-light text-massmutual-blue-dark"
       )}
       onClick={onClick}
     >
       <Icon className="h-5 w-5" />
       <span className="text-sm font-medium flex-1">{text}</span>
       {notification && (
-        <span className="rounded-full bg-red-500 text-white text-xs px-2 py-0.5">
+        <span className="rounded-full bg-massmutual-orange text-white text-xs px-2 py-0.5">
           {notification}
         </span>
       )}
@@ -42,10 +44,10 @@ const Sidebar = () => {
   };
 
   return (
-    <aside className="bg-sidebar w-64 min-h-screen py-6 flex flex-col">
+    <aside className="bg-massmutual-blue-dark w-64 min-h-screen py-6 flex flex-col">
       <div className="px-4 mb-6">
-        <h2 className="text-lg font-bold text-sidebar-foreground mb-1">Access Attest</h2>
-        <p className="text-xs text-sidebar-foreground/70">Access Management System</p>
+        <h2 className="text-lg font-bold text-white mb-1">Access Attest</h2>
+        <p className="text-xs text-gray-300">Access Management System</p>
       </div>
       
       <div className="space-y-1 px-3 flex-1">
@@ -55,12 +57,12 @@ const Sidebar = () => {
         <NavItem icon={Clock} text="History" />
       </div>
       
-      <div className="mt-auto px-4 pt-6 border-t border-sidebar-border">
-        <div className="bg-sidebar-accent rounded-md p-4">
-          <h4 className="text-sm font-medium text-sidebar-foreground mb-2">Current Attestation Period</h4>
-          <p className="text-xs text-sidebar-foreground/70 mb-2">May 1-31, 2025</p>
-          <div className="h-1.5 w-full bg-sidebar-border rounded-full overflow-hidden">
-            <div className="h-full bg-attestation-pending w-3/5 rounded-full"></div>
+      <div className="mt-auto px-4 pt-6 border-t border-massmutual-blue">
+        <div className="bg-massmutual-blue rounded-md p-4">
+          <h4 className="text-sm font-medium text-white mb-2">Current Attestation Period</h4>
+          <p className="text-xs text-gray-300 mb-2">May 1-31, 2025</p>
+          <div className="h-1.5 w-full bg-massmutual-blue-light/30 rounded-full overflow-hidden">
+            <div className="h-full bg-massmutual-orange w-3/5 rounded-full"></div>
           </div>
         </div>
       </div>

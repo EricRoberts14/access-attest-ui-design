@@ -67,6 +67,21 @@ export default {
 					valid: "#22c55e",
 					pending: "#f59e0b",
 					expired: "#ef4444",
+				},
+				massmutual: {
+					blue: {
+						dark: "#002a5c", // Dark blue color from screenshots
+						DEFAULT: "#005295", // Standard blue color
+						light: "#0070cc", // Light blue for links/accents
+					},
+					orange: {
+						DEFAULT: "#ff6a13", // Bright orange from the screenshots
+					},
+					gray: {
+						light: "#f2f2f2", // Light gray background
+						DEFAULT: "#e0e0e0", // Medium gray
+						dark: "#333333", // Dark gray for text
+					}
 				}
 			},
 			borderRadius: {

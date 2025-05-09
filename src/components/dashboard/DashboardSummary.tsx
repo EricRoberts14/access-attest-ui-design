@@ -15,18 +15,18 @@ const DashboardSummary = () => {
   return (
     <Card className="w-full md:w-1/2">
       <CardHeader className="pb-2">
-        <CardTitle className="text-lg">Current Attestation Period</CardTitle>
+        <CardTitle className="text-lg text-massmutual-blue-dark">Current Attestation Period</CardTitle>
         <CardDescription>May 1-31, 2025</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="flex items-center gap-2 mb-3">
-          <Calendar className="h-5 w-5 text-muted-foreground" />
+          <Calendar className="h-5 w-5 text-massmutual-orange" />
           <span className="text-sm">{pendingCount} items require attestation</span>
         </div>
-        <Progress value={progressPercentage} className="h-2 mb-5" />
+        <Progress value={progressPercentage} className="h-2 mb-5 bg-massmutual-gray [&>div]:bg-massmutual-orange" />
         
         <div className="space-y-4 mt-3">
-          <h3 className="text-sm font-medium">Accounts</h3>
+          <h3 className="text-sm font-medium text-massmutual-blue-dark">Accounts</h3>
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <span className="text-sm">Total Accounts</span>
@@ -34,7 +34,7 @@ const DashboardSummary = () => {
             </div>
             <div className="flex justify-between items-center">
               <span className="text-sm">Pending Attestations</span>
-              <Badge variant="outline" className="bg-attestation-pending/10 text-attestation-pending">{pendingCount}</Badge>
+              <Badge variant="outline" className="bg-massmutual-orange/10 text-massmutual-orange">{pendingCount}</Badge>
             </div>
           </div>
         </div>
