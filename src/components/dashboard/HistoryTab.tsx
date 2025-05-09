@@ -1,13 +1,16 @@
 
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { useIsMobile } from "@/hooks/use-mobile";
 import HistoryTable from './history/HistoryTable';
+import MobileHistoryCard from './history/MobileHistoryCard';
 import HistoryPagination from './history/HistoryPagination';
 import { historyAttestations } from './history/mockData';
 
 const HistoryTab = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
+  const isMobile = useIsMobile();
 
   // Calculate pagination
   const totalPages = Math.ceil(historyAttestations.length / pageSize);
@@ -35,7 +38,15 @@ const HistoryTab = () => {
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          <HistoryTable historyData={paginatedHistory} />
+          {isMobile ? (
+            <div className="space-y-4">
+              {paginatedHistory.map((historyItem) => (
+                <MobileHistoryCard key={historyItem.id} historyItem={historyItem} />
+              ))}
+            </div>
+          ) : (
+            <HistoryTable historyData={paginatedHistory} />
+          )}
         </div>
       </CardContent>
       <CardFooter className="flex justify-between">
