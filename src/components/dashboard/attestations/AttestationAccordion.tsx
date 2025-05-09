@@ -37,9 +37,16 @@ const AttestationAccordion = ({ attestations }: AttestationAccordionProps) => {
                     <User className="h-4 w-4 text-muted-foreground" />
                     <span className="font-medium text-base">{accountDetails.accountHolder}</span>
                   </div>
-                  <Badge variant="outline" className="font-normal bg-muted/40 hover:bg-muted">
-                    {accountDetails.accountEmail}
-                  </Badge>
+                  <div className="flex items-center gap-2">
+                    <Badge variant="outline" className="font-normal bg-muted/40 hover:bg-muted">
+                      {accountDetails.accountEmail}
+                    </Badge>
+                    {accountDetails.userName && (
+                      <Badge variant="outline" className="font-normal bg-muted/60 hover:bg-muted">
+                        {accountDetails.userName}
+                      </Badge>
+                    )}
+                  </div>
                 </div>
                 <AttestationStatus status={accountDetails.status} />
               </div>
