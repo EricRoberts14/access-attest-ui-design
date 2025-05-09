@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { UsersIcon } from "lucide-react";
+import { UsersIcon, CircleDot, Circle } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -30,6 +30,10 @@ const delegateEntities = [
 const DelegateInfoCard = () => {
   const { api, setApi, activeIndex, count } = useCarouselIndicator();
 
+  const scrollToSlide = (index: number) => {
+    api?.scrollTo(index);
+  };
+
   return (
     <Card className="w-full md:w-1/2">
       <CardHeader className="pb-2">
@@ -52,16 +56,25 @@ const DelegateInfoCard = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <div className="flex justify-center gap-2 mt-2">
+          <div className="flex justify-center gap-2 mt-4">
             <CarouselPrevious className="relative inset-0 translate-y-0 left-0" />
-            <div className="flex items-center gap-2 mx-2">
+            <div className="flex items-center gap-3 mx-2">
               {Array.from({ length: count }).map((_, index) => (
-                <div 
+                <button
                   key={index}
-                  className={`h-2 w-2 rounded-full transition-colors ${
-                    index === activeIndex ? 'bg-massmutual-blue-dark' : 'bg-massmutual-gray-light'
+                  type="button"
+                  onClick={() => scrollToSlide(index)}
+                  className={`flex items-center justify-center transition-all ${
+                    index === activeIndex ? 'scale-110' : 'opacity-70 hover:opacity-100'
                   }`}
-                />
+                  aria-label={`Go to slide ${index + 1}`}
+                >
+                  {index === activeIndex ? (
+                    <CircleDot className="h-5 w-5 text-massmutual-blue-dark" />
+                  ) : (
+                    <Circle className="h-4 w-4 text-massmutual-gray-light hover:text-massmutual-blue-dark/70 transition-colors" />
+                  )}
+                </button>
               ))}
             </div>
             <CarouselNext className="relative inset-0 translate-y-0 right-0" />
