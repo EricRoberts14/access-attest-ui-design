@@ -21,7 +21,8 @@ const AttestationsTab = () => {
       contractType: 'RIA',
       commissionAccess: 'Yes',
       expirationDate: 'May 31, 2025',
-      status: 'pending' as const
+      status: 'pending' as const,
+      enabled: 'Enabled'
     },
     {
       id: '2',
@@ -29,7 +30,8 @@ const AttestationsTab = () => {
       contractType: 'Agent',
       commissionAccess: 'No',
       expirationDate: 'May 31, 2025',
-      status: 'pending' as const
+      status: 'pending' as const,
+      enabled: 'Enabled'
     },
     {
       id: '3',
@@ -37,7 +39,8 @@ const AttestationsTab = () => {
       contractType: 'RIA',
       commissionAccess: 'Yes',
       expirationDate: 'May 31, 2025',
-      status: 'pending' as const
+      status: 'pending' as const,
+      enabled: 'Enabled'
     },
     {
       id: '4',
@@ -45,7 +48,8 @@ const AttestationsTab = () => {
       contractType: 'Agent',
       commissionAccess: 'No',
       expirationDate: 'May 31, 2025',
-      status: 'pending' as const
+      status: 'pending' as const,
+      enabled: 'Enabled'
     },
     {
       id: '5',
@@ -53,7 +57,8 @@ const AttestationsTab = () => {
       contractType: 'RIA',
       commissionAccess: 'Yes',
       expirationDate: 'May 31, 2025',
-      status: 'pending' as const
+      status: 'pending' as const,
+      enabled: 'Enabled'
     },
     {
       id: '6',
@@ -61,7 +66,8 @@ const AttestationsTab = () => {
       contractType: 'Agent',
       commissionAccess: 'No',
       expirationDate: 'May 31, 2025',
-      status: 'pending' as const
+      status: 'pending' as const,
+      enabled: 'Enabled'
     },
     {
       id: '7',
@@ -69,7 +75,8 @@ const AttestationsTab = () => {
       contractType: 'RIA',
       commissionAccess: 'Yes',
       expirationDate: 'May 31, 2025',
-      status: 'pending' as const
+      status: 'pending' as const,
+      enabled: 'Enabled'
     },
     {
       id: '8',
@@ -77,7 +84,8 @@ const AttestationsTab = () => {
       contractType: 'Agent',
       commissionAccess: 'No',
       expirationDate: 'May 31, 2025',
-      status: 'pending' as const
+      status: 'pending' as const,
+      enabled: 'Enabled'
     }
   ];
 
@@ -97,9 +105,10 @@ const AttestationsTab = () => {
               <TableRow>
                 <TableHead>Entity Name</TableHead>
                 <TableHead>Contract Type</TableHead>
-                <TableHead>Commission Access</TableHead>
                 <TableHead>Expires</TableHead>
                 <TableHead>Status</TableHead>
+                <TableHead>Commission Access</TableHead>
+                <TableHead>Enabled</TableHead>
                 <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
@@ -108,11 +117,12 @@ const AttestationsTab = () => {
                 <TableRow key={attestation.id}>
                   <TableCell className="font-medium">{attestation.entityName}</TableCell>
                   <TableCell>{attestation.contractType}</TableCell>
-                  <TableCell>{attestation.commissionAccess}</TableCell>
                   <TableCell>{attestation.expirationDate}</TableCell>
                   <TableCell>
                     <AttestationStatus status={attestation.status} />
                   </TableCell>
+                  <TableCell>{attestation.commissionAccess}</TableCell>
+                  <TableCell>{attestation.enabled}</TableCell>
                   <TableCell>
                     <Button size="sm">Attest</Button>
                   </TableCell>
