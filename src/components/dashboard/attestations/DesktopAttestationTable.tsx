@@ -49,7 +49,7 @@ const DesktopAttestationTable = ({ attestations }: DesktopAttestationTableProps)
                 <AttestationStatus status={attestation.status} />
               </td>
               <td className="p-3 text-sm">{attestation.commissionAccess}</td>
-              <td className="p-3 text-sm">{attestation.enabled}</td>
+              <td className="p-3 text-sm">{attestation.enabled === "true" ? "Yes" : "No"}</td>
               <td className="p-3">
                 <div className="flex space-x-2">
                   <Button size="sm">Attest</Button>

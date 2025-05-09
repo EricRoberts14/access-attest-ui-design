@@ -129,10 +129,10 @@ const MobileAssociationAccordion = ({
                                 checked={association.enabled}
                                 onCheckedChange={(checked) => onEnabledChange(association.id, checked)}
                               />
-                              <Label className="text-xs">{association.enabled ? "Enabled" : "Disabled"}</Label>
+                              <Label className="text-xs">{association.enabled ? "Yes" : "No"}</Label>
                             </div>
                           ) : (
-                            <span>{association.enabled ? "Enabled" : "Disabled"}</span>
+                            <span>{association.enabled ? "Yes" : "No"}</span>
                           )}
                         </div>
                         <div className="pt-1 flex justify-end">

@@ -34,7 +34,7 @@ const MobileHistoryCard = ({ historyItem }: MobileHistoryCardProps) => {
           <dd>{historyItem.commissionAccess}</dd>
           
           <dt className="text-xs font-medium text-muted-foreground">Enabled</dt>
-          <dd>{historyItem.enabled ? "Enabled" : "Disabled"}</dd>
+          <dd>{historyItem.enabled ? "Yes" : "No"}</dd>
           
           <dt className="text-xs font-medium text-muted-foreground">Attested Date</dt>
           <dd className="flex items-center gap-1">

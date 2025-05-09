@@ -105,10 +105,10 @@ const AssociationTable = ({
                       checked={association.enabled}
                       onCheckedChange={(checked) => onEnabledChange(association.id, checked)}
                     />
-                    <Label>{association.enabled ? "Enabled" : "Disabled"}</Label>
+                    <Label>{association.enabled ? "Yes" : "No"}</Label>
                   </div>
                 ) : (
-                  association.enabled ? "Enabled" : "Disabled"
+                  association.enabled ? "Yes" : "No"
                 )}
               </td>
               <td className="p-3">

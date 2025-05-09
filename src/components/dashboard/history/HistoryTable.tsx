@@ -45,7 +45,7 @@ const HistoryTable = ({ historyData }: HistoryTableProps) => {
               <td className="p-3 text-sm">{item.entityName}</td>
               <td className="p-3 text-sm">{item.contractType}</td>
               <td className="p-3 text-sm">{item.commissionAccess}</td>
-              <td className="p-3 text-sm">{item.enabled ? "Enabled" : "Disabled"}</td>
+              <td className="p-3 text-sm">{item.enabled ? "Yes" : "No"}</td>
               <td className="p-3 text-sm">
                 <div className="flex items-center gap-2">
                   <History className="h-4 w-4 text-muted-foreground" />
