@@ -1,8 +1,7 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { UsersIcon, ChevronLeft, ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { UsersIcon } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -10,7 +9,7 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from "@/components/ui/carousel";
-import useEmblaCarousel from 'embla-carousel-react';
+import { useCarouselIndicator } from '@/hooks/useCarouselIndicator';
 
 // Sample data for demonstration
 const delegateEntities = [
@@ -29,24 +28,7 @@ const delegateEntities = [
 ];
 
 const DelegateInfoCard = () => {
-  const [emblaRef, emblaApi] = useEmblaCarousel();
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const onSelect = React.useCallback(() => {
-    if (!emblaApi) return;
-    setActiveIndex(emblaApi.selectedScrollSnap());
-  }, [emblaApi]);
-
-  React.useEffect(() => {
-    if (!emblaApi) return;
-    
-    emblaApi.on('select', onSelect);
-    onSelect();
-    
-    return () => {
-      emblaApi.off('select', onSelect);
-    };
-  }, [emblaApi, onSelect]);
+  const { api, setApi, activeIndex, count } = useCarouselIndicator();
 
   return (
     <Card className="w-full md:w-1/2">
@@ -60,8 +42,8 @@ const DelegateInfoCard = () => {
           <span className="text-sm">You can assign associations on behalf of</span>
         </div>
         
-        <Carousel className="w-full" setApi={(api) => emblaApi}>
-          <CarouselContent ref={emblaRef}>
+        <Carousel className="w-full" setApi={setApi}>
+          <CarouselContent>
             {delegateEntities.map((entity) => (
               <CarouselItem key={entity.id}>
                 <div className="border border-massmutual-gray-light rounded-md p-3 bg-massmutual-gray-light/10">
@@ -73,7 +55,7 @@ const DelegateInfoCard = () => {
           <div className="flex justify-center gap-2 mt-2">
             <CarouselPrevious className="relative inset-0 translate-y-0 left-0" />
             <div className="flex items-center gap-2 mx-2">
-              {delegateEntities.map((_, index) => (
+              {Array.from({ length: count }).map((_, index) => (
                 <div 
                   key={index}
                   className={`h-2 w-2 rounded-full transition-colors ${
