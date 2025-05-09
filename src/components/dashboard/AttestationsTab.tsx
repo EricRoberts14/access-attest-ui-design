@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -117,56 +117,63 @@ const AttestationsTab = () => {
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Account Holder</TableHead>
-                <TableHead>Association(s)</TableHead>
-                <TableHead>Contract Type</TableHead>
-                <TableHead>Expires</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Commission Access</TableHead>
-                <TableHead>Enabled</TableHead>
-                <TableHead>Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {pendingAttestations.map((attestation) => (
-                <TableRow key={attestation.id}>
-                  <TableCell className="font-medium">
-                    <HoverCard>
-                      <HoverCardTrigger asChild>
-                        <span className="cursor-help underline decoration-dotted">
-                          {attestation.accountHolder}
-                        </span>
-                      </HoverCardTrigger>
-                      <HoverCardContent className="w-auto">
-                        <div className="text-sm">
-                          <p className="font-medium">{attestation.accountEmail}</p>
-                        </div>
-                      </HoverCardContent>
-                    </HoverCard>
-                  </TableCell>
-                  <TableCell>{attestation.entityName}</TableCell>
-                  <TableCell>{attestation.contractType}</TableCell>
-                  <TableCell>{attestation.expirationDate}</TableCell>
-                  <TableCell>
-                    <AttestationStatus status={attestation.status} />
-                  </TableCell>
-                  <TableCell>{attestation.commissionAccess}</TableCell>
-                  <TableCell>{attestation.enabled}</TableCell>
-                  <TableCell>
-                    <div className="flex space-x-2">
-                      <Button size="sm">Attest</Button>
-                      <Button size="sm" variant="destructive">Reject</Button>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+          <div className="border rounded-lg overflow-hidden">
+            <table className="w-full">
+              <thead className="bg-muted">
+                <tr>
+                  <th className="text-xs font-medium text-left p-3">Account Holder</th>
+                  <th className="text-xs font-medium text-left p-3">Association(s)</th>
+                  <th className="text-xs font-medium text-left p-3">Contract Type</th>
+                  <th className="text-xs font-medium text-left p-3">Expires</th>
+                  <th className="text-xs font-medium text-left p-3">Status</th>
+                  <th className="text-xs font-medium text-left p-3">Commission Access</th>
+                  <th className="text-xs font-medium text-left p-3">Enabled</th>
+                  <th className="text-xs font-medium text-left p-3">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y">
+                {pendingAttestations.map((attestation) => (
+                  <tr key={attestation.id}>
+                    <td className="p-3 text-sm">
+                      <HoverCard>
+                        <HoverCardTrigger asChild>
+                          <span className="cursor-help underline decoration-dotted">
+                            {attestation.accountHolder}
+                          </span>
+                        </HoverCardTrigger>
+                        <HoverCardContent className="w-auto">
+                          <div className="text-sm">
+                            <p className="font-medium">{attestation.accountEmail}</p>
+                          </div>
+                        </HoverCardContent>
+                      </HoverCard>
+                    </td>
+                    <td className="p-3 text-sm">{attestation.entityName}</td>
+                    <td className="p-3 text-sm">{attestation.contractType}</td>
+                    <td className="p-3 text-sm">{attestation.expirationDate}</td>
+                    <td className="p-3">
+                      <AttestationStatus status={attestation.status} />
+                    </td>
+                    <td className="p-3 text-sm">{attestation.commissionAccess}</td>
+                    <td className="p-3 text-sm">{attestation.enabled}</td>
+                    <td className="p-3">
+                      <div className="flex space-x-2">
+                        <Button size="sm">Attest</Button>
+                        <Button size="sm" variant="destructive">Reject</Button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </CardContent>
+      <CardFooter className="flex justify-between">
+        <Button variant="outline">Previous</Button>
+        <div className="text-sm">Page 1 of 1</div>
+        <Button>Next</Button>
+      </CardFooter>
     </Card>
   );
 };

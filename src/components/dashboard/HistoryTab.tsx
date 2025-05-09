@@ -1,25 +1,9 @@
-
 import React from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { History } from 'lucide-react';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow
-} from "@/components/ui/table";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
 
 const HistoryTab = () => {
   // Historical attestation data from November 2024
@@ -130,78 +114,65 @@ const HistoryTab = () => {
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Account Holder</TableHead>
-                <TableHead>Association(s)</TableHead>
-                <TableHead>Contract Type</TableHead>
-                <TableHead>Commission Access</TableHead>
-                <TableHead>Enabled</TableHead>
-                <TableHead>Attested Date</TableHead>
-                <TableHead>Attested By</TableHead>
-                <TableHead>Action</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {historyAttestations.map((item) => (
-                <TableRow key={item.id}>
-                  <TableCell className="font-medium">
-                    <HoverCard>
-                      <HoverCardTrigger asChild>
-                        <span className="cursor-help underline decoration-dotted">
-                          {item.accountHolder}
-                        </span>
-                      </HoverCardTrigger>
-                      <HoverCardContent className="w-auto">
-                        <div className="text-sm">
-                          <p className="font-medium">{item.accountEmail}</p>
-                        </div>
-                      </HoverCardContent>
-                    </HoverCard>
-                  </TableCell>
-                  <TableCell>{item.entityName}</TableCell>
-                  <TableCell>{item.contractType}</TableCell>
-                  <TableCell>{item.commissionAccess}</TableCell>
-                  <TableCell>{item.enabled ? "Enabled" : "Disabled"}</TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-2">
-                      <History className="h-4 w-4 text-muted-foreground" />
-                      {item.attestedDate}
-                    </div>
-                  </TableCell>
-                  <TableCell>{item.attestedBy}</TableCell>
-                  <TableCell>
-                    <Badge variant={item.action === 'Approved' ? 'outline' : 'destructive'}>
-                      {item.action}
-                    </Badge>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-          
-          <Pagination>
-            <PaginationContent>
-              <PaginationItem>
-                <PaginationPrevious href="#" />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#" isActive>1</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#">2</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#">3</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationNext href="#" />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
+          <div className="border rounded-lg overflow-hidden">
+            <table className="w-full">
+              <thead className="bg-muted">
+                <tr>
+                  <th className="text-xs font-medium text-left p-3">Account Holder</th>
+                  <th className="text-xs font-medium text-left p-3">Association(s)</th>
+                  <th className="text-xs font-medium text-left p-3">Contract Type</th>
+                  <th className="text-xs font-medium text-left p-3">Commission Access</th>
+                  <th className="text-xs font-medium text-left p-3">Enabled</th>
+                  <th className="text-xs font-medium text-left p-3">Attested Date</th>
+                  <th className="text-xs font-medium text-left p-3">Attested By</th>
+                  <th className="text-xs font-medium text-left p-3">Action</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y">
+                {historyAttestations.map((item) => (
+                  <tr key={item.id}>
+                    <td className="p-3 text-sm">
+                      <HoverCard>
+                        <HoverCardTrigger asChild>
+                          <span className="cursor-help underline decoration-dotted">
+                            {item.accountHolder}
+                          </span>
+                        </HoverCardTrigger>
+                        <HoverCardContent className="w-auto">
+                          <div className="text-sm">
+                            <p className="font-medium">{item.accountEmail}</p>
+                          </div>
+                        </HoverCardContent>
+                      </HoverCard>
+                    </td>
+                    <td className="p-3 text-sm">{item.entityName}</td>
+                    <td className="p-3 text-sm">{item.contractType}</td>
+                    <td className="p-3 text-sm">{item.commissionAccess}</td>
+                    <td className="p-3 text-sm">{item.enabled ? "Enabled" : "Disabled"}</td>
+                    <td className="p-3 text-sm">
+                      <div className="flex items-center gap-2">
+                        <History className="h-4 w-4 text-muted-foreground" />
+                        {item.attestedDate}
+                      </div>
+                    </td>
+                    <td className="p-3 text-sm">{item.attestedBy}</td>
+                    <td className="p-3">
+                      <Badge variant={item.action === 'Approved' ? 'outline' : 'destructive'}>
+                        {item.action}
+                      </Badge>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </CardContent>
+      <CardFooter className="flex justify-between">
+        <Button variant="outline">Previous</Button>
+        <div className="text-sm">Page 1 of 3</div>
+        <Button>Next</Button>
+      </CardFooter>
     </Card>
   );
 };
