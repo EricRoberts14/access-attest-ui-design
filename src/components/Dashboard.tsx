@@ -156,14 +156,14 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Added "Next Attestation Period" information */}
+          {/* Updated to "Current Attestation Period" information */}
           <div className="space-y-4 mt-4 pt-4 border-t">
-            <h3 className="text-sm font-medium">Next Attestation Period</h3>
+            <h3 className="text-sm font-medium">Current Attestation Period</h3>
             <div className="flex items-center gap-2">
               <Calendar className="h-5 w-5 text-muted-foreground" />
-              <span className="text-sm">Due by November 30, 2025</span>
+              <span className="text-sm">May 1-31, 2025</span>
             </div>
-            <Progress value={0} className="h-2" />
+            <Progress value={42} className="h-2" />
           </div>
         </CardContent>
         <CardFooter>
