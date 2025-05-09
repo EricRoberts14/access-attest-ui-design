@@ -18,64 +18,64 @@ const AttestationsTab = () => {
     {
       id: '1',
       entityName: 'Global Tech Partners',
-      entityType: 'Organization',
-      accessLevel: 'Full Access',
+      contractType: 'RIA',
+      commissionAccess: 'Yes',
       expirationDate: 'May 31, 2025',
       status: 'pending' as const
     },
     {
       id: '2',
       entityName: 'Sarah Johnson',
-      entityType: 'Individual',
-      accessLevel: 'Limited Access',
+      contractType: 'Agent',
+      commissionAccess: 'No',
       expirationDate: 'May 31, 2025',
       status: 'pending' as const
     },
     {
       id: '3',
       entityName: 'Accenture Technologies',
-      entityType: 'Organization',
-      accessLevel: 'Read Only',
+      contractType: 'RIA',
+      commissionAccess: 'Yes',
       expirationDate: 'May 31, 2025',
       status: 'pending' as const
     },
     {
       id: '4',
       entityName: 'David Miller',
-      entityType: 'Individual',
-      accessLevel: 'Full Access',
+      contractType: 'Agent',
+      commissionAccess: 'No',
       expirationDate: 'May 31, 2025',
       status: 'pending' as const
     },
     {
       id: '5',
       entityName: 'Quantum Systems',
-      entityType: 'Organization',
-      accessLevel: 'Limited Access',
+      contractType: 'RIA',
+      commissionAccess: 'Yes',
       expirationDate: 'May 31, 2025',
       status: 'pending' as const
     },
     {
       id: '6',
       entityName: 'Emily Chen',
-      entityType: 'Individual',
-      accessLevel: 'Read Only',
+      contractType: 'Agent',
+      commissionAccess: 'No',
       expirationDate: 'May 31, 2025',
       status: 'pending' as const
     },
     {
       id: '7',
       entityName: 'Global Innovations Inc.',
-      entityType: 'Organization',
-      accessLevel: 'Full Access',
+      contractType: 'RIA',
+      commissionAccess: 'Yes',
       expirationDate: 'May 31, 2025',
       status: 'pending' as const
     },
     {
       id: '8',
       entityName: 'Michael Brown',
-      entityType: 'Individual',
-      accessLevel: 'Limited Access',
+      contractType: 'Agent',
+      commissionAccess: 'No',
       expirationDate: 'May 31, 2025',
       status: 'pending' as const
     }
@@ -96,8 +96,8 @@ const AttestationsTab = () => {
             <TableHeader>
               <TableRow>
                 <TableHead>Entity Name</TableHead>
-                <TableHead>Type</TableHead>
-                <TableHead>Access Level</TableHead>
+                <TableHead>Contract Type</TableHead>
+                <TableHead>Commission Access</TableHead>
                 <TableHead>Expires</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Actions</TableHead>
@@ -107,8 +107,8 @@ const AttestationsTab = () => {
               {pendingAttestations.map((attestation) => (
                 <TableRow key={attestation.id}>
                   <TableCell className="font-medium">{attestation.entityName}</TableCell>
-                  <TableCell>{attestation.entityType}</TableCell>
-                  <TableCell>{attestation.accessLevel}</TableCell>
+                  <TableCell>{attestation.contractType}</TableCell>
+                  <TableCell>{attestation.commissionAccess}</TableCell>
                   <TableCell>{attestation.expirationDate}</TableCell>
                   <TableCell>
                     <AttestationStatus status={attestation.status} />

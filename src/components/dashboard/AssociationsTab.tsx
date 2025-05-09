@@ -18,8 +18,8 @@ const AssociationsTab = () => {
               <thead className="bg-muted">
                 <tr>
                   <th className="text-xs font-medium text-left p-3">Entity Name</th>
-                  <th className="text-xs font-medium text-left p-3">Type</th>
-                  <th className="text-xs font-medium text-left p-3">Access Level</th>
+                  <th className="text-xs font-medium text-left p-3">Contract Type</th>
+                  <th className="text-xs font-medium text-left p-3">Commission Access</th>
                   <th className="text-xs font-medium text-left p-3">Last Attested</th>
                   <th className="text-xs font-medium text-left p-3">Status</th>
                   <th className="text-xs font-medium text-left p-3">Actions</th>
@@ -28,8 +28,8 @@ const AssociationsTab = () => {
               <tbody className="divide-y">
                 <tr>
                   <td className="p-3 text-sm">Acme Corporation</td>
-                  <td className="p-3 text-sm">Organization</td>
-                  <td className="p-3 text-sm">Full Access</td>
+                  <td className="p-3 text-sm">RIA</td>
+                  <td className="p-3 text-sm">Yes</td>
                   <td className="p-3 text-sm">May 1, 2025</td>
                   <td className="p-3">
                     <AttestationStatus status="valid" />
@@ -40,8 +40,8 @@ const AssociationsTab = () => {
                 </tr>
                 <tr>
                   <td className="p-3 text-sm">James Smith</td>
-                  <td className="p-3 text-sm">Individual</td>
-                  <td className="p-3 text-sm">Read Only</td>
+                  <td className="p-3 text-sm">Agent</td>
+                  <td className="p-3 text-sm">No</td>
                   <td className="p-3 text-sm">May 20, 2025</td>
                   <td className="p-3">
                     <AttestationStatus status="valid" />
@@ -52,8 +52,8 @@ const AssociationsTab = () => {
                 </tr>
                 <tr>
                   <td className="p-3 text-sm">Global Tech Partners</td>
-                  <td className="p-3 text-sm">Organization</td>
-                  <td className="p-3 text-sm">Full Access</td>
+                  <td className="p-3 text-sm">RIA</td>
+                  <td className="p-3 text-sm">Yes</td>
                   <td className="p-3 text-sm">November 30, 2024</td>
                   <td className="p-3">
                     <AttestationStatus status="pending" />
@@ -64,8 +64,8 @@ const AssociationsTab = () => {
                 </tr>
                 <tr>
                   <td className="p-3 text-sm">Sarah Johnson</td>
-                  <td className="p-3 text-sm">Individual</td>
-                  <td className="p-3 text-sm">Limited Access</td>
+                  <td className="p-3 text-sm">Agent</td>
+                  <td className="p-3 text-sm">No</td>
                   <td className="p-3 text-sm">November 25, 2024</td>
                   <td className="p-3">
                     <AttestationStatus status="expired" />
