@@ -4,26 +4,30 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useIsMobile } from "@/hooks/use-mobile";
 import AssociationsPagination from './associations/AssociationsPagination';
+import AttestationStatus from './AttestationStatus';
 
-// Updated sample data for demonstration
+// Updated sample data for demonstration with status field
 const myAccountAssociations = [
   {
     id: 1,
     entity: "Raymond James LLC",
     role: "Delegate",
-    dateGranted: "01/15/2025"
+    dateGranted: "01/15/2025",
+    status: "valid" as const
   },
   {
     id: 2,
     entity: "Morgan Financial Partners",
     role: "Delegate",
-    dateGranted: "02/01/2025"
+    dateGranted: "02/01/2025",
+    status: "pending" as const
   },
   {
     id: 3,
     entity: "Fidelity Investments",
     role: "Delegate",
-    dateGranted: "03/10/2025"
+    dateGranted: "03/10/2025",
+    status: "expired" as const
   }
 ];
 
@@ -44,6 +48,12 @@ const MobileAccountAssociationCard = ({ association }: { association: any }) => 
           <div className="flex justify-between">
             <span className="font-medium">Date Granted</span>
             <span>{association.dateGranted}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="font-medium">Status</span>
+            <div className="flex items-center">
+              <AttestationStatus status={association.status} />
+            </div>
           </div>
         </div>
       </CardContent>
@@ -96,6 +106,7 @@ const MyAccountTab = () => {
                     <th className="text-xs font-medium text-left p-3">Association(s)</th>
                     <th className="text-xs font-medium text-left p-3">Role</th>
                     <th className="text-xs font-medium text-left p-3">Date Granted</th>
+                    <th className="text-xs font-medium text-left p-3">Status</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y">
@@ -104,6 +115,9 @@ const MyAccountTab = () => {
                       <td className="p-3 text-sm font-medium">{association.entity}</td>
                       <td className="p-3 text-sm">{association.role}</td>
                       <td className="p-3 text-sm">{association.dateGranted}</td>
+                      <td className="p-3">
+                        <AttestationStatus status={association.status} />
+                      </td>
                     </tr>
                   ))}
                 </tbody>
