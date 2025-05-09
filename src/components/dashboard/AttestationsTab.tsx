@@ -1,121 +1,21 @@
 
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow
-} from "@/components/ui/table";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
-import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
-import AttestationStatus from './AttestationStatus';
 import { useIsMobile } from '@/hooks/use-mobile';
+import MobileAttestationCard from './attestations/MobileAttestationCard';
+import DesktopAttestationTable from './attestations/DesktopAttestationTable';
+import AttestationPagination from './attestations/AttestationPagination';
+import { mockPendingAttestations } from './attestations/mockData';
 
 const AttestationsTab = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
   const isMobile = useIsMobile();
 
-  // Mock pending attestation data
-  const pendingAttestations = [
-    {
-      id: '1',
-      entityName: 'Raymond James LLC',
-      accountHolder: 'Michael Johnson',
-      accountEmail: 'michael.johnson@globaltech.com',
-      contractType: 'RIA',
-      commissionAccess: 'Yes',
-      expirationDate: 'May 31, 2025',
-      status: 'pending' as const,
-      enabled: 'Enabled'
-    },
-    {
-      id: '2',
-      entityName: 'Raymond James LLC',
-      accountHolder: 'Sarah Johnson',
-      accountEmail: 'sarah.johnson@example.com',
-      contractType: 'Agent',
-      commissionAccess: 'No',
-      expirationDate: 'May 31, 2025',
-      status: 'pending' as const,
-      enabled: 'Enabled'
-    },
-    {
-      id: '3',
-      entityName: 'Raymond James LLC',
-      accountHolder: 'Robert Williams',
-      accountEmail: 'r.williams@accenture.com',
-      contractType: 'RIA',
-      commissionAccess: 'Yes',
-      expirationDate: 'May 31, 2025',
-      status: 'pending' as const,
-      enabled: 'Enabled'
-    },
-    {
-      id: '4',
-      entityName: 'Raymond James LLC',
-      accountHolder: 'David Miller',
-      accountEmail: 'david.miller@example.com',
-      contractType: 'Agent',
-      commissionAccess: 'No',
-      expirationDate: 'May 31, 2025',
-      status: 'pending' as const,
-      enabled: 'Enabled'
-    },
-    {
-      id: '5',
-      entityName: 'Raymond James LLC',
-      accountHolder: 'Jennifer Adams',
-      accountEmail: 'j.adams@quantum.com',
-      contractType: 'RIA',
-      commissionAccess: 'Yes',
-      expirationDate: 'May 31, 2025',
-      status: 'pending' as const,
-      enabled: 'Enabled'
-    },
-    {
-      id: '6',
-      entityName: 'Raymond James LLC',
-      accountHolder: 'Emily Chen',
-      accountEmail: 'emily.chen@example.com',
-      contractType: 'Agent',
-      commissionAccess: 'No',
-      expirationDate: 'May 31, 2025',
-      status: 'pending' as const,
-      enabled: 'Enabled'
-    },
-    {
-      id: '7',
-      entityName: 'Raymond James LLC',
-      accountHolder: 'Thomas Wilson',
-      accountEmail: 't.wilson@globalinnovations.com',
-      contractType: 'RIA',
-      commissionAccess: 'Yes',
-      expirationDate: 'May 31, 2025',
-      status: 'pending' as const,
-      enabled: 'Enabled'
-    },
-    {
-      id: '8',
-      entityName: 'Raymond James LLC',
-      accountHolder: 'Michael Brown',
-      accountEmail: 'michael.brown@example.com',
-      contractType: 'Agent',
-      commissionAccess: 'No',
-      expirationDate: 'May 31, 2025',
-      status: 'pending' as const,
-      enabled: 'Enabled'
-    }
-  ];
-
   // Calculate pagination
-  const totalPages = Math.ceil(pendingAttestations.length / pageSize);
+  const totalPages = Math.ceil(mockPendingAttestations.length / pageSize);
   const startIndex = (currentPage - 1) * pageSize;
-  const paginatedAttestations = pendingAttestations.slice(startIndex, startIndex + pageSize);
+  const paginatedAttestations = mockPendingAttestations.slice(startIndex, startIndex + pageSize);
 
   // Handle page changes
   const handlePreviousPage = () => {
@@ -130,99 +30,8 @@ const AttestationsTab = () => {
     }
   };
 
-  const renderMobileView = () => {
-    return (
-      <div className="space-y-4">
-        {paginatedAttestations.map((attestation) => (
-          <Card key={attestation.id} className="overflow-hidden">
-            <CardHeader className="p-3">
-              <CardTitle className="text-base flex justify-between items-center">
-                <span>{attestation.accountHolder}</span>
-                <AttestationStatus status={attestation.status} />
-              </CardTitle>
-              <CardDescription className="text-xs mt-1">{attestation.accountEmail}</CardDescription>
-            </CardHeader>
-            <CardContent className="p-3 pt-0">
-              <dl className="grid grid-cols-2 gap-1 text-sm">
-                <dt className="text-xs font-medium text-muted-foreground">Association</dt>
-                <dd>{attestation.entityName}</dd>
-                
-                <dt className="text-xs font-medium text-muted-foreground">Type</dt>
-                <dd>{attestation.contractType}</dd>
-                
-                <dt className="text-xs font-medium text-muted-foreground">Expires</dt>
-                <dd>{attestation.expirationDate}</dd>
-                
-                <dt className="text-xs font-medium text-muted-foreground">Commission</dt>
-                <dd>{attestation.commissionAccess}</dd>
-                
-                <dt className="text-xs font-medium text-muted-foreground">Enabled</dt>
-                <dd>{attestation.enabled}</dd>
-              </dl>
-            </CardContent>
-            <CardFooter className="p-3 pt-0 flex gap-2 justify-end">
-              <Button size="sm">Attest</Button>
-              <Button size="sm" variant="destructive">Reject</Button>
-            </CardFooter>
-          </Card>
-        ))}
-      </div>
-    );
-  };
-
-  const renderDesktopView = () => {
-    return (
-      <div className="border rounded-lg overflow-hidden">
-        <table className="w-full">
-          <thead className="bg-muted">
-            <tr>
-              <th className="text-xs font-medium text-left p-3">Account Holder</th>
-              <th className="text-xs font-medium text-left p-3">Association(s)</th>
-              <th className="text-xs font-medium text-left p-3">Contract Type</th>
-              <th className="text-xs font-medium text-left p-3">Expires</th>
-              <th className="text-xs font-medium text-left p-3">Status</th>
-              <th className="text-xs font-medium text-left p-3">Commission Access</th>
-              <th className="text-xs font-medium text-left p-3">Enabled</th>
-              <th className="text-xs font-medium text-left p-3">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y">
-            {paginatedAttestations.map((attestation) => (
-              <tr key={attestation.id} className="hover:bg-muted/50">
-                <td className="p-3 text-sm">
-                  <HoverCard>
-                    <HoverCardTrigger asChild>
-                      <span className="cursor-help underline decoration-dotted">
-                        {attestation.accountHolder}
-                      </span>
-                    </HoverCardTrigger>
-                    <HoverCardContent className="w-auto">
-                      <div className="text-sm">
-                        <p className="font-medium">{attestation.accountEmail}</p>
-                      </div>
-                    </HoverCardContent>
-                  </HoverCard>
-                </td>
-                <td className="p-3 text-sm">{attestation.entityName}</td>
-                <td className="p-3 text-sm">{attestation.contractType}</td>
-                <td className="p-3 text-sm">{attestation.expirationDate}</td>
-                <td className="p-3">
-                  <AttestationStatus status={attestation.status} />
-                </td>
-                <td className="p-3 text-sm">{attestation.commissionAccess}</td>
-                <td className="p-3 text-sm">{attestation.enabled}</td>
-                <td className="p-3">
-                  <div className="flex space-x-2">
-                    <Button size="sm">Attest</Button>
-                    <Button size="sm" variant="destructive">Reject</Button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
   };
 
   return (
@@ -233,30 +42,25 @@ const AttestationsTab = () => {
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          {isMobile ? renderMobileView() : renderDesktopView()}
+          {isMobile ? (
+            <div className="space-y-4">
+              {paginatedAttestations.map((attestation) => (
+                <MobileAttestationCard key={attestation.id} attestation={attestation} />
+              ))}
+            </div>
+          ) : (
+            <DesktopAttestationTable attestations={paginatedAttestations} />
+          )}
         </div>
       </CardContent>
       <CardFooter className="flex justify-between overflow-auto">
-        <Pagination>
-          <PaginationContent className="flex-wrap">
-            <PaginationItem>
-              <PaginationPrevious onClick={handlePreviousPage} className={currentPage === 1 ? "pointer-events-none opacity-50" : ""} />
-            </PaginationItem>
-            {!isMobile && Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-              <PaginationItem key={page}>
-                <PaginationLink 
-                  isActive={page === currentPage} 
-                  onClick={() => setCurrentPage(page)}
-                >
-                  {page}
-                </PaginationLink>
-              </PaginationItem>
-            ))}
-            <PaginationItem>
-              <PaginationNext onClick={handleNextPage} className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""} />
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
+        <AttestationPagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPreviousPage={handlePreviousPage}
+          onNextPage={handleNextPage}
+          onPageChange={handlePageChange}
+        />
       </CardFooter>
     </Card>
   );
