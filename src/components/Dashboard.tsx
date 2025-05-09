@@ -41,6 +41,10 @@ const Dashboard = ({ activeTab = "associations", onTabChange }: DashboardProps) 
     }
   };
   
+  const navigateToAttestations = () => {
+    handleTabChange("attestations");
+  };
+  
   return (
     <div className="p-6 space-y-6">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
@@ -94,7 +98,7 @@ const Dashboard = ({ activeTab = "associations", onTabChange }: DashboardProps) 
       
       {/* Dashboard Summary Cards */}
       <div className="flex flex-col md:flex-row gap-6">
-        <DashboardSummary />
+        <DashboardSummary onNavigateToAttestations={navigateToAttestations} />
         <DelegateInfoCard />
       </div>
       

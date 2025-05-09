@@ -5,7 +5,11 @@ import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { Calendar } from 'lucide-react';
 
-const DashboardSummary = () => {
+interface DashboardSummaryProps {
+  onNavigateToAttestations?: () => void;
+}
+
+const DashboardSummary = ({ onNavigateToAttestations }: DashboardSummaryProps) => {
   // Update to match the 8 pending attestations shown in AttestationsTab
   const pendingCount = 8;
   const totalAccounts = 20;
@@ -19,7 +23,13 @@ const DashboardSummary = () => {
         <CardDescription>May 1-31, 2025</CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="flex items-center gap-2 mb-3">
+        <div 
+          className="flex items-center gap-2 mb-3 cursor-pointer hover:text-massmutual-orange transition-colors" 
+          onClick={onNavigateToAttestations}
+          role="button"
+          tabIndex={0}
+          aria-label="View pending attestations"
+        >
           <Calendar className="h-5 w-5 text-massmutual-orange" />
           <span className="text-sm">{pendingCount} items require attestation</span>
         </div>
@@ -34,7 +44,16 @@ const DashboardSummary = () => {
             </div>
             <div className="flex justify-between items-center">
               <span className="text-sm">Pending Attestations</span>
-              <Badge variant="outline" className="bg-massmutual-orange/10 text-massmutual-orange">{pendingCount}</Badge>
+              <Badge 
+                variant="outline" 
+                className="bg-massmutual-orange/10 text-massmutual-orange cursor-pointer hover:bg-massmutual-orange/20 transition-colors"
+                onClick={onNavigateToAttestations}
+                role="button"
+                tabIndex={0}
+                aria-label="View pending attestations"
+              >
+                {pendingCount}
+              </Badge>
             </div>
           </div>
         </div>

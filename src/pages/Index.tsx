@@ -1,10 +1,9 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Dashboard from "../components/Dashboard";
 import { useToast } from "@/components/ui/use-toast";
-import { useEffect } from 'react';
 
 const Index = () => {
   const { toast } = useToast();
@@ -30,13 +29,20 @@ const Index = () => {
     };
   }, [toast]);
 
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+    // Dispatch event to notify sidebar
+    const event = new CustomEvent('tabChange', { detail: tab });
+    window.dispatchEvent(event);
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
       <div className="flex flex-1">
         <Sidebar />
         <main className="flex-1 overflow-auto">
-          <Dashboard activeTab={activeTab} onTabChange={setActiveTab} />
+          <Dashboard activeTab={activeTab} onTabChange={handleTabChange} />
         </main>
       </div>
     </div>
