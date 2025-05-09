@@ -3,7 +3,6 @@ import React from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useIsMobile } from "@/hooks/use-mobile";
-import DelegateInfoCard from './DelegateInfoCard';
 
 // Sample data for demonstration
 const myAccountAssociations = [
@@ -72,8 +71,6 @@ const MyAccountTab = () => {
 
   return (
     <div className="space-y-6">
-      <DelegateInfoCard />
-      
       <Card>
         <CardHeader>
           <CardTitle>My Account Associations</CardTitle>
