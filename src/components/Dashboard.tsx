@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -48,12 +47,7 @@ const Dashboard = () => {
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>
-              {!emailSearchCompleted 
-                ? "Enter Email Address" 
-                : existingAccount 
-                  ? "Existing Account Found" 
-                  : "Create New Association"
-              }
+              Create New Association
             </DialogTitle>
             <DialogDescription>
               {!emailSearchCompleted 
