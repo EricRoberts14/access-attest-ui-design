@@ -133,7 +133,7 @@ const AttestationsTab = () => {
               </thead>
               <tbody className="divide-y">
                 {pendingAttestations.map((attestation) => (
-                  <tr key={attestation.id}>
+                  <tr key={attestation.id} className="hover:bg-muted/50">
                     <td className="p-3 text-sm">
                       <HoverCard>
                         <HoverCardTrigger asChild>

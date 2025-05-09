@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -130,7 +131,7 @@ const HistoryTab = () => {
               </thead>
               <tbody className="divide-y">
                 {historyAttestations.map((item) => (
-                  <tr key={item.id}>
+                  <tr key={item.id} className="hover:bg-muted/50">
                     <td className="p-3 text-sm">
                       <HoverCard>
                         <HoverCardTrigger asChild>
