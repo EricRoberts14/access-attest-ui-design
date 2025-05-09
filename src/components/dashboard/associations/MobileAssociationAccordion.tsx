@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
@@ -8,6 +9,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { useToast } from "@/hooks/use-toast";
 import { Association } from './types';
 import AttestationStatus from '../AttestationStatus';
+import { Badge } from '@/components/ui/badge';
 
 interface MobileAssociationAccordionProps {
   associations: Association[];
@@ -57,14 +59,16 @@ const MobileAssociationAccordion = ({
           <AccordionItem key={accountHolder} value={accountHolder} className="border rounded-md mb-2">
             <AccordionTrigger className="hover:bg-muted/50 px-3 py-2.5 rounded-md">
               <div className="flex w-full flex-col sm:flex-row sm:items-center text-left">
-                <div className="flex flex-wrap gap-1 items-center">
+                <div className="flex flex-wrap items-center gap-2 mb-1 sm:mb-0">
                   <span className="font-medium">{accountDetails.accountHolder}</span>
-                  <div className="flex items-center text-xs space-x-2 text-muted-foreground">
-                    <span>&lt;{accountDetails.accountEmail}&gt;</span>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <Badge variant="outline" className="font-normal text-xs bg-muted/40 hover:bg-muted">
+                      {accountDetails.accountEmail}
+                    </Badge>
                     {accountDetails.userName && (
-                      <span className="bg-muted/60 px-2 py-0.5 rounded text-xs">
+                      <Badge variant="outline" className="font-normal text-xs bg-muted/60 hover:bg-muted">
                         {accountDetails.userName}
-                      </span>
+                      </Badge>
                     )}
                   </div>
                 </div>
