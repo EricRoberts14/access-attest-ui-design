@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,9 +11,13 @@ import {
   TableRow
 } from "@/components/ui/table";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import AttestationStatus from './AttestationStatus';
 
 const AttestationsTab = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 10;
+
   // Mock pending attestation data
   const pendingAttestations = [
     {
@@ -106,6 +110,24 @@ const AttestationsTab = () => {
     }
   ];
 
+  // Calculate pagination
+  const totalPages = Math.ceil(pendingAttestations.length / pageSize);
+  const startIndex = (currentPage - 1) * pageSize;
+  const paginatedAttestations = pendingAttestations.slice(startIndex, startIndex + pageSize);
+
+  // Handle page changes
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
@@ -132,7 +154,7 @@ const AttestationsTab = () => {
                 </tr>
               </thead>
               <tbody className="divide-y">
-                {pendingAttestations.map((attestation) => (
+                {paginatedAttestations.map((attestation) => (
                   <tr key={attestation.id} className="hover:bg-muted/50">
                     <td className="p-3 text-sm">
                       <HoverCard>
@@ -170,9 +192,26 @@ const AttestationsTab = () => {
         </div>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Button variant="outline">Previous</Button>
-        <div className="text-sm">Page 1 of 1</div>
-        <Button>Next</Button>
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious onClick={handlePreviousPage} className={currentPage === 1 ? "pointer-events-none opacity-50" : ""} />
+            </PaginationItem>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <PaginationItem key={page}>
+                <PaginationLink 
+                  isActive={page === currentPage} 
+                  onClick={() => setCurrentPage(page)}
+                >
+                  {page}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+            <PaginationItem>
+              <PaginationNext onClick={handleNextPage} className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""} />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
       </CardFooter>
     </Card>
   );

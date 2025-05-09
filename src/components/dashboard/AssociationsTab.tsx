@@ -6,6 +6,7 @@ import { Switch } from "@/components/ui/switch";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { useToast } from "@/hooks/use-toast";
 import AttestationStatus from './AttestationStatus';
 
@@ -28,6 +29,10 @@ interface AssociationsTabProps {
 
 const AssociationsTab = ({ onCreateNew }: AssociationsTabProps) => {
   const { toast } = useToast();
+  // Current page state for pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 10;
+  
   // Sample data
   const [associations, setAssociations] = useState<Association[]>([
     { id: 1, name: 'Raymond James LLC', accountHolder: 'James Wilson', accountEmail: 'james.wilson@acme.com', contractType: 'RIA', lastAttested: 'May 1, 2025', status: 'valid', commissionAccess: true, enabled: true },
@@ -38,6 +43,11 @@ const AssociationsTab = ({ onCreateNew }: AssociationsTabProps) => {
   
   // Track which row is being edited
   const [editingId, setEditingId] = useState<number | null>(null);
+  
+  // Calculate pagination
+  const totalPages = Math.ceil(associations.length / pageSize);
+  const startIndex = (currentPage - 1) * pageSize;
+  const paginatedAssociations = associations.slice(startIndex, startIndex + pageSize);
   
   // Toggle edit mode for a row
   const toggleEdit = (id: number) => {
@@ -50,6 +60,19 @@ const AssociationsTab = ({ onCreateNew }: AssociationsTabProps) => {
       setEditingId(null);
     } else {
       setEditingId(id);
+    }
+  };
+  
+  // Handle page changes
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
     }
   };
   
@@ -93,8 +116,8 @@ const AssociationsTab = ({ onCreateNew }: AssociationsTabProps) => {
                 </tr>
               </thead>
               <tbody className="divide-y">
-                {associations.map((association) => (
-                  <tr key={association.id}>
+                {paginatedAssociations.map((association) => (
+                  <tr key={association.id} className="hover:bg-muted/50">
                     <td className="p-3 text-sm">
                       <HoverCard>
                         <HoverCardTrigger asChild>
@@ -165,9 +188,26 @@ const AssociationsTab = ({ onCreateNew }: AssociationsTabProps) => {
         </div>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Button variant="outline">Previous</Button>
-        <div className="text-sm">Page 1 of 3</div>
-        <Button>Next</Button>
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious onClick={handlePreviousPage} className={currentPage === 1 ? "pointer-events-none opacity-50" : ""} />
+            </PaginationItem>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <PaginationItem key={page}>
+                <PaginationLink 
+                  isActive={page === currentPage} 
+                  onClick={() => setCurrentPage(page)}
+                >
+                  {page}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+            <PaginationItem>
+              <PaginationNext onClick={handleNextPage} className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""} />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
       </CardFooter>
     </Card>
   );
