@@ -63,20 +63,16 @@ const AttestationAccordion = ({ attestations }: AttestationAccordionProps) => {
                     )}
                   </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <AttestationStatus status={accountDetails.status} />
-                  <Button size="sm" onClick={(e) => {
-                    e.stopPropagation();
-                    handleAttestAll(accountHolder);
-                  }}>Attest All</Button>
-                  <Button size="sm" variant="destructive" onClick={(e) => {
-                    e.stopPropagation();
-                    handleRejectAll(accountHolder);
-                  }}>Reject All</Button>
-                </div>
+                <AttestationStatus status={accountDetails.status} />
               </div>
             </AccordionTrigger>
             <AccordionContent className="px-4 py-2">
+              <div className="flex items-center justify-end mb-3">
+                <div className="flex gap-2">
+                  <Button size="sm" onClick={() => handleAttestAll(accountHolder)}>Attest All</Button>
+                  <Button size="sm" variant="destructive" onClick={() => handleRejectAll(accountHolder)}>Reject All</Button>
+                </div>
+              </div>
               <div className="border rounded-lg overflow-hidden mt-2">
                 <table className="w-full">
                   <thead className="bg-muted">
