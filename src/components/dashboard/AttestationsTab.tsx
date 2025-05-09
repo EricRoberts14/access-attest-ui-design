@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -130,12 +129,9 @@ const AttestationsTab = () => {
 
   return (
     <Card>
-      <CardHeader className="flex flex-row items-center justify-between">
-        <div>
-          <CardTitle>Required Attestations</CardTitle>
-          <CardDescription>Access permissions requiring periodic attestation</CardDescription>
-        </div>
-        <Button>Attest All</Button>
+      <CardHeader>
+        <CardTitle>Required Attestations</CardTitle>
+        <CardDescription>Access permissions requiring periodic attestation</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">

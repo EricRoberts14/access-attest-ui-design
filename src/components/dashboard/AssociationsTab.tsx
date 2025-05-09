@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -92,12 +91,9 @@ const AssociationsTab = ({ onCreateNew }: AssociationsTabProps) => {
 
   return (
     <Card>
-      <CardHeader className="flex flex-row items-center justify-between">
-        <div>
-          <CardTitle>Active Associations</CardTitle>
-          <CardDescription>Organizations and individuals with active access permissions</CardDescription>
-        </div>
-        <Button onClick={onCreateNew}>Create New Association</Button>
+      <CardHeader>
+        <CardTitle>Active Associations</CardTitle>
+        <CardDescription>Organizations and individuals with active access permissions</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
