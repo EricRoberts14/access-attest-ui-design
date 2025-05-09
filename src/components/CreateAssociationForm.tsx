@@ -75,82 +75,86 @@ const CreateAssociationForm = ({ onClose }: CreateAssociationFormProps) => {
   return (
     <Form {...form}>
       <FormProvider {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <CardContent className="space-y-4">
-            <FormField
-              control={form.control}
-              name="entityType"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Entity Type</FormLabel>
-                  <Select 
-                    value={field.value} 
-                    onValueChange={field.onChange}
-                  >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <CardContent className="space-y-3 p-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="entityType"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Entity Type</FormLabel>
+                    <Select 
+                      value={field.value} 
+                      onValueChange={field.onChange}
+                    >
+                      <FormControl>
+                        <SelectTrigger id="entity-type">
+                          <SelectValue placeholder="Select entity type" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="organization">Organization</SelectItem>
+                        <SelectItem value="individual">Individual</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="entityName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Entity Name</FormLabel>
                     <FormControl>
-                      <SelectTrigger id="entity-type">
-                        <SelectValue placeholder="Select entity type" />
-                      </SelectTrigger>
+                      <Input placeholder="Enter organization name" {...field} />
                     </FormControl>
-                    <SelectContent>
-                      <SelectItem value="organization">Organization</SelectItem>
-                      <SelectItem value="individual">Individual</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </FormItem>
-              )}
-            />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
-            <FormField
-              control={form.control}
-              name="entityName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Entity Name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter organization name" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="entityEmail"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Contact Email</FormLabel>
-                  <FormControl>
-                    <Input type="email" placeholder="Enter email address" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="accessLevel"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Access Level</FormLabel>
-                  <Select value={field.value} onValueChange={field.onChange}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="entityEmail"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Contact Email</FormLabel>
                     <FormControl>
-                      <SelectTrigger id="access-level">
-                        <SelectValue placeholder="Select access level" />
-                      </SelectTrigger>
+                      <Input type="email" placeholder="Enter email address" {...field} />
                     </FormControl>
-                    <SelectContent>
-                      <SelectItem value="readonly">Read Only</SelectItem>
-                      <SelectItem value="limited">Limited Access</SelectItem>
-                      <SelectItem value="full">Full Access</SelectItem>
-                      <SelectItem value="admin">Administrative Access</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </FormItem>
-              )}
-            />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="accessLevel"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Access Level</FormLabel>
+                    <Select value={field.value} onValueChange={field.onChange}>
+                      <FormControl>
+                        <SelectTrigger id="access-level">
+                          <SelectValue placeholder="Select access level" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="readonly">Read Only</SelectItem>
+                        <SelectItem value="limited">Limited Access</SelectItem>
+                        <SelectItem value="full">Full Access</SelectItem>
+                        <SelectItem value="admin">Administrative Access</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </FormItem>
+                )}
+              />
+            </div>
 
             <FormField
               control={form.control}
@@ -172,7 +176,7 @@ const CreateAssociationForm = ({ onClose }: CreateAssociationFormProps) => {
                           {field.value ? format(field.value, "PPP") : <span>Pick a date</span>}
                         </Button>
                       </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0">
+                      <PopoverContent className="w-auto p-0" align="start">
                         <Calendar
                           mode="single"
                           selected={field.value}
@@ -182,7 +186,7 @@ const CreateAssociationForm = ({ onClose }: CreateAssociationFormProps) => {
                       </PopoverContent>
                     </Popover>
                   </FormControl>
-                  <div className="text-xs text-muted-foreground mt-1">
+                  <div className="text-xs text-muted-foreground">
                     Next attestation will be due on September 30, 2025
                   </div>
                 </FormItem>
@@ -190,8 +194,8 @@ const CreateAssociationForm = ({ onClose }: CreateAssociationFormProps) => {
             />
 
             <div>
-              <Label>Permissions</Label>
-              <div className="space-y-2 mt-2">
+              <Label className="mb-1 block">Permissions</Label>
+              <div className="grid grid-cols-2 gap-2">
                 <FormField
                   control={form.control}
                   name="permissions.view"
@@ -261,7 +265,7 @@ const CreateAssociationForm = ({ onClose }: CreateAssociationFormProps) => {
                     <Textarea 
                       id="justification" 
                       placeholder="Explain why this association is required..." 
-                      className="resize-none" 
+                      className="resize-none h-20" 
                       {...field}
                     />
                   </FormControl>
@@ -274,7 +278,7 @@ const CreateAssociationForm = ({ onClose }: CreateAssociationFormProps) => {
               control={form.control}
               name="attestationConfirmation"
               render={({ field }) => (
-                <FormItem className="mt-4">
+                <FormItem className="mt-2">
                   <div className="flex items-center space-x-2">
                     <FormControl>
                       <Checkbox 
@@ -284,7 +288,7 @@ const CreateAssociationForm = ({ onClose }: CreateAssociationFormProps) => {
                       />
                     </FormControl>
                     <Label htmlFor="attestation-confirmation" className="text-sm font-normal">
-                      I understand that this association will require attestation every 6 months (March and September)
+                      I understand that this association will require attestation every 6 months
                     </Label>
                   </div>
                   <FormMessage />
@@ -292,7 +296,7 @@ const CreateAssociationForm = ({ onClose }: CreateAssociationFormProps) => {
               )}
             />
           </CardContent>
-          <CardFooter className="flex justify-between">
+          <CardFooter className="flex justify-between px-2 py-2">
             <Button variant="outline" type="button" onClick={onClose}>Cancel</Button>
             <Button type="submit">Create Association</Button>
           </CardFooter>
