@@ -54,8 +54,8 @@ const AssociationsTab = ({ onCreateNew }: AssociationsTabProps) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Active Associations</CardTitle>
-        <CardDescription>Organizations and individuals with active access permissions</CardDescription>
+        <CardTitle>Associations</CardTitle>
+        <CardDescription>Accounts with associations to business</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
