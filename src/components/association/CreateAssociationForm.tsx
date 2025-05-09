@@ -26,7 +26,7 @@ interface CreateAssociationFormProps {
 type FormData = {
   entityEmail: string;
   association: string[];
-  contractType: string;
+  contractType: string[];
   commissionAccess: string;
   justification: string;
   attestationConfirmation: boolean;
@@ -38,7 +38,7 @@ const CreateAssociationForm = ({ onClose, existingEntity, prefillEmail }: Create
     defaultValues: {
       entityEmail: existingEntity?.entityEmail || prefillEmail || "",
       association: [],
-      contractType: "RIA",
+      contractType: [],
       commissionAccess: "no",
       justification: "",
       attestationConfirmation: false,
