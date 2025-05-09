@@ -47,7 +47,7 @@ const MobileAttestationAccordion = ({ attestations }: MobileAttestationAccordion
         return (
           <AccordionItem key={accountHolder} value={accountHolder} className="border rounded-md mb-2">
             <AccordionTrigger className="hover:bg-muted/50 px-3 py-2.5 rounded-md">
-              <div className="flex w-full items-center justify-between">
+              <div className="flex w-full flex-col sm:flex-row sm:items-center text-left">
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-1 sm:mb-0">
                     <div className="flex items-center gap-1">
@@ -69,18 +69,18 @@ const MobileAttestationAccordion = ({ attestations }: MobileAttestationAccordion
                 </div>
               </div>
             </AccordionTrigger>
-            <AccordionContent className="pt-2 pb-2 px-3">
+            <AccordionContent className="px-2 py-2">
               <div className="flex items-center justify-end mb-3">
                 <div className="flex gap-2">
                   <Button size="sm" onClick={() => handleAttestAll(accountHolder)}>Attest All</Button>
                   <Button size="sm" variant="destructive" onClick={() => handleRejectAll(accountHolder)}>Reject All</Button>
                 </div>
               </div>
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {accountAttestations.map((attestation) => (
                   <Card key={attestation.id} className="overflow-hidden">
-                    <CardContent className="p-4">
-                      <div className="space-y-3 text-sm">
+                    <CardContent className="p-3">
+                      <div className="space-y-2 text-sm">
                         <div className="flex justify-between">
                           <span className="font-medium">Association(s)</span>
                           <span>{attestation.entityName}</span>
@@ -107,9 +107,9 @@ const MobileAttestationAccordion = ({ attestations }: MobileAttestationAccordion
                           <span className="font-medium">Enabled</span>
                           <span>Yes</span>
                         </div>
-                        <div className="pt-2 flex justify-end gap-2">
+                        <div className="pt-1 flex justify-end">
                           <Button size="sm">Attest</Button>
-                          <Button size="sm" variant="destructive">Reject</Button>
+                          <Button size="sm" variant="destructive" className="ml-2">Reject</Button>
                         </div>
                       </div>
                     </CardContent>
