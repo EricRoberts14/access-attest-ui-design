@@ -6,6 +6,14 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Calendar, Clock, Check, X } from 'lucide-react';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow
+} from "@/components/ui/table";
 
 const AttestationStatus = ({ status }: { status: 'valid' | 'pending' | 'expired' }) => {
   const statusConfig = {
@@ -39,6 +47,74 @@ const AttestationStatus = ({ status }: { status: 'valid' | 'pending' | 'expired'
 };
 
 const Dashboard = () => {
+  // Mock pending attestation data
+  const pendingAttestations = [
+    {
+      id: '1',
+      entityName: 'Global Tech Partners',
+      entityType: 'Organization',
+      accessLevel: 'Full Access',
+      expirationDate: 'May 31, 2025',
+      status: 'pending' as const
+    },
+    {
+      id: '2',
+      entityName: 'Sarah Johnson',
+      entityType: 'Individual',
+      accessLevel: 'Limited Access',
+      expirationDate: 'May 31, 2025',
+      status: 'pending' as const
+    },
+    {
+      id: '3',
+      entityName: 'Accenture Technologies',
+      entityType: 'Organization',
+      accessLevel: 'Read Only',
+      expirationDate: 'May 31, 2025',
+      status: 'pending' as const
+    },
+    {
+      id: '4',
+      entityName: 'David Miller',
+      entityType: 'Individual',
+      accessLevel: 'Full Access',
+      expirationDate: 'May 31, 2025',
+      status: 'pending' as const
+    },
+    {
+      id: '5',
+      entityName: 'Quantum Systems',
+      entityType: 'Organization',
+      accessLevel: 'Limited Access',
+      expirationDate: 'May 31, 2025',
+      status: 'pending' as const
+    },
+    {
+      id: '6',
+      entityName: 'Emily Chen',
+      entityType: 'Individual',
+      accessLevel: 'Read Only',
+      expirationDate: 'May 31, 2025',
+      status: 'pending' as const
+    },
+    {
+      id: '7',
+      entityName: 'Global Innovations Inc.',
+      entityType: 'Organization',
+      accessLevel: 'Full Access',
+      expirationDate: 'May 31, 2025',
+      status: 'pending' as const
+    },
+    {
+      id: '8',
+      entityName: 'Michael Brown',
+      entityType: 'Individual',
+      accessLevel: 'Limited Access',
+      expirationDate: 'May 31, 2025',
+      status: 'pending' as const
+    }
+  ];
+
   return (
     <div className="p-6 space-y-6">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
@@ -182,12 +258,40 @@ const Dashboard = () => {
               <CardDescription>Access permissions requiring periodic attestation</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="p-8 text-center">
-                <h3 className="text-lg font-medium mb-2">No Pending Attestations</h3>
-                <p className="text-muted-foreground mb-4">All required attestations have been completed for this period.</p>
-                <Button>View Attestation History</Button>
+              <div className="space-y-4">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Entity Name</TableHead>
+                      <TableHead>Type</TableHead>
+                      <TableHead>Access Level</TableHead>
+                      <TableHead>Expires</TableHead>
+                      <TableHead>Status</TableHead>
+                      <TableHead>Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {pendingAttestations.map((attestation) => (
+                      <TableRow key={attestation.id}>
+                        <TableCell className="font-medium">{attestation.entityName}</TableCell>
+                        <TableCell>{attestation.entityType}</TableCell>
+                        <TableCell>{attestation.accessLevel}</TableCell>
+                        <TableCell>{attestation.expirationDate}</TableCell>
+                        <TableCell>
+                          <AttestationStatus status={attestation.status} />
+                        </TableCell>
+                        <TableCell>
+                          <Button size="sm">Attest</Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
               </div>
             </CardContent>
+            <CardFooter className="flex justify-end">
+              <Button>Attest All</Button>
+            </CardFooter>
           </Card>
         </TabsContent>
         
