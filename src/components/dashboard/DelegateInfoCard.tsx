@@ -46,7 +46,7 @@ const DelegateInfoCard = () => {
           <span className="text-sm">You can assign associations on behalf of</span>
         </div>
         
-        <Carousel className="w-full" setApi={setApi}>
+        <Carousel className="w-full" setApi={setApi} opts={{ loop: true }}>
           <CarouselContent>
             {delegateEntities.map((entity) => (
               <CarouselItem key={entity.id}>
