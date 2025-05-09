@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -89,7 +88,7 @@ const MyAccountTab = () => {
       <Card>
         <CardHeader>
           <CardTitle>My Account Associations</CardTitle>
-          <CardDescription>Organizations you are associated with</CardDescription>
+          <CardDescription>Business you are associated with</CardDescription>
         </CardHeader>
         <CardContent>
           {isMobile ? (
