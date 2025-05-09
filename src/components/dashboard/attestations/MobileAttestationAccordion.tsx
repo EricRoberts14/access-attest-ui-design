@@ -6,6 +6,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { AttestationData } from './types';
 import AttestationStatus from '../AttestationStatus';
 import { Badge } from '@/components/ui/badge';
+import { User } from "lucide-react";
 
 interface MobileAttestationAccordionProps {
   attestations: AttestationData[];
@@ -33,7 +34,10 @@ const MobileAttestationAccordion = ({ attestations }: MobileAttestationAccordion
             <AccordionTrigger className="hover:bg-muted/50 px-3 py-2.5 rounded-md">
               <div className="flex w-full flex-col sm:flex-row sm:items-center text-left">
                 <div className="flex flex-wrap items-center gap-2 mb-1 sm:mb-0">
-                  <span className="font-medium">{accountDetails.accountHolder}</span>
+                  <div className="flex items-center gap-1">
+                    <User className="h-4 w-4 text-muted-foreground" />
+                    <span className="font-medium">{accountDetails.accountHolder}</span>
+                  </div>
                   <div className="flex flex-wrap items-center gap-2">
                     <Badge variant="outline" className="font-normal text-xs bg-muted/40 hover:bg-muted">
                       {accountDetails.accountEmail}
