@@ -76,11 +76,11 @@ const MobileAttestationAccordion = ({ attestations }: MobileAttestationAccordion
                   <Button size="sm" variant="destructive" onClick={() => handleRejectAll(accountHolder)}>Reject All</Button>
                 </div>
               </div>
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {accountAttestations.map((attestation) => (
                   <Card key={attestation.id} className="overflow-hidden">
-                    <CardContent className="p-3">
-                      <div className="space-y-2 text-sm">
+                    <CardContent className="p-4">
+                      <div className="space-y-3 text-sm">
                         <div className="flex justify-between">
                           <span className="font-medium">Association(s)</span>
                           <span>{attestation.entityName}</span>
@@ -107,7 +107,7 @@ const MobileAttestationAccordion = ({ attestations }: MobileAttestationAccordion
                           <span className="font-medium">Enabled</span>
                           <span>Yes</span>
                         </div>
-                        <div className="pt-1 flex justify-end gap-2">
+                        <div className="pt-2 flex justify-end gap-2">
                           <Button size="sm">Attest</Button>
                           <Button size="sm" variant="destructive">Reject</Button>
                         </div>
