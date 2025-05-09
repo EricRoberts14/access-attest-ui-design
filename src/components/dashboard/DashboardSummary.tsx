@@ -2,7 +2,6 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Calendar } from 'lucide-react';
 
@@ -34,9 +33,6 @@ const DashboardSummary = () => {
           </div>
         </div>
       </CardContent>
-      <CardFooter>
-        <Button variant="default" className="w-full">Prepare All Attestations</Button>
-      </CardFooter>
     </Card>
   );
 };
