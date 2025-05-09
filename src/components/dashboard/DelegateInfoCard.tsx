@@ -15,18 +15,15 @@ import {
 const delegateEntities = [
   {
     id: 1,
-    name: "Raymond James LLC",
-    description: "As a delegate, you can create and manage associations for this entity"
+    name: "Raymond James LLC"
   },
   {
     id: 2,
-    name: "Morgan Financial Partners",
-    description: "You have full delegation rights for this organization"
+    name: "Morgan Financial Partners"
   },
   {
     id: 3,
-    name: "Fidelity Investments",
-    description: "Limited delegation authority for this financial institution"
+    name: "Fidelity Investments"
   }
 ];
 
@@ -35,7 +32,7 @@ const DelegateInfoCard = () => {
     <Card className="w-full md:w-1/2">
       <CardHeader className="pb-2">
         <CardTitle className="text-lg text-massmutual-blue-dark">Delegation Authority</CardTitle>
-        <CardDescription>You are authorized as a delegate</CardDescription>
+        <CardDescription>You are authorized as a delegate, therefore, you can create and manage associations for this entity</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="flex items-center gap-2 mb-3">
@@ -49,7 +46,6 @@ const DelegateInfoCard = () => {
               <CarouselItem key={entity.id}>
                 <div className="border border-massmutual-gray-light rounded-md p-3 bg-massmutual-gray-light/10">
                   <h4 className="font-medium text-massmutual-blue-dark mb-1">{entity.name}</h4>
-                  <p className="text-sm text-muted-foreground">{entity.description}</p>
                 </div>
               </CarouselItem>
             ))}
