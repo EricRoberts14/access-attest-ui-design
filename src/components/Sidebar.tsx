@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { User, Link as LinkIcon, Check, Clock } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -33,12 +34,25 @@ const NavItem = ({ icon: Icon, text, active, notification, onClick }: NavItemPro
 };
 
 const Sidebar = () => {
+  const [activeTab, setActiveTab] = React.useState<string>("myaccount");
+
+  // Function to click on associations tab
+  const handleAssociationsClick = () => {
+    // Find the associations tab and click it
+    const associationsTab = document.querySelector('[value="associations"]');
+    if (associationsTab) {
+      (associationsTab as HTMLElement).click();
+      setActiveTab("associations");
+    }
+  };
+
   // Function to click on attestations tab
   const handleAttestationsClick = () => {
     // Find the attestations tab and click it
     const attestationsTab = document.querySelector('[value="attestations"]');
     if (attestationsTab) {
       (attestationsTab as HTMLElement).click();
+      setActiveTab("attestations");
     }
   };
 
@@ -48,6 +62,7 @@ const Sidebar = () => {
     const historyTab = document.querySelector('[value="history"]');
     if (historyTab) {
       (historyTab as HTMLElement).click();
+      setActiveTab("history");
     }
   };
 
@@ -59,10 +74,26 @@ const Sidebar = () => {
       </div>
       
       <div className="space-y-1 px-3 flex-1">
-        <NavItem icon={User} text="My Account" active={true} />
-        <NavItem icon={LinkIcon} text="Associations" />
-        <NavItem icon={Check} text="Attestations" notification={8} onClick={handleAttestationsClick} />
-        <NavItem icon={Clock} text="History" onClick={handleHistoryClick} />
+        <NavItem icon={User} text="My Account" active={activeTab === "myaccount"} />
+        <NavItem 
+          icon={LinkIcon} 
+          text="Associations" 
+          active={activeTab === "associations"}
+          onClick={handleAssociationsClick} 
+        />
+        <NavItem 
+          icon={Check} 
+          text="Attestations" 
+          notification={8} 
+          active={activeTab === "attestations"}
+          onClick={handleAttestationsClick} 
+        />
+        <NavItem 
+          icon={Clock} 
+          text="History" 
+          active={activeTab === "history"}
+          onClick={handleHistoryClick} 
+        />
       </div>
       
       <div className="mt-auto px-4 pt-6 border-t border-massmutual-blue">
