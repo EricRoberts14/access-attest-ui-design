@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { User, Link as LinkIcon, Check, Clock } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -18,7 +17,7 @@ const NavItem = ({ icon: Icon, text, active, notification, onClick }: NavItemPro
         "flex items-center gap-3 px-4 py-3 rounded-md cursor-pointer transition-colors",
         active 
           ? "bg-massmutual-blue text-white" 
-          : "hover:bg-massmutual-gray-light text-white"
+          : "hover:bg-massmutual-gray-light hover:text-massmutual-orange text-white font-medium"
       )}
       onClick={onClick}
     >
