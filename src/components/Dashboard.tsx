@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -6,7 +7,7 @@ import DashboardSummary from './dashboard/DashboardSummary';
 import AssociationsTab from './dashboard/AssociationsTab';
 import AttestationsTab from './dashboard/AttestationsTab';
 import HistoryTab from './dashboard/HistoryTab';
-import CreateAssociationForm from './CreateAssociationForm';
+import CreateAssociationForm from './association/CreateAssociationForm';
 import EmailSearchForm from './EmailSearchForm';
 
 const Dashboard = () => {
