@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -83,9 +83,12 @@ const AttestationsTab = () => {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Required Attestations</CardTitle>
-        <CardDescription>Access permissions requiring periodic attestation</CardDescription>
+      <CardHeader className="flex flex-row items-center justify-between">
+        <div>
+          <CardTitle>Required Attestations</CardTitle>
+          <CardDescription>Access permissions requiring periodic attestation</CardDescription>
+        </div>
+        <Button>Attest All</Button>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
@@ -119,9 +122,6 @@ const AttestationsTab = () => {
           </Table>
         </div>
       </CardContent>
-      <CardFooter className="flex justify-end">
-        <Button>Attest All</Button>
-      </CardFooter>
     </Card>
   );
 };
