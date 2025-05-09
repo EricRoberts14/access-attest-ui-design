@@ -76,13 +76,13 @@ const Sidebar = () => {
   const handleHistoryClick = () => changeTab("history");
 
   return (
-    <aside className="bg-massmutual-blue-dark w-64 min-h-screen py-6 flex flex-col">
+    <aside className="bg-massmutual-blue-dark w-64 min-h-screen py-6 flex flex-col fixed top-0 left-0 h-full z-30 pt-16">
       <div className="px-4 mb-6">
         <h2 className="text-lg font-bold text-white mb-1">Access Attest</h2>
         <p className="text-xs text-gray-300">Access Management System</p>
       </div>
       
-      <div className="space-y-1 px-3 flex-1">
+      <div className="space-y-1 px-3 flex-1 overflow-y-auto scrollbar-hide">
         <NavItem 
           icon={User} 
           text="My Account" 

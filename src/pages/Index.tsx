@@ -59,7 +59,7 @@ const Index = () => {
         ) : (
           <Sidebar />
         )}
-        <main className="flex-1 overflow-auto w-full">
+        <main className="flex-1 overflow-auto w-full ml-64">
           <Dashboard activeTab={activeTab} onTabChange={handleTabChange} />
         </main>
       </div>
