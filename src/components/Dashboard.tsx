@@ -8,9 +8,26 @@ import AssociationsTab from './dashboard/AssociationsTab';
 import AttestationsTab from './dashboard/AttestationsTab';
 import HistoryTab from './dashboard/HistoryTab';
 import CreateAssociationForm from './CreateAssociationForm';
+import EmailSearchForm from './EmailSearchForm';
 
 const Dashboard = () => {
   const [showCreateForm, setShowCreateForm] = useState(false);
+  const [emailSearchCompleted, setEmailSearchCompleted] = useState(false);
+  const [searchedEmail, setSearchedEmail] = useState('');
+  const [existingAccount, setExistingAccount] = useState<{name: string, email: string, type: string} | null>(null);
+  
+  const handleEmailSearch = (email: string, exists: boolean, accountData?: {name: string, email: string, type: string}) => {
+    setSearchedEmail(email);
+    setEmailSearchCompleted(true);
+    setExistingAccount(accountData || null);
+  };
+  
+  const handleCloseDialog = () => {
+    setShowCreateForm(false);
+    setEmailSearchCompleted(false);
+    setSearchedEmail('');
+    setExistingAccount(null);
+  };
   
   return (
     <div className="p-6 space-y-6">
@@ -27,15 +44,44 @@ const Dashboard = () => {
       </div>
       
       {/* Dialog for creating a new association */}
-      <Dialog open={showCreateForm} onOpenChange={setShowCreateForm}>
+      <Dialog open={showCreateForm} onOpenChange={handleCloseDialog}>
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>Create New Association</DialogTitle>
+            <DialogTitle>
+              {!emailSearchCompleted 
+                ? "Enter Email Address" 
+                : existingAccount 
+                  ? "Existing Account Found" 
+                  : "Create New Association"
+              }
+            </DialogTitle>
             <DialogDescription>
-              Create a new access association between your account and an organization or individual
+              {!emailSearchCompleted 
+                ? "Enter an email address to check if an account already exists" 
+                : existingAccount 
+                  ? `Create a new association with the existing account for ${existingAccount.email}`
+                  : `Create a new association for ${searchedEmail}`
+              }
             </DialogDescription>
           </DialogHeader>
-          <CreateAssociationForm onClose={() => setShowCreateForm(false)} />
+          
+          {!emailSearchCompleted ? (
+            <EmailSearchForm onSearch={handleEmailSearch} onClose={handleCloseDialog} />
+          ) : existingAccount ? (
+            <CreateAssociationForm 
+              onClose={handleCloseDialog} 
+              existingEntity={{
+                entityName: existingAccount.name,
+                entityEmail: existingAccount.email,
+                entityType: existingAccount.type
+              }}
+            />
+          ) : (
+            <CreateAssociationForm 
+              onClose={handleCloseDialog} 
+              prefillEmail={searchedEmail}
+            />
+          )}
         </DialogContent>
       </Dialog>
       

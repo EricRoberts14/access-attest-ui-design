@@ -9,7 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { CardContent, CardFooter } from "@/components/ui/card";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Calendar as CalendarIcon } from 'lucide-react';
+import { Calendar as CalendarIcon, UserCheck } from 'lucide-react';
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { useForm, FormProvider } from "react-hook-form";
@@ -25,6 +25,12 @@ import {
 
 interface CreateAssociationFormProps {
   onClose?: () => void;
+  existingEntity?: {
+    entityName: string;
+    entityEmail: string;
+    entityType: string;
+  };
+  prefillEmail?: string;
 }
 
 type FormData = {
@@ -43,13 +49,13 @@ type FormData = {
   attestationConfirmation: boolean;
 };
 
-const CreateAssociationForm = ({ onClose }: CreateAssociationFormProps) => {
+const CreateAssociationForm = ({ onClose, existingEntity, prefillEmail }: CreateAssociationFormProps) => {
   const { toast } = useToast();
   const form = useForm<FormData>({
     defaultValues: {
-      entityType: "organization",
-      entityName: "",
-      entityEmail: "",
+      entityType: existingEntity?.entityType || "organization",
+      entityName: existingEntity?.entityName || "",
+      entityEmail: existingEntity?.entityEmail || prefillEmail || "",
       accessLevel: "readonly",
       expiration: new Date(),
       permissions: {
@@ -77,6 +83,16 @@ const CreateAssociationForm = ({ onClose }: CreateAssociationFormProps) => {
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <CardContent className="space-y-3 p-2">
+            {existingEntity && (
+              <div className="flex items-center p-3 bg-muted/50 rounded-md mb-2">
+                <UserCheck className="h-5 w-5 text-green-500 mr-2" />
+                <div>
+                  <p className="font-medium">{existingEntity.entityName}</p>
+                  <p className="text-sm text-muted-foreground">{existingEntity.entityEmail}</p>
+                </div>
+              </div>
+            )}
+            
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <FormField
                 control={form.control}
@@ -87,6 +103,7 @@ const CreateAssociationForm = ({ onClose }: CreateAssociationFormProps) => {
                     <Select 
                       value={field.value} 
                       onValueChange={field.onChange}
+                      disabled={!!existingEntity}
                     >
                       <FormControl>
                         <SelectTrigger id="entity-type">
@@ -109,7 +126,11 @@ const CreateAssociationForm = ({ onClose }: CreateAssociationFormProps) => {
                   <FormItem>
                     <FormLabel>Entity Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter organization name" {...field} />
+                      <Input 
+                        placeholder="Enter organization name" 
+                        {...field} 
+                        disabled={!!existingEntity}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -117,7 +138,7 @@ const CreateAssociationForm = ({ onClose }: CreateAssociationFormProps) => {
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {!existingEntity && (
               <FormField
                 control={form.control}
                 name="entityEmail"
@@ -125,36 +146,41 @@ const CreateAssociationForm = ({ onClose }: CreateAssociationFormProps) => {
                   <FormItem>
                     <FormLabel>Contact Email</FormLabel>
                     <FormControl>
-                      <Input type="email" placeholder="Enter email address" {...field} />
+                      <Input 
+                        type="email" 
+                        placeholder="Enter email address" 
+                        {...field} 
+                        disabled={!!prefillEmail}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+            )}
 
-              <FormField
-                control={form.control}
-                name="accessLevel"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Access Level</FormLabel>
-                    <Select value={field.value} onValueChange={field.onChange}>
-                      <FormControl>
-                        <SelectTrigger id="access-level">
-                          <SelectValue placeholder="Select access level" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="readonly">Read Only</SelectItem>
-                        <SelectItem value="limited">Limited Access</SelectItem>
-                        <SelectItem value="full">Full Access</SelectItem>
-                        <SelectItem value="admin">Administrative Access</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </FormItem>
-                )}
-              />
-            </div>
+            <FormField
+              control={form.control}
+              name="accessLevel"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Access Level</FormLabel>
+                  <Select value={field.value} onValueChange={field.onChange}>
+                    <FormControl>
+                      <SelectTrigger id="access-level">
+                        <SelectValue placeholder="Select access level" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="readonly">Read Only</SelectItem>
+                      <SelectItem value="limited">Limited Access</SelectItem>
+                      <SelectItem value="full">Full Access</SelectItem>
+                      <SelectItem value="admin">Administrative Access</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormItem>
+              )}
+            />
 
             <FormField
               control={form.control}
