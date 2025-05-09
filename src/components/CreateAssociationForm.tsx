@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -7,13 +7,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
 import { CardContent, CardFooter } from "@/components/ui/card";
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Calendar as CalendarIcon, UserCheck } from 'lucide-react';
-import { format } from "date-fns";
-import { cn } from "@/lib/utils";
+import { UserCheck } from 'lucide-react';
 import { useForm, FormProvider } from "react-hook-form";
 import { useToast } from "@/hooks/use-toast";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Form,
   FormControl,
@@ -34,11 +31,9 @@ interface CreateAssociationFormProps {
 }
 
 type FormData = {
-  entityType: string;
-  entityName: string;
   entityEmail: string;
-  accessLevel: string;
-  expiration: Date;
+  contractType: string;
+  commissionAccess: string;
   permissions: {
     view: boolean;
     modify: boolean;
@@ -53,11 +48,9 @@ const CreateAssociationForm = ({ onClose, existingEntity, prefillEmail }: Create
   const { toast } = useToast();
   const form = useForm<FormData>({
     defaultValues: {
-      entityType: existingEntity?.entityType || "organization",
-      entityName: existingEntity?.entityName || "",
       entityEmail: existingEntity?.entityEmail || prefillEmail || "",
-      accessLevel: "readonly",
-      expiration: new Date(),
+      contractType: "RIA",
+      commissionAccess: "no",
       permissions: {
         view: false,
         modify: false,
@@ -73,7 +66,7 @@ const CreateAssociationForm = ({ onClose, existingEntity, prefillEmail }: Create
     console.log("Form data submitted:", data);
     toast({
       title: "Association Created",
-      description: `${data.entityName} has been successfully associated with your account.`,
+      description: `A new association has been created with ${data.entityEmail}.`,
     });
     if (onClose) onClose();
   };
@@ -92,51 +85,6 @@ const CreateAssociationForm = ({ onClose, existingEntity, prefillEmail }: Create
                 </div>
               </div>
             )}
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <FormField
-                control={form.control}
-                name="entityType"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Entity Type</FormLabel>
-                    <Select 
-                      value={field.value} 
-                      onValueChange={field.onChange}
-                      disabled={!!existingEntity}
-                    >
-                      <FormControl>
-                        <SelectTrigger id="entity-type">
-                          <SelectValue placeholder="Select entity type" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="organization">Organization</SelectItem>
-                        <SelectItem value="individual">Individual</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="entityName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Entity Name</FormLabel>
-                    <FormControl>
-                      <Input 
-                        placeholder="Enter organization name" 
-                        {...field} 
-                        disabled={!!existingEntity}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
 
             {!existingEntity && (
               <FormField
@@ -158,24 +106,25 @@ const CreateAssociationForm = ({ onClose, existingEntity, prefillEmail }: Create
                 )}
               />
             )}
-
+            
             <FormField
               control={form.control}
-              name="accessLevel"
+              name="contractType"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Access Level</FormLabel>
+                  <FormLabel>Contract Type</FormLabel>
                   <Select value={field.value} onValueChange={field.onChange}>
                     <FormControl>
-                      <SelectTrigger id="access-level">
-                        <SelectValue placeholder="Select access level" />
+                      <SelectTrigger id="contract-type">
+                        <SelectValue placeholder="Select contract type" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="readonly">Read Only</SelectItem>
-                      <SelectItem value="limited">Limited Access</SelectItem>
-                      <SelectItem value="full">Full Access</SelectItem>
-                      <SelectItem value="admin">Administrative Access</SelectItem>
+                      <SelectItem value="RIA">RIA</SelectItem>
+                      <SelectItem value="Agent">Agent</SelectItem>
+                      <SelectItem value="Broker">Broker</SelectItem>
+                      <SelectItem value="Partner">Partner</SelectItem>
+                      <SelectItem value="Consultant">Consultant</SelectItem>
                     </SelectContent>
                   </Select>
                 </FormItem>
@@ -184,40 +133,33 @@ const CreateAssociationForm = ({ onClose, existingEntity, prefillEmail }: Create
 
             <FormField
               control={form.control}
-              name="expiration"
+              name="commissionAccess"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Access Expiration</FormLabel>
+                  <FormLabel>Commission Access</FormLabel>
                   <FormControl>
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <Button
-                          variant={"outline"}
-                          className={cn(
-                            "w-full justify-start text-left font-normal",
-                            !field.value && "text-muted-foreground"
-                          )}
-                        >
-                          <CalendarIcon className="mr-2 h-4 w-4" />
-                          {field.value ? format(field.value, "PPP") : <span>Pick a date</span>}
-                        </Button>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0" align="start">
-                        <Calendar
-                          mode="single"
-                          selected={field.value}
-                          onSelect={field.onChange}
-                          initialFocus
-                        />
-                      </PopoverContent>
-                    </Popover>
+                    <RadioGroup 
+                      value={field.value}
+                      onValueChange={field.onChange}
+                      className="flex space-x-6"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="yes" id="commission-yes" />
+                        <Label htmlFor="commission-yes">Yes</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="no" id="commission-no" />
+                        <Label htmlFor="commission-no">No</Label>
+                      </div>
+                    </RadioGroup>
                   </FormControl>
-                  <div className="text-xs text-muted-foreground">
-                    Next attestation will be due on September 30, 2025
-                  </div>
                 </FormItem>
               )}
             />
+
+            <div className="text-xs text-muted-foreground mt-2 mb-4">
+              Next attestation will be due on November 30, 2025
+            </div>
 
             <div>
               <Label className="mb-1 block">Permissions</Label>
