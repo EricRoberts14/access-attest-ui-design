@@ -32,6 +32,7 @@ interface CreateAssociationFormProps {
 
 type FormData = {
   entityEmail: string;
+  association: string[];
   contractType: string;
   commissionAccess: string;
   justification: string;
@@ -43,6 +44,7 @@ const CreateAssociationForm = ({ onClose, existingEntity, prefillEmail }: Create
   const form = useForm<FormData>({
     defaultValues: {
       entityEmail: existingEntity?.entityEmail || prefillEmail || "",
+      association: [],
       contractType: "RIA",
       commissionAccess: "no",
       justification: "",
@@ -95,6 +97,47 @@ const CreateAssociationForm = ({ onClose, existingEntity, prefillEmail }: Create
               />
             )}
             
+            <FormField
+              control={form.control}
+              name="association"
+              render={() => (
+                <FormItem>
+                  <div className="mb-2">
+                    <FormLabel>Association</FormLabel>
+                  </div>
+                  <div className="space-y-2">
+                    <FormField
+                      control={form.control}
+                      name="association"
+                      render={({ field }) => {
+                        return (
+                          <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                            <FormControl>
+                              <Checkbox
+                                checked={field.value?.includes("Raymond James LLC")}
+                                onCheckedChange={(checked) => {
+                                  return checked
+                                    ? field.onChange([...field.value, "Raymond James LLC"])
+                                    : field.onChange(
+                                        field.value?.filter(
+                                          (value) => value !== "Raymond James LLC"
+                                        )
+                                      );
+                                }}
+                              />
+                            </FormControl>
+                            <FormLabel className="font-normal">
+                              Raymond James LLC
+                            </FormLabel>
+                          </FormItem>
+                        );
+                      }}
+                    />
+                  </div>
+                </FormItem>
+              )}
+            />
+
             <FormField
               control={form.control}
               name="contractType"
