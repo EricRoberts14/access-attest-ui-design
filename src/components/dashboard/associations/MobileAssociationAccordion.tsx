@@ -59,9 +59,14 @@ const MobileAssociationAccordion = ({
             <AccordionTrigger className="hover:bg-muted/50 px-3 py-2.5 rounded-md">
               <div className="flex w-full flex-col items-start text-left">
                 <h3 className="font-medium">{accountDetails.accountHolder}</h3>
-                <div className="text-xs text-muted-foreground mt-1">
+                <div className="flex items-center text-xs text-muted-foreground mt-1">
                   <div>{accountDetails.accountEmail}</div>
-                  <div>{accountDetails.userName || 'No username'}</div>
+                  {accountDetails.userName && (
+                    <>
+                      <span className="mx-2">•</span>
+                      <div>{accountDetails.userName}</div>
+                    </>
+                  )}
                 </div>
               </div>
             </AccordionTrigger>
@@ -78,10 +83,6 @@ const MobileAssociationAccordion = ({
                         <div className="flex justify-between">
                           <span className="font-medium">Contract Type</span>
                           <span>{association.contractType}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="font-medium">Last Attested</span>
-                          <span>{association.lastAttested}</span>
                         </div>
                         <div className="flex justify-between">
                           <span className="font-medium">Status</span>

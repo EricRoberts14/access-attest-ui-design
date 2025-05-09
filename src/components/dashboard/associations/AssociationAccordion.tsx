@@ -59,9 +59,14 @@ const AssociationAccordion = ({
               <div className="flex w-full items-center justify-between pr-8">
                 <div className="flex flex-col text-left">
                   <h3 className="font-medium text-base">{accountDetails.accountHolder}</h3>
-                  <div className="text-sm text-muted-foreground mt-1 space-y-0.5">
+                  <div className="flex items-center text-sm text-muted-foreground mt-1">
                     <div>{accountDetails.accountEmail}</div>
-                    <div>{accountDetails.userName || 'No username'}</div>
+                    {accountDetails.userName && (
+                      <>
+                        <span className="mx-2">•</span>
+                        <div>{accountDetails.userName}</div>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
@@ -73,7 +78,6 @@ const AssociationAccordion = ({
                     <tr>
                       <th className="text-xs font-medium text-left p-3">Association(s)</th>
                       <th className="text-xs font-medium text-left p-3">Contract Type</th>
-                      <th className="text-xs font-medium text-left p-3">Last Attested</th>
                       <th className="text-xs font-medium text-left p-3">Status</th>
                       <th className="text-xs font-medium text-left p-3">Commission Access</th>
                       <th className="text-xs font-medium text-left p-3">Enabled</th>
@@ -85,7 +89,6 @@ const AssociationAccordion = ({
                       <tr key={association.id} className="hover:bg-muted/50">
                         <td className="p-3 text-sm">{association.name}</td>
                         <td className="p-3 text-sm">{association.contractType}</td>
-                        <td className="p-3 text-sm">{association.lastAttested}</td>
                         <td className="p-3">
                           <AttestationStatus status={association.status} />
                         </td>
