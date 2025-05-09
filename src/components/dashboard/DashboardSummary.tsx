@@ -6,6 +6,9 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar } from 'lucide-react';
 
 const DashboardSummary = () => {
+  // Update to match the 8 pending attestations shown in AttestationsTab
+  const pendingCount = 8;
+  
   return (
     <Card className="w-full md:w-1/2">
       <CardHeader className="pb-2">
@@ -15,7 +18,7 @@ const DashboardSummary = () => {
       <CardContent>
         <div className="flex items-center gap-2 mb-3">
           <Calendar className="h-5 w-5 text-muted-foreground" />
-          <span className="text-sm">14 items require attestation</span>
+          <span className="text-sm">{pendingCount} items require attestation</span>
         </div>
         <Progress value={42} className="h-2 mb-5" />
         
@@ -28,7 +31,7 @@ const DashboardSummary = () => {
             </div>
             <div className="flex justify-between items-center">
               <span className="text-sm">Pending Attestations</span>
-              <Badge variant="outline" className="bg-attestation-pending/10 text-attestation-pending">8</Badge>
+              <Badge variant="outline" className="bg-attestation-pending/10 text-attestation-pending">{pendingCount}</Badge>
             </div>
           </div>
         </div>
