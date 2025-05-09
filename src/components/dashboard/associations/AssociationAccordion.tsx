@@ -133,9 +133,9 @@ const AssociationAccordion = ({
                         </td>
                         <td className="p-3">
                           <Button 
-                            variant="ghost" 
                             size="sm" 
                             onClick={() => toggleEdit(association.id)}
+                            variant={editingId === association.id ? "default" : "outline"}
                           >
                             {editingId === association.id ? "Save" : "Manage"}
                           </Button>
