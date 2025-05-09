@@ -45,8 +45,8 @@ const Sidebar = () => {
       
       <div className="mt-auto px-4 pt-6 border-t border-sidebar-border">
         <div className="bg-sidebar-accent rounded-md p-4">
-          <h4 className="text-sm font-medium text-sidebar-foreground mb-2">Next Attestation Period</h4>
-          <p className="text-xs text-sidebar-foreground/70 mb-2">Due by September 30, 2025</p>
+          <h4 className="text-sm font-medium text-sidebar-foreground mb-2">Current Attestation Period</h4>
+          <p className="text-xs text-sidebar-foreground/70 mb-2">May 1-31, 2025</p>
           <div className="h-1.5 w-full bg-sidebar-border rounded-full overflow-hidden">
             <div className="h-full bg-attestation-pending w-3/4 rounded-full"></div>
           </div>
