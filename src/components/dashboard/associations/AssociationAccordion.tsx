@@ -57,15 +57,16 @@ const AssociationAccordion = ({
           <AccordionItem key={accountHolder} value={accountHolder}>
             <AccordionTrigger className="hover:bg-muted/50 px-4 py-3 rounded-md">
               <div className="flex w-full items-center justify-between pr-8">
-                <div className="flex items-center gap-2">
-                  <h3 className="font-medium text-base">{accountDetails.accountHolder}</h3>
-                  <div className="flex items-center text-sm text-muted-foreground">
-                    <div>{accountDetails.accountEmail}</div>
+                <div className="flex gap-1 items-center">
+                  <span className="font-medium text-base">{accountDetails.accountHolder}</span>
+                  <div className="flex items-center text-sm space-x-2">
+                    <span className="text-muted-foreground">
+                      &lt;{accountDetails.accountEmail}&gt;
+                    </span>
                     {accountDetails.userName && (
-                      <>
-                        <span className="mx-2">•</span>
-                        <div>{accountDetails.userName}</div>
-                      </>
+                      <span className="bg-muted/60 px-2 py-0.5 rounded text-xs text-muted-foreground">
+                        {accountDetails.userName}
+                      </span>
                     )}
                   </div>
                 </div>

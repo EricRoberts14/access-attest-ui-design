@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
@@ -57,16 +56,15 @@ const MobileAssociationAccordion = ({
         return (
           <AccordionItem key={accountHolder} value={accountHolder} className="border rounded-md mb-2">
             <AccordionTrigger className="hover:bg-muted/50 px-3 py-2.5 rounded-md">
-              <div className="flex w-full items-center justify-between">
-                <div className="flex items-center gap-2 flex-wrap">
-                  <h3 className="font-medium">{accountDetails.accountHolder}</h3>
-                  <div className="flex items-center text-xs text-muted-foreground">
-                    <div>{accountDetails.accountEmail}</div>
+              <div className="flex w-full flex-col sm:flex-row sm:items-center text-left">
+                <div className="flex flex-wrap gap-1 items-center">
+                  <span className="font-medium">{accountDetails.accountHolder}</span>
+                  <div className="flex items-center text-xs space-x-2 text-muted-foreground">
+                    <span>&lt;{accountDetails.accountEmail}&gt;</span>
                     {accountDetails.userName && (
-                      <>
-                        <span className="mx-2">•</span>
-                        <div>{accountDetails.userName}</div>
-                      </>
+                      <span className="bg-muted/60 px-2 py-0.5 rounded text-xs">
+                        {accountDetails.userName}
+                      </span>
                     )}
                   </div>
                 </div>
