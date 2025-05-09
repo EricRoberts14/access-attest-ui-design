@@ -6,6 +6,7 @@ export interface AttestationData {
   entityName: string;
   accountHolder: string;
   accountEmail: string;
+  userName?: string;
   contractType: string;
   commissionAccess: string;
   expirationDate: string;
