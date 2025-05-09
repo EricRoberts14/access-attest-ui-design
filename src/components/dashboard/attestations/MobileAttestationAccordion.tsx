@@ -47,9 +47,9 @@ const MobileAttestationAccordion = ({ attestations }: MobileAttestationAccordion
         return (
           <AccordionItem key={accountHolder} value={accountHolder} className="border rounded-md mb-2">
             <AccordionTrigger className="hover:bg-muted/50 px-3 py-2.5 rounded-md">
-              <div className="flex w-full items-center text-left">
+              <div className="flex w-full items-center justify-between">
                 <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1 sm:mb-0">
+                  <div className="flex items-center justify-between mb-1 sm:mb-0">
                     <div className="flex items-center gap-1">
                       <User className="h-4 w-4 text-muted-foreground" />
                       <span className="font-medium">{accountDetails.accountHolder}</span>
