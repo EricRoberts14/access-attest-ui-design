@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { User, Link as LinkIcon, Check, Clock } from 'lucide-react';
+import { User, Link as LinkIcon, Check, Clock, LayoutDashboard } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 type NavItemProps = {
@@ -67,6 +67,11 @@ const Sidebar = () => {
     }
   };
 
+  // Scroll to top of page
+  const handleDashboardClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   // Change handlers for each tab
   const handleMyAccountClick = () => changeTab("myaccount");
   const handleAssociationsClick = () => changeTab("associations");
@@ -81,6 +86,11 @@ const Sidebar = () => {
       </div>
       
       <div className="space-y-1 px-3 flex-1 overflow-y-auto scrollbar-hide">
+        <NavItem 
+          icon={LayoutDashboard} 
+          text="Dashboard" 
+          onClick={handleDashboardClick}
+        />
         <NavItem 
           icon={User} 
           text="My Account" 

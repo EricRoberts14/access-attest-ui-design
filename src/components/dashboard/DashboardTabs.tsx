@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AssociationsTab from './AssociationsTab';
 import AttestationsTab from './AttestationsTab';
 import HistoryTab from './HistoryTab';
+import MyAccountTab from './MyAccountTab';
 
 interface DashboardTabsProps {
   activeTab: string;
@@ -39,13 +40,18 @@ const DashboardTabs = ({ activeTab, onTabChange, onCreateNew }: DashboardTabsPro
 
   return (
     <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
-      <TabsList ref={tabsListRef} className="grid grid-cols-3 mb-4 sm:mb-6">
+      <TabsList ref={tabsListRef} className="grid grid-cols-4 mb-4 sm:mb-6">
+        <TabsTrigger value="myaccount">My Account</TabsTrigger>
         <TabsTrigger value="associations">Associations</TabsTrigger>
         <TabsTrigger value="attestations">Attestations</TabsTrigger>
         <TabsTrigger value="history">History</TabsTrigger>
       </TabsList>
       
       <div ref={tabsContentRef}>
+        <TabsContent value="myaccount" className="space-y-4">
+          <MyAccountTab />
+        </TabsContent>
+        
         <TabsContent value="associations" className="space-y-4">
           <AssociationsTab onCreateNew={onCreateNew} />
         </TabsContent>
