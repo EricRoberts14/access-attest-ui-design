@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -12,10 +13,12 @@ import {
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import AttestationStatus from './AttestationStatus';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const AttestationsTab = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
+  const isMobile = useIsMobile();
 
   // Mock pending attestation data
   const pendingAttestations = [
@@ -127,6 +130,101 @@ const AttestationsTab = () => {
     }
   };
 
+  const renderMobileView = () => {
+    return (
+      <div className="space-y-4">
+        {paginatedAttestations.map((attestation) => (
+          <Card key={attestation.id} className="overflow-hidden">
+            <CardHeader className="p-3">
+              <CardTitle className="text-base flex justify-between items-center">
+                <span>{attestation.accountHolder}</span>
+                <AttestationStatus status={attestation.status} />
+              </CardTitle>
+              <CardDescription className="text-xs mt-1">{attestation.accountEmail}</CardDescription>
+            </CardHeader>
+            <CardContent className="p-3 pt-0">
+              <dl className="grid grid-cols-2 gap-1 text-sm">
+                <dt className="text-xs font-medium text-muted-foreground">Association</dt>
+                <dd>{attestation.entityName}</dd>
+                
+                <dt className="text-xs font-medium text-muted-foreground">Type</dt>
+                <dd>{attestation.contractType}</dd>
+                
+                <dt className="text-xs font-medium text-muted-foreground">Expires</dt>
+                <dd>{attestation.expirationDate}</dd>
+                
+                <dt className="text-xs font-medium text-muted-foreground">Commission</dt>
+                <dd>{attestation.commissionAccess}</dd>
+                
+                <dt className="text-xs font-medium text-muted-foreground">Enabled</dt>
+                <dd>{attestation.enabled}</dd>
+              </dl>
+            </CardContent>
+            <CardFooter className="p-3 pt-0 flex gap-2 justify-end">
+              <Button size="sm">Attest</Button>
+              <Button size="sm" variant="destructive">Reject</Button>
+            </CardFooter>
+          </Card>
+        ))}
+      </div>
+    );
+  };
+
+  const renderDesktopView = () => {
+    return (
+      <div className="border rounded-lg overflow-hidden">
+        <table className="w-full">
+          <thead className="bg-muted">
+            <tr>
+              <th className="text-xs font-medium text-left p-3">Account Holder</th>
+              <th className="text-xs font-medium text-left p-3">Association(s)</th>
+              <th className="text-xs font-medium text-left p-3">Contract Type</th>
+              <th className="text-xs font-medium text-left p-3">Expires</th>
+              <th className="text-xs font-medium text-left p-3">Status</th>
+              <th className="text-xs font-medium text-left p-3">Commission Access</th>
+              <th className="text-xs font-medium text-left p-3">Enabled</th>
+              <th className="text-xs font-medium text-left p-3">Actions</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y">
+            {paginatedAttestations.map((attestation) => (
+              <tr key={attestation.id} className="hover:bg-muted/50">
+                <td className="p-3 text-sm">
+                  <HoverCard>
+                    <HoverCardTrigger asChild>
+                      <span className="cursor-help underline decoration-dotted">
+                        {attestation.accountHolder}
+                      </span>
+                    </HoverCardTrigger>
+                    <HoverCardContent className="w-auto">
+                      <div className="text-sm">
+                        <p className="font-medium">{attestation.accountEmail}</p>
+                      </div>
+                    </HoverCardContent>
+                  </HoverCard>
+                </td>
+                <td className="p-3 text-sm">{attestation.entityName}</td>
+                <td className="p-3 text-sm">{attestation.contractType}</td>
+                <td className="p-3 text-sm">{attestation.expirationDate}</td>
+                <td className="p-3">
+                  <AttestationStatus status={attestation.status} />
+                </td>
+                <td className="p-3 text-sm">{attestation.commissionAccess}</td>
+                <td className="p-3 text-sm">{attestation.enabled}</td>
+                <td className="p-3">
+                  <div className="flex space-x-2">
+                    <Button size="sm">Attest</Button>
+                    <Button size="sm" variant="destructive">Reject</Button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -135,65 +233,16 @@ const AttestationsTab = () => {
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          <div className="border rounded-lg overflow-hidden">
-            <table className="w-full">
-              <thead className="bg-muted">
-                <tr>
-                  <th className="text-xs font-medium text-left p-3">Account Holder</th>
-                  <th className="text-xs font-medium text-left p-3">Association(s)</th>
-                  <th className="text-xs font-medium text-left p-3">Contract Type</th>
-                  <th className="text-xs font-medium text-left p-3">Expires</th>
-                  <th className="text-xs font-medium text-left p-3">Status</th>
-                  <th className="text-xs font-medium text-left p-3">Commission Access</th>
-                  <th className="text-xs font-medium text-left p-3">Enabled</th>
-                  <th className="text-xs font-medium text-left p-3">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y">
-                {paginatedAttestations.map((attestation) => (
-                  <tr key={attestation.id} className="hover:bg-muted/50">
-                    <td className="p-3 text-sm">
-                      <HoverCard>
-                        <HoverCardTrigger asChild>
-                          <span className="cursor-help underline decoration-dotted">
-                            {attestation.accountHolder}
-                          </span>
-                        </HoverCardTrigger>
-                        <HoverCardContent className="w-auto">
-                          <div className="text-sm">
-                            <p className="font-medium">{attestation.accountEmail}</p>
-                          </div>
-                        </HoverCardContent>
-                      </HoverCard>
-                    </td>
-                    <td className="p-3 text-sm">{attestation.entityName}</td>
-                    <td className="p-3 text-sm">{attestation.contractType}</td>
-                    <td className="p-3 text-sm">{attestation.expirationDate}</td>
-                    <td className="p-3">
-                      <AttestationStatus status={attestation.status} />
-                    </td>
-                    <td className="p-3 text-sm">{attestation.commissionAccess}</td>
-                    <td className="p-3 text-sm">{attestation.enabled}</td>
-                    <td className="p-3">
-                      <div className="flex space-x-2">
-                        <Button size="sm">Attest</Button>
-                        <Button size="sm" variant="destructive">Reject</Button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          {isMobile ? renderMobileView() : renderDesktopView()}
         </div>
       </CardContent>
-      <CardFooter className="flex justify-between">
+      <CardFooter className="flex justify-between overflow-auto">
         <Pagination>
-          <PaginationContent>
+          <PaginationContent className="flex-wrap">
             <PaginationItem>
               <PaginationPrevious onClick={handlePreviousPage} className={currentPage === 1 ? "pointer-events-none opacity-50" : ""} />
             </PaginationItem>
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            {!isMobile && Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
               <PaginationItem key={page}>
                 <PaginationLink 
                   isActive={page === currentPage} 

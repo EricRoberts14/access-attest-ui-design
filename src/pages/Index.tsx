@@ -4,10 +4,15 @@ import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Dashboard from "../components/Dashboard";
 import { useToast } from "@/components/ui/use-toast";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Menu } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const Index = () => {
   const { toast } = useToast();
   const [activeTab, setActiveTab] = useState<string>("associations");
+  const isMobile = useIsMobile();
   
   // Show notification toast when the page loads
   useEffect(() => {
@@ -40,8 +45,21 @@ const Index = () => {
     <div className="min-h-screen flex flex-col">
       <Header />
       <div className="flex flex-1">
-        <Sidebar />
-        <main className="flex-1 overflow-auto">
+        {isMobile ? (
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="fixed bottom-4 left-4 z-40 bg-primary text-white rounded-full shadow-lg">
+                <Menu className="h-5 w-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="p-0 w-[85%] sm:w-[300px] border-r">
+              <Sidebar />
+            </SheetContent>
+          </Sheet>
+        ) : (
+          <Sidebar />
+        )}
+        <main className="flex-1 overflow-auto w-full">
           <Dashboard activeTab={activeTab} onTabChange={handleTabChange} />
         </main>
       </div>

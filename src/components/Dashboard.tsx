@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { useIsMobile } from "@/hooks/use-mobile";
 import DashboardSummary from './dashboard/DashboardSummary';
 import DelegateInfoCard from './dashboard/DelegateInfoCard';
 import AssociationsTab from './dashboard/AssociationsTab';
@@ -21,6 +22,7 @@ const Dashboard = ({ activeTab = "associations", onTabChange }: DashboardProps) 
   const [emailSearchCompleted, setEmailSearchCompleted] = useState(false);
   const [searchedEmail, setSearchedEmail] = useState('');
   const [existingAccount, setExistingAccount] = useState<{name: string, email: string, type: string} | null>(null);
+  const isMobile = useIsMobile();
   
   const handleEmailSearch = (email: string, exists: boolean, accountData?: {name: string, email: string, type: string}) => {
     setSearchedEmail(email);
@@ -46,16 +48,16 @@ const Dashboard = ({ activeTab = "associations", onTabChange }: DashboardProps) 
   };
   
   return (
-    <div className="p-6 space-y-6">
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <div className="p-3 sm:p-6 space-y-4 sm:space-y-6">
+      <div className="flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold">Access Management Dashboard</h1>
-          <p className="text-muted-foreground">Manage your account associations and attestations</p>
+          <h1 className="text-xl sm:text-2xl font-bold">Access Management Dashboard</h1>
+          <p className="text-muted-foreground text-sm">Manage your account associations and attestations</p>
         </div>
         
-        <div className="flex items-center gap-3">
-          <Button variant="outline">Export</Button>
-          <Button onClick={() => setShowCreateForm(true)}>Create New Association</Button>
+        <div className="flex items-center gap-2">
+          <Button variant="outline" size={isMobile ? "sm" : "default"}>Export</Button>
+          <Button onClick={() => setShowCreateForm(true)} size={isMobile ? "sm" : "default"}>Create New Association</Button>
         </div>
       </div>
       
@@ -97,14 +99,14 @@ const Dashboard = ({ activeTab = "associations", onTabChange }: DashboardProps) 
       </Dialog>
       
       {/* Dashboard Summary Cards */}
-      <div className="flex flex-col md:flex-row gap-6">
+      <div className="flex flex-col sm:flex-row gap-4">
         <DashboardSummary onNavigateToAttestations={navigateToAttestations} />
         <DelegateInfoCard />
       </div>
       
       {/* Main Tabs */}
       <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
-        <TabsList className="grid grid-cols-3 mb-6">
+        <TabsList className="grid grid-cols-3 mb-4 sm:mb-6">
           <TabsTrigger value="associations">Associations</TabsTrigger>
           <TabsTrigger value="attestations">Attestations</TabsTrigger>
           <TabsTrigger value="history">History</TabsTrigger>
