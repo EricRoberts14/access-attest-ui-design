@@ -55,17 +55,17 @@ const MobileAssociationAccordion = ({
         const accountDetails = accountAssociations[0];
         
         return (
-          <AccordionItem key={accountHolder} value={accountHolder}>
-            <AccordionTrigger className="hover:bg-muted/50 px-2 py-2 text-sm">
-              <div className="flex w-full flex-col items-start justify-between">
-                <div className="font-medium">{accountDetails.accountHolder}</div>
-                <div className="text-xs text-muted-foreground">
+          <AccordionItem key={accountHolder} value={accountHolder} className="border rounded-md mb-2">
+            <AccordionTrigger className="hover:bg-muted/50 px-3 py-2.5 rounded-md">
+              <div className="flex w-full flex-col items-start text-left">
+                <h3 className="font-medium">{accountDetails.accountHolder}</h3>
+                <div className="text-xs text-muted-foreground mt-1">
                   <div>{accountDetails.accountEmail}</div>
-                  <div>Username: {accountDetails.userName}</div>
+                  <div>{accountDetails.userName || 'No username'}</div>
                 </div>
               </div>
             </AccordionTrigger>
-            <AccordionContent className="px-1">
+            <AccordionContent className="px-2 py-2">
               <div className="space-y-3">
                 {accountAssociations.map((association) => (
                   <Card key={association.id} className="overflow-hidden">

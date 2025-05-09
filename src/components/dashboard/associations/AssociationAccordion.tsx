@@ -55,14 +55,14 @@ const AssociationAccordion = ({
         
         return (
           <AccordionItem key={accountHolder} value={accountHolder}>
-            <AccordionTrigger className="hover:bg-muted/50 px-4 py-2 rounded-md">
+            <AccordionTrigger className="hover:bg-muted/50 px-4 py-3 rounded-md">
               <div className="flex w-full items-center justify-between pr-8">
-                <div className="text-left">
-                  <h3 className="font-medium">{accountDetails.accountHolder}</h3>
-                </div>
-                <div className="text-sm text-muted-foreground space-x-8">
-                  <span>Email: {accountDetails.accountEmail}</span>
-                  <span>Username: {accountDetails.userName}</span>
+                <div className="flex flex-col text-left">
+                  <h3 className="font-medium text-base">{accountDetails.accountHolder}</h3>
+                  <div className="text-sm text-muted-foreground mt-1 space-y-0.5">
+                    <div>{accountDetails.accountEmail}</div>
+                    <div>{accountDetails.userName || 'No username'}</div>
+                  </div>
                 </div>
               </div>
             </AccordionTrigger>
