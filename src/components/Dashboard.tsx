@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import DashboardSummary from './dashboard/DashboardSummary';
+import DelegateInfoCard from './dashboard/DelegateInfoCard';
 import AssociationsTab from './dashboard/AssociationsTab';
 import AttestationsTab from './dashboard/AttestationsTab';
 import HistoryTab from './dashboard/HistoryTab';
@@ -91,8 +92,11 @@ const Dashboard = ({ activeTab = "associations", onTabChange }: DashboardProps) 
         </DialogContent>
       </Dialog>
       
-      {/* Dashboard Summary Card */}
-      <DashboardSummary />
+      {/* Dashboard Summary Cards */}
+      <div className="flex flex-col md:flex-row gap-6">
+        <DashboardSummary />
+        <DelegateInfoCard />
+      </div>
       
       {/* Main Tabs */}
       <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
