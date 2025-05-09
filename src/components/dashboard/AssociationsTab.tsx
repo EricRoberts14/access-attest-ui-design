@@ -30,7 +30,7 @@ const AssociationsTab = () => {
                   <td className="p-3 text-sm">Acme Corporation</td>
                   <td className="p-3 text-sm">Organization</td>
                   <td className="p-3 text-sm">Full Access</td>
-                  <td className="p-3 text-sm">March 15, 2025</td>
+                  <td className="p-3 text-sm">May 1, 2025</td>
                   <td className="p-3">
                     <AttestationStatus status="valid" />
                   </td>
@@ -42,7 +42,7 @@ const AssociationsTab = () => {
                   <td className="p-3 text-sm">James Smith</td>
                   <td className="p-3 text-sm">Individual</td>
                   <td className="p-3 text-sm">Read Only</td>
-                  <td className="p-3 text-sm">February 28, 2025</td>
+                  <td className="p-3 text-sm">May 20, 2025</td>
                   <td className="p-3">
                     <AttestationStatus status="valid" />
                   </td>
