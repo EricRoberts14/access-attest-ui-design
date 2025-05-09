@@ -29,7 +29,7 @@ const HistoryTab = () => {
       contractType: 'RIA',
       commissionAccess: 'Yes',
       attestedDate: 'November 25, 2024',
-      attestedBy: 'John Smith',
+      attestedBy: 'John Doe',
       action: 'Approved',
       enabled: true
     },
@@ -39,7 +39,7 @@ const HistoryTab = () => {
       contractType: 'Agent',
       commissionAccess: 'No',
       attestedDate: 'November 23, 2024',
-      attestedBy: 'Maria Garcia',
+      attestedBy: 'John Doe',
       action: 'Approved',
       enabled: true
     },
@@ -49,7 +49,7 @@ const HistoryTab = () => {
       contractType: 'RIA',
       commissionAccess: 'Yes',
       attestedDate: 'November 20, 2024',
-      attestedBy: 'John Smith',
+      attestedBy: 'John Doe',
       action: 'Rejected',
       enabled: false
     },
@@ -59,7 +59,7 @@ const HistoryTab = () => {
       contractType: 'Agent',
       commissionAccess: 'No',
       attestedDate: 'November 18, 2024',
-      attestedBy: 'Robert Johnson',
+      attestedBy: 'John Doe',
       action: 'Approved',
       enabled: true
     },
@@ -69,7 +69,7 @@ const HistoryTab = () => {
       contractType: 'RIA',
       commissionAccess: 'Yes',
       attestedDate: 'November 15, 2024',
-      attestedBy: 'Maria Garcia',
+      attestedBy: 'John Doe',
       action: 'Approved',
       enabled: true
     },
@@ -79,7 +79,7 @@ const HistoryTab = () => {
       contractType: 'Agent',
       commissionAccess: 'No',
       attestedDate: 'November 10, 2024',
-      attestedBy: 'John Smith',
+      attestedBy: 'John Doe',
       action: 'Rejected',
       enabled: false
     },
@@ -89,7 +89,7 @@ const HistoryTab = () => {
       contractType: 'RIA',
       commissionAccess: 'Yes',
       attestedDate: 'November 8, 2024',
-      attestedBy: 'Robert Johnson',
+      attestedBy: 'John Doe',
       action: 'Approved',
       enabled: true
     },
@@ -99,7 +99,7 @@ const HistoryTab = () => {
       contractType: 'Agent',
       commissionAccess: 'No',
       attestedDate: 'November 5, 2024',
-      attestedBy: 'Maria Garcia',
+      attestedBy: 'John Doe',
       action: 'Approved',
       enabled: true
     }
