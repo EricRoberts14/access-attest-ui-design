@@ -14,9 +14,16 @@ interface DashboardTabsProps {
 const DashboardTabs = ({ activeTab, onTabChange, onCreateNew }: DashboardTabsProps) => {
   const tabsListRef = useRef<HTMLDivElement>(null);
   const tabsContentRef = useRef<HTMLDivElement>(null);
+  const isInitialLoadRef = useRef(true);
   
-  // Scroll tab into view when active tab changes
+  // Only scroll tab into view when active tab changes and it's not the initial load
   useEffect(() => {
+    // Skip scrolling on the initial render
+    if (isInitialLoadRef.current) {
+      isInitialLoadRef.current = false;
+      return;
+    }
+    
     if (tabsListRef.current) {
       tabsListRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }

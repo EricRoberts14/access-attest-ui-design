@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { User, Link as LinkIcon, Check, Clock } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -60,13 +59,11 @@ const Sidebar = () => {
     const event = new CustomEvent('tabChange', { detail: tabName });
     window.dispatchEvent(event);
     
-    // Add a small delay to ensure the DOM is updated before scrolling
-    setTimeout(() => {
-      const tabsList = document.querySelector('.tabs-list');
-      if (tabsList) {
-        tabsList.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
-    }, 100);
+    // Only scroll when a tab is clicked, not on page load
+    const tabsList = document.querySelector('.tabs-list');
+    if (tabsList) {
+      tabsList.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
   };
 
   // Change handlers for each tab
