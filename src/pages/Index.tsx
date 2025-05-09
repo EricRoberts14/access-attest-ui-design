@@ -12,8 +12,8 @@ const Index = () => {
   // Show notification toast when the page loads
   useEffect(() => {
     toast({
-      title: "Attestation Period Approaching",
-      description: "The next attestation period begins September 1, 2025.",
+      title: "Attestation Period Active",
+      description: "The current attestation period ends May 31, 2025.",
       duration: 5000,
     });
   }, [toast]);

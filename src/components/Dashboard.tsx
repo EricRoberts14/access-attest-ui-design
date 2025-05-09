@@ -56,8 +56,8 @@ const Dashboard = () => {
       {/* Combined Attestation and Associations Summary Card */}
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="text-lg">Next Attestation Period</CardTitle>
-          <CardDescription>September 1-30, 2025</CardDescription>
+          <CardTitle className="text-lg">Current Attestation Period</CardTitle>
+          <CardDescription>May 1-31, 2025</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex items-center gap-2 mb-3">
@@ -142,7 +142,7 @@ const Dashboard = () => {
                         <td className="p-3 text-sm">Global Tech Partners</td>
                         <td className="p-3 text-sm">Organization</td>
                         <td className="p-3 text-sm">Full Access</td>
-                        <td className="p-3 text-sm">September 29, 2024</td>
+                        <td className="p-3 text-sm">November 30, 2024</td>
                         <td className="p-3">
                           <AttestationStatus status="pending" />
                         </td>
@@ -154,7 +154,7 @@ const Dashboard = () => {
                         <td className="p-3 text-sm">Sarah Johnson</td>
                         <td className="p-3 text-sm">Individual</td>
                         <td className="p-3 text-sm">Limited Access</td>
-                        <td className="p-3 text-sm">August 5, 2024</td>
+                        <td className="p-3 text-sm">November 25, 2024</td>
                         <td className="p-3">
                           <AttestationStatus status="expired" />
                         </td>
