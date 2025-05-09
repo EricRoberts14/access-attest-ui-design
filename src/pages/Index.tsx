@@ -46,22 +46,31 @@ const Index = () => {
       <Header />
       <div className="flex flex-1">
         {isMobile ? (
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="fixed bottom-4 left-4 z-40 bg-primary text-white rounded-full shadow-lg">
-                <Menu className="h-5 w-5" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="p-0 w-[85%] sm:w-[300px] border-r">
-              <Sidebar />
-            </SheetContent>
-          </Sheet>
+          <>
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="fixed bottom-4 left-4 z-40 bg-primary text-white rounded-full shadow-lg">
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="p-0 w-[85%] sm:w-[300px] border-r">
+                <Sidebar />
+              </SheetContent>
+            </Sheet>
+            <main className="flex-1 overflow-auto w-full">
+              <Dashboard activeTab={activeTab} onTabChange={handleTabChange} />
+            </main>
+          </>
         ) : (
-          <Sidebar />
+          <>
+            <div className="w-64 fixed top-0 left-0 h-full">
+              <Sidebar />
+            </div>
+            <main className="flex-1 overflow-auto w-full ml-64">
+              <Dashboard activeTab={activeTab} onTabChange={handleTabChange} />
+            </main>
+          </>
         )}
-        <main className="flex-1 overflow-auto w-full ml-64">
-          <Dashboard activeTab={activeTab} onTabChange={handleTabChange} />
-        </main>
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { User, Link as LinkIcon, Check, Clock } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -73,7 +74,7 @@ const Sidebar = () => {
   const handleHistoryClick = () => changeTab("history");
 
   return (
-    <aside className="bg-massmutual-blue-dark w-64 min-h-screen py-6 flex flex-col fixed top-0 left-0 h-full z-30 pt-16">
+    <aside className="bg-massmutual-blue-dark w-64 min-h-screen py-6 flex flex-col h-full z-30 pt-16">
       <div className="px-4 mb-6">
         <h2 className="text-lg font-bold text-white mb-1">Access Attest</h2>
         <p className="text-xs text-gray-300">Access Management System</p>
