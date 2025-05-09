@@ -50,7 +50,7 @@ const MobileAccountAssociationCard = ({ association }: { association: any }) => 
             <span>{association.dateGranted}</span>
           </div>
           <div className="flex justify-between">
-            <span className="font-medium">Status</span>
+            <span className="font-medium">Attestation Status</span>
             <div className="flex items-center">
               <AttestationStatus status={association.status} />
             </div>
@@ -106,7 +106,7 @@ const MyAccountTab = () => {
                     <th className="text-xs font-medium text-left p-3">Association(s)</th>
                     <th className="text-xs font-medium text-left p-3">Role</th>
                     <th className="text-xs font-medium text-left p-3">Date Granted</th>
-                    <th className="text-xs font-medium text-left p-3">Status</th>
+                    <th className="text-xs font-medium text-left p-3">Attestation Status</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y">

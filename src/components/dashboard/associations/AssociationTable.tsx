@@ -53,11 +53,10 @@ const AssociationTable = ({
             <th className="text-xs font-medium text-left p-3">Account Holder</th>
             <th className="text-xs font-medium text-left p-3">Association(s)</th>
             <th className="text-xs font-medium text-left p-3">Contract Type</th>
-            <th className="text-xs font-medium text-left p-3">Last Attested</th>
-            <th className="text-xs font-medium text-left p-3">Status</th>
             <th className="text-xs font-medium text-left p-3">Commission Access</th>
             <th className="text-xs font-medium text-left p-3">Enabled</th>
             <th className="text-xs font-medium text-left p-3">Actions</th>
+            <th className="text-xs font-medium text-left p-3">Attestation Status</th>
           </tr>
         </thead>
         <tbody className="divide-y">
@@ -79,10 +78,6 @@ const AssociationTable = ({
               </td>
               <td className="p-3 text-sm">{association.name}</td>
               <td className="p-3 text-sm">{association.contractType}</td>
-              <td className="p-3 text-sm">{association.lastAttested}</td>
-              <td className="p-3">
-                <AttestationStatus status={association.status} />
-              </td>
               <td className="p-3 text-sm">
                 {editingId === association.id ? (
                   <RadioGroup 
@@ -124,6 +119,9 @@ const AssociationTable = ({
                 >
                   {editingId === association.id ? "Save" : "Manage"}
                 </Button>
+              </td>
+              <td className="p-3">
+                <AttestationStatus status={association.status} />
               </td>
             </tr>
           ))}

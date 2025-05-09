@@ -57,16 +57,18 @@ const MobileAssociationAccordion = ({
         return (
           <AccordionItem key={accountHolder} value={accountHolder} className="border rounded-md mb-2">
             <AccordionTrigger className="hover:bg-muted/50 px-3 py-2.5 rounded-md">
-              <div className="flex w-full flex-col items-start text-left">
-                <h3 className="font-medium">{accountDetails.accountHolder}</h3>
-                <div className="flex items-center text-xs text-muted-foreground mt-1">
-                  <div>{accountDetails.accountEmail}</div>
-                  {accountDetails.userName && (
-                    <>
-                      <span className="mx-2">•</span>
-                      <div>{accountDetails.userName}</div>
-                    </>
-                  )}
+              <div className="flex w-full items-center justify-between">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h3 className="font-medium">{accountDetails.accountHolder}</h3>
+                  <div className="flex items-center text-xs text-muted-foreground">
+                    <div>{accountDetails.accountEmail}</div>
+                    {accountDetails.userName && (
+                      <>
+                        <span className="mx-2">•</span>
+                        <div>{accountDetails.userName}</div>
+                      </>
+                    )}
+                  </div>
                 </div>
               </div>
             </AccordionTrigger>
@@ -83,12 +85,6 @@ const MobileAssociationAccordion = ({
                         <div className="flex justify-between">
                           <span className="font-medium">Contract Type</span>
                           <span>{association.contractType}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="font-medium">Status</span>
-                          <div className="flex items-center">
-                            <AttestationStatus status={association.status} />
-                          </div>
                         </div>
                         <div className="flex justify-between items-center">
                           <span className="font-medium">Commission Access</span>
@@ -126,6 +122,12 @@ const MobileAssociationAccordion = ({
                           ) : (
                             <span>{association.enabled ? "Enabled" : "Disabled"}</span>
                           )}
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="font-medium">Attestation Status</span>
+                          <div className="flex items-center">
+                            <AttestationStatus status={association.status} />
+                          </div>
                         </div>
                         <div className="pt-1 flex justify-end">
                           <Button 

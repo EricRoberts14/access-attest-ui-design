@@ -35,6 +35,11 @@ const MobileAttestationCard = ({ attestation }: MobileAttestationCardProps) => {
           
           <dt className="text-xs font-medium text-muted-foreground">Enabled</dt>
           <dd>{attestation.enabled}</dd>
+          
+          <dt className="text-xs font-medium text-muted-foreground">Attestation Status</dt>
+          <dd className="flex items-center">
+            <AttestationStatus status={attestation.status} />
+          </dd>
         </dl>
       </CardContent>
       <CardFooter className="p-3 pt-0 flex gap-2 justify-end">

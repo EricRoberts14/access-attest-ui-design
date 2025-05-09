@@ -19,10 +19,10 @@ const DesktopAttestationTable = ({ attestations }: DesktopAttestationTableProps)
             <th className="text-xs font-medium text-left p-3">Association(s)</th>
             <th className="text-xs font-medium text-left p-3">Contract Type</th>
             <th className="text-xs font-medium text-left p-3">Expires</th>
-            <th className="text-xs font-medium text-left p-3">Status</th>
             <th className="text-xs font-medium text-left p-3">Commission Access</th>
             <th className="text-xs font-medium text-left p-3">Enabled</th>
             <th className="text-xs font-medium text-left p-3">Actions</th>
+            <th className="text-xs font-medium text-left p-3">Attestation Status</th>
           </tr>
         </thead>
         <tbody className="divide-y">
@@ -45,9 +45,6 @@ const DesktopAttestationTable = ({ attestations }: DesktopAttestationTableProps)
               <td className="p-3 text-sm">{attestation.entityName}</td>
               <td className="p-3 text-sm">{attestation.contractType}</td>
               <td className="p-3 text-sm">{attestation.expirationDate}</td>
-              <td className="p-3">
-                <AttestationStatus status={attestation.status} />
-              </td>
               <td className="p-3 text-sm">{attestation.commissionAccess}</td>
               <td className="p-3 text-sm">{attestation.enabled}</td>
               <td className="p-3">
@@ -55,6 +52,9 @@ const DesktopAttestationTable = ({ attestations }: DesktopAttestationTableProps)
                   <Button size="sm">Attest</Button>
                   <Button size="sm" variant="destructive">Reject</Button>
                 </div>
+              </td>
+              <td className="p-3">
+                <AttestationStatus status={attestation.status} />
               </td>
             </tr>
           ))}
