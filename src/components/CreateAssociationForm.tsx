@@ -103,7 +103,7 @@ const CreateAssociationForm = ({ onClose, existingEntity, prefillEmail }: Create
               render={() => (
                 <FormItem>
                   <div className="mb-2">
-                    <FormLabel>Association</FormLabel>
+                    <FormLabel>Select Association(s)</FormLabel>
                   </div>
                   <div className="space-y-2">
                     <FormField
@@ -153,9 +153,6 @@ const CreateAssociationForm = ({ onClose, existingEntity, prefillEmail }: Create
                     <SelectContent>
                       <SelectItem value="RIA">RIA</SelectItem>
                       <SelectItem value="Agent">Agent</SelectItem>
-                      <SelectItem value="Broker">Broker</SelectItem>
-                      <SelectItem value="Partner">Partner</SelectItem>
-                      <SelectItem value="Consultant">Consultant</SelectItem>
                     </SelectContent>
                   </Select>
                 </FormItem>
