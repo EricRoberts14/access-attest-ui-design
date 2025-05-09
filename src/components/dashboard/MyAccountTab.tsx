@@ -1,36 +1,29 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useIsMobile } from "@/hooks/use-mobile";
+import AssociationsPagination from './associations/AssociationsPagination';
 
-// Sample data for demonstration
+// Updated sample data for demonstration
 const myAccountAssociations = [
   {
     id: 1,
     entity: "Raymond James LLC",
     role: "Delegate",
-    accessLevel: "Administrator",
-    startDate: "01/15/2025",
-    endDate: "05/31/2025"
+    dateGranted: "01/15/2025"
   },
   {
     id: 2,
-    name: "Morgan Financial Partners",
     entity: "Morgan Financial Partners",
-    role: "User",
-    accessLevel: "Standard",
-    startDate: "02/01/2025",
-    endDate: "05/31/2025"
+    role: "Delegate",
+    dateGranted: "02/01/2025"
   },
   {
     id: 3,
-    name: "Fidelity Investments",
     entity: "Fidelity Investments",
     role: "Delegate",
-    accessLevel: "Administrator",
-    startDate: "03/10/2025",
-    endDate: "05/31/2025"
+    dateGranted: "03/10/2025"
   }
 ];
 
@@ -41,7 +34,7 @@ const MobileAccountAssociationCard = ({ association }: { association: any }) => 
       <CardContent className="pt-4">
         <div className="space-y-2">
           <div className="flex justify-between">
-            <span className="font-medium">Entity</span>
+            <span className="font-medium">Association(s)</span>
             <span>{association.entity}</span>
           </div>
           <div className="flex justify-between">
@@ -49,16 +42,8 @@ const MobileAccountAssociationCard = ({ association }: { association: any }) => 
             <span>{association.role}</span>
           </div>
           <div className="flex justify-between">
-            <span className="font-medium">Access Level</span>
-            <span>{association.accessLevel}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="font-medium">Start Date</span>
-            <span>{association.startDate}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="font-medium">End Date</span>
-            <span>{association.endDate}</span>
+            <span className="font-medium">Date Granted</span>
+            <span>{association.dateGranted}</span>
           </div>
         </div>
       </CardContent>
@@ -68,6 +53,26 @@ const MobileAccountAssociationCard = ({ association }: { association: any }) => 
 
 const MyAccountTab = () => {
   const isMobile = useIsMobile();
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 10;
+  
+  // Calculate pagination
+  const totalPages = Math.ceil(myAccountAssociations.length / pageSize);
+  const startIndex = (currentPage - 1) * pageSize;
+  const paginatedAssociations = myAccountAssociations.slice(startIndex, startIndex + pageSize);
+  
+  // Handle page changes
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -79,39 +84,41 @@ const MyAccountTab = () => {
         <CardContent>
           {isMobile ? (
             <div className="space-y-4">
-              {myAccountAssociations.map((association) => (
+              {paginatedAssociations.map((association) => (
                 <MobileAccountAssociationCard key={association.id} association={association} />
               ))}
             </div>
           ) : (
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Entity</TableHead>
-                  <TableHead>Role</TableHead>
-                  <TableHead>Access Level</TableHead>
-                  <TableHead>Start Date</TableHead>
-                  <TableHead>End Date</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {myAccountAssociations.map((association) => (
-                  <TableRow key={association.id}>
-                    <TableCell className="font-medium">{association.entity}</TableCell>
-                    <TableCell>{association.role}</TableCell>
-                    <TableCell>{association.accessLevel}</TableCell>
-                    <TableCell>{association.startDate}</TableCell>
-                    <TableCell>{association.endDate}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+            <div className="border rounded-lg overflow-hidden">
+              <table className="w-full">
+                <thead className="bg-muted">
+                  <tr>
+                    <th className="text-xs font-medium text-left p-3">Association(s)</th>
+                    <th className="text-xs font-medium text-left p-3">Role</th>
+                    <th className="text-xs font-medium text-left p-3">Date Granted</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y">
+                  {paginatedAssociations.map((association) => (
+                    <tr key={association.id} className="hover:bg-muted/50">
+                      <td className="p-3 text-sm font-medium">{association.entity}</td>
+                      <td className="p-3 text-sm">{association.role}</td>
+                      <td className="p-3 text-sm">{association.dateGranted}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           )}
         </CardContent>
         <CardFooter className="flex justify-between">
-          <div className="text-sm text-gray-500">
-            Showing {myAccountAssociations.length} associations
-          </div>
+          <AssociationsPagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPreviousPage={handlePreviousPage}
+            onNextPage={handleNextPage}
+            onPageChange={setCurrentPage}
+          />
         </CardFooter>
       </Card>
     </div>
