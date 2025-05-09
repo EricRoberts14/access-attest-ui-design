@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 
 const Index = () => {
   const { toast } = useToast();
-  const [activeTab, setActiveTab] = useState<string>("associations");
+  const [activeTab, setActiveTab] = useState<string>("myaccount");
   const isMobile = useIsMobile();
   
   // Show notification toast when the page loads

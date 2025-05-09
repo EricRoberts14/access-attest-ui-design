@@ -20,14 +20,14 @@ const myAccountAssociations = [
     entity: "Morgan Financial Partners",
     role: "Delegate",
     dateGranted: "02/01/2025",
-    status: "pending" as const
+    status: "valid" as const
   },
   {
     id: 3,
     entity: "Fidelity Investments",
     role: "Delegate",
     dateGranted: "03/10/2025",
-    status: "expired" as const
+    status: "valid" as const
   }
 ];
 
