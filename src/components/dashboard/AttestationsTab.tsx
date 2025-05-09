@@ -1,0 +1,129 @@
+
+import React from 'react';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow
+} from "@/components/ui/table";
+import AttestationStatus from './AttestationStatus';
+
+const AttestationsTab = () => {
+  // Mock pending attestation data
+  const pendingAttestations = [
+    {
+      id: '1',
+      entityName: 'Global Tech Partners',
+      entityType: 'Organization',
+      accessLevel: 'Full Access',
+      expirationDate: 'May 31, 2025',
+      status: 'pending' as const
+    },
+    {
+      id: '2',
+      entityName: 'Sarah Johnson',
+      entityType: 'Individual',
+      accessLevel: 'Limited Access',
+      expirationDate: 'May 31, 2025',
+      status: 'pending' as const
+    },
+    {
+      id: '3',
+      entityName: 'Accenture Technologies',
+      entityType: 'Organization',
+      accessLevel: 'Read Only',
+      expirationDate: 'May 31, 2025',
+      status: 'pending' as const
+    },
+    {
+      id: '4',
+      entityName: 'David Miller',
+      entityType: 'Individual',
+      accessLevel: 'Full Access',
+      expirationDate: 'May 31, 2025',
+      status: 'pending' as const
+    },
+    {
+      id: '5',
+      entityName: 'Quantum Systems',
+      entityType: 'Organization',
+      accessLevel: 'Limited Access',
+      expirationDate: 'May 31, 2025',
+      status: 'pending' as const
+    },
+    {
+      id: '6',
+      entityName: 'Emily Chen',
+      entityType: 'Individual',
+      accessLevel: 'Read Only',
+      expirationDate: 'May 31, 2025',
+      status: 'pending' as const
+    },
+    {
+      id: '7',
+      entityName: 'Global Innovations Inc.',
+      entityType: 'Organization',
+      accessLevel: 'Full Access',
+      expirationDate: 'May 31, 2025',
+      status: 'pending' as const
+    },
+    {
+      id: '8',
+      entityName: 'Michael Brown',
+      entityType: 'Individual',
+      accessLevel: 'Limited Access',
+      expirationDate: 'May 31, 2025',
+      status: 'pending' as const
+    }
+  ];
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Required Attestations</CardTitle>
+        <CardDescription>Access permissions requiring periodic attestation</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-4">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Entity Name</TableHead>
+                <TableHead>Type</TableHead>
+                <TableHead>Access Level</TableHead>
+                <TableHead>Expires</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead>Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {pendingAttestations.map((attestation) => (
+                <TableRow key={attestation.id}>
+                  <TableCell className="font-medium">{attestation.entityName}</TableCell>
+                  <TableCell>{attestation.entityType}</TableCell>
+                  <TableCell>{attestation.accessLevel}</TableCell>
+                  <TableCell>{attestation.expirationDate}</TableCell>
+                  <TableCell>
+                    <AttestationStatus status={attestation.status} />
+                  </TableCell>
+                  <TableCell>
+                    <Button size="sm">Attest</Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </CardContent>
+      <CardFooter className="flex justify-end">
+        <Button>Attest All</Button>
+      </CardFooter>
+    </Card>
+  );
+};
+
+export default AttestationsTab;
