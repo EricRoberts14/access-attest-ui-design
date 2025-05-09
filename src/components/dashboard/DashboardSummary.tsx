@@ -1,13 +1,13 @@
 
 import React from 'react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { Calendar } from 'lucide-react';
 
 const DashboardSummary = () => {
   return (
-    <Card>
+    <Card className="w-full md:w-1/2">
       <CardHeader className="pb-2">
         <CardTitle className="text-lg">Current Attestation Period</CardTitle>
         <CardDescription>May 1-31, 2025</CardDescription>
