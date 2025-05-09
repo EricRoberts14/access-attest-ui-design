@@ -18,7 +18,7 @@ const AttestationsTab = () => {
   const pendingAttestations = [
     {
       id: '1',
-      entityName: 'Global Tech Partners',
+      entityName: 'Raymond James LLC',
       accountHolder: 'Michael Johnson',
       accountEmail: 'michael.johnson@globaltech.com',
       contractType: 'RIA',
@@ -29,7 +29,7 @@ const AttestationsTab = () => {
     },
     {
       id: '2',
-      entityName: 'Sarah Johnson',
+      entityName: 'Raymond James LLC',
       accountHolder: 'Sarah Johnson',
       accountEmail: 'sarah.johnson@example.com',
       contractType: 'Agent',
@@ -40,7 +40,7 @@ const AttestationsTab = () => {
     },
     {
       id: '3',
-      entityName: 'Accenture Technologies',
+      entityName: 'Raymond James LLC',
       accountHolder: 'Robert Williams',
       accountEmail: 'r.williams@accenture.com',
       contractType: 'RIA',
@@ -51,7 +51,7 @@ const AttestationsTab = () => {
     },
     {
       id: '4',
-      entityName: 'David Miller',
+      entityName: 'Raymond James LLC',
       accountHolder: 'David Miller',
       accountEmail: 'david.miller@example.com',
       contractType: 'Agent',
@@ -62,7 +62,7 @@ const AttestationsTab = () => {
     },
     {
       id: '5',
-      entityName: 'Quantum Systems',
+      entityName: 'Raymond James LLC',
       accountHolder: 'Jennifer Adams',
       accountEmail: 'j.adams@quantum.com',
       contractType: 'RIA',
@@ -73,7 +73,7 @@ const AttestationsTab = () => {
     },
     {
       id: '6',
-      entityName: 'Emily Chen',
+      entityName: 'Raymond James LLC',
       accountHolder: 'Emily Chen',
       accountEmail: 'emily.chen@example.com',
       contractType: 'Agent',
@@ -84,7 +84,7 @@ const AttestationsTab = () => {
     },
     {
       id: '7',
-      entityName: 'Global Innovations Inc.',
+      entityName: 'Raymond James LLC',
       accountHolder: 'Thomas Wilson',
       accountEmail: 't.wilson@globalinnovations.com',
       contractType: 'RIA',
@@ -95,7 +95,7 @@ const AttestationsTab = () => {
     },
     {
       id: '8',
-      entityName: 'Michael Brown',
+      entityName: 'Raymond James LLC',
       accountHolder: 'Michael Brown',
       accountEmail: 'michael.brown@example.com',
       contractType: 'Agent',
@@ -121,7 +121,7 @@ const AttestationsTab = () => {
             <TableHeader>
               <TableRow>
                 <TableHead>Account Holder</TableHead>
-                <TableHead>Entity Name</TableHead>
+                <TableHead>Association(s)</TableHead>
                 <TableHead>Contract Type</TableHead>
                 <TableHead>Expires</TableHead>
                 <TableHead>Status</TableHead>

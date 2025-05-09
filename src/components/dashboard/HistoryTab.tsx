@@ -26,7 +26,7 @@ const HistoryTab = () => {
   const historyAttestations = [
     {
       id: '101',
-      entityName: 'Acme Corporation',
+      entityName: 'Raymond James LLC',
       accountHolder: 'James Wilson',
       accountEmail: 'james.wilson@acme.com',
       contractType: 'RIA',
@@ -38,7 +38,7 @@ const HistoryTab = () => {
     },
     {
       id: '102',
-      entityName: 'James Smith',
+      entityName: 'Raymond James LLC',
       accountHolder: 'James Smith',
       accountEmail: 'james.smith@example.com',
       contractType: 'Agent',
@@ -50,7 +50,7 @@ const HistoryTab = () => {
     },
     {
       id: '103',
-      entityName: 'Quantum Systems',
+      entityName: 'Raymond James LLC',
       accountHolder: 'Jennifer Adams',
       accountEmail: 'j.adams@quantum.com',
       contractType: 'RIA',
@@ -62,7 +62,7 @@ const HistoryTab = () => {
     },
     {
       id: '104',
-      entityName: 'Emily Chen',
+      entityName: 'Raymond James LLC',
       accountHolder: 'Emily Chen',
       accountEmail: 'emily.chen@example.com',
       contractType: 'Agent',
@@ -74,7 +74,7 @@ const HistoryTab = () => {
     },
     {
       id: '105',
-      entityName: 'Global Innovations Inc.',
+      entityName: 'Raymond James LLC',
       accountHolder: 'Thomas Wilson',
       accountEmail: 't.wilson@globalinnovations.com',
       contractType: 'RIA',
@@ -86,7 +86,7 @@ const HistoryTab = () => {
     },
     {
       id: '106',
-      entityName: 'Michael Brown',
+      entityName: 'Raymond James LLC',
       accountHolder: 'Michael Brown',
       accountEmail: 'michael.brown@example.com',
       contractType: 'Agent',
@@ -98,7 +98,7 @@ const HistoryTab = () => {
     },
     {
       id: '107',
-      entityName: 'Tech Partners LLC',
+      entityName: 'Raymond James LLC',
       accountHolder: 'Richard Thompson',
       accountEmail: 'r.thompson@techpartners.com',
       contractType: 'RIA',
@@ -110,7 +110,7 @@ const HistoryTab = () => {
     },
     {
       id: '108',
-      entityName: 'Jennifer Wilson',
+      entityName: 'Raymond James LLC',
       accountHolder: 'Jennifer Wilson',
       accountEmail: 'jennifer.wilson@example.com',
       contractType: 'Agent',
@@ -134,7 +134,7 @@ const HistoryTab = () => {
             <TableHeader>
               <TableRow>
                 <TableHead>Account Holder</TableHead>
-                <TableHead>Entity Name</TableHead>
+                <TableHead>Association(s)</TableHead>
                 <TableHead>Contract Type</TableHead>
                 <TableHead>Commission Access</TableHead>
                 <TableHead>Enabled</TableHead>
