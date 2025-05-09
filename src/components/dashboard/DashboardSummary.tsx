@@ -8,6 +8,9 @@ import { Calendar } from 'lucide-react';
 const DashboardSummary = () => {
   // Update to match the 8 pending attestations shown in AttestationsTab
   const pendingCount = 8;
+  const totalAccounts = 20;
+  const completedCount = totalAccounts - pendingCount;
+  const progressPercentage = (completedCount / totalAccounts) * 100;
   
   return (
     <Card className="w-full md:w-1/2">
@@ -20,14 +23,14 @@ const DashboardSummary = () => {
           <Calendar className="h-5 w-5 text-muted-foreground" />
           <span className="text-sm">{pendingCount} items require attestation</span>
         </div>
-        <Progress value={42} className="h-2 mb-5" />
+        <Progress value={progressPercentage} className="h-2 mb-5" />
         
         <div className="space-y-4 mt-3">
           <h3 className="text-sm font-medium">Accounts</h3>
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <span className="text-sm">Total Accounts</span>
-              <span className="font-medium">20</span>
+              <span className="font-medium">{totalAccounts}</span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-sm">Pending Attestations</span>
