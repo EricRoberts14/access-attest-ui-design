@@ -36,35 +36,36 @@ const NavItem = ({ icon: Icon, text, active, notification, onClick }: NavItemPro
 const Sidebar = () => {
   const [activeTab, setActiveTab] = React.useState<string>("myaccount");
 
-  // Function to click on associations tab
-  const handleAssociationsClick = () => {
-    // Find the associations tab and click it
-    const associationsTab = document.querySelector('[value="associations"]');
-    if (associationsTab) {
-      (associationsTab as HTMLElement).click();
-      setActiveTab("associations");
-    }
+  // We need to set up a global state handler for the active tab
+  // This will be used by both components to stay in sync
+  React.useEffect(() => {
+    // Define a function to handle custom events for tab changes
+    const handleTabChange = (event: CustomEvent<string>) => {
+      setActiveTab(event.detail);
+    };
+
+    // Add event listener for tab changes
+    window.addEventListener('tabChange' as any, handleTabChange as EventListener);
+
+    // Cleanup function
+    return () => {
+      window.removeEventListener('tabChange' as any, handleTabChange as EventListener);
+    };
+  }, []);
+
+  // Function to change tabs and dispatch event
+  const changeTab = (tabName: string) => {
+    setActiveTab(tabName);
+    // Dispatch event to notify other components
+    const event = new CustomEvent('tabChange', { detail: tabName });
+    window.dispatchEvent(event);
   };
 
-  // Function to click on attestations tab
-  const handleAttestationsClick = () => {
-    // Find the attestations tab and click it
-    const attestationsTab = document.querySelector('[value="attestations"]');
-    if (attestationsTab) {
-      (attestationsTab as HTMLElement).click();
-      setActiveTab("attestations");
-    }
-  };
-
-  // Function to click on history tab
-  const handleHistoryClick = () => {
-    // Find the history tab and click it
-    const historyTab = document.querySelector('[value="history"]');
-    if (historyTab) {
-      (historyTab as HTMLElement).click();
-      setActiveTab("history");
-    }
-  };
+  // Change handlers for each tab
+  const handleMyAccountClick = () => changeTab("myaccount");
+  const handleAssociationsClick = () => changeTab("associations");
+  const handleAttestationsClick = () => changeTab("attestations");
+  const handleHistoryClick = () => changeTab("history");
 
   return (
     <aside className="bg-massmutual-blue-dark w-64 min-h-screen py-6 flex flex-col">
@@ -74,7 +75,12 @@ const Sidebar = () => {
       </div>
       
       <div className="space-y-1 px-3 flex-1">
-        <NavItem icon={User} text="My Account" active={activeTab === "myaccount"} />
+        <NavItem 
+          icon={User} 
+          text="My Account" 
+          active={activeTab === "myaccount"} 
+          onClick={handleMyAccountClick}
+        />
         <NavItem 
           icon={LinkIcon} 
           text="Associations" 

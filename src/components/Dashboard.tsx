@@ -10,7 +10,12 @@ import HistoryTab from './dashboard/HistoryTab';
 import CreateAssociationForm from './association/CreateAssociationForm';
 import EmailSearchForm from './EmailSearchForm';
 
-const Dashboard = () => {
+interface DashboardProps {
+  activeTab?: string;
+  onTabChange?: (tab: string) => void;
+}
+
+const Dashboard = ({ activeTab = "associations", onTabChange }: DashboardProps) => {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [emailSearchCompleted, setEmailSearchCompleted] = useState(false);
   const [searchedEmail, setSearchedEmail] = useState('');
@@ -27,6 +32,12 @@ const Dashboard = () => {
     setEmailSearchCompleted(false);
     setSearchedEmail('');
     setExistingAccount(null);
+  };
+
+  const handleTabChange = (value: string) => {
+    if (onTabChange) {
+      onTabChange(value);
+    }
   };
   
   return (
@@ -84,7 +95,7 @@ const Dashboard = () => {
       <DashboardSummary />
       
       {/* Main Tabs */}
-      <Tabs defaultValue="associations" className="w-full">
+      <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
         <TabsList className="grid grid-cols-3 mb-6">
           <TabsTrigger value="associations">Associations</TabsTrigger>
           <TabsTrigger value="attestations">Attestations</TabsTrigger>
