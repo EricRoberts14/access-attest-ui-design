@@ -1,0 +1,94 @@
+
+import React from 'react';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { AttestationData } from './types';
+import AttestationStatus from '../AttestationStatus';
+import { Badge } from '@/components/ui/badge';
+
+interface MobileAttestationAccordionProps {
+  attestations: AttestationData[];
+}
+
+const MobileAttestationAccordion = ({ attestations }: MobileAttestationAccordionProps) => {
+  // Group attestations by account holder
+  const groupedAttestations = attestations.reduce((groups: Record<string, AttestationData[]>, attestation) => {
+    const key = attestation.accountHolder;
+    if (!groups[key]) {
+      groups[key] = [];
+    }
+    groups[key].push(attestation);
+    return groups;
+  }, {});
+  
+  return (
+    <Accordion type="single" collapsible className="w-full">
+      {Object.entries(groupedAttestations).map(([accountHolder, accountAttestations]) => {
+        // Use first attestation for account holder details
+        const accountDetails = accountAttestations[0];
+        
+        return (
+          <AccordionItem key={accountHolder} value={accountHolder} className="border rounded-md mb-2">
+            <AccordionTrigger className="hover:bg-muted/50 px-3 py-2.5 rounded-md">
+              <div className="flex w-full flex-col sm:flex-row sm:items-center text-left">
+                <div className="flex flex-wrap items-center gap-2 mb-1 sm:mb-0">
+                  <span className="font-medium">{accountDetails.accountHolder}</span>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <Badge variant="outline" className="font-normal text-xs bg-muted/40 hover:bg-muted">
+                      {accountDetails.accountEmail}
+                    </Badge>
+                  </div>
+                </div>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent className="px-2 py-2">
+              <div className="space-y-3">
+                {accountAttestations.map((attestation) => (
+                  <Card key={attestation.id} className="overflow-hidden">
+                    <CardContent className="p-3">
+                      <div className="space-y-2 text-sm">
+                        <div className="flex justify-between">
+                          <span className="font-medium">Association(s)</span>
+                          <span>{attestation.entityName}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="font-medium">Contract Type</span>
+                          <span>{attestation.contractType}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="font-medium">Expires</span>
+                          <span>{attestation.expirationDate}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="font-medium">Attestation Status</span>
+                          <div className="flex items-center">
+                            <AttestationStatus status={attestation.status} />
+                          </div>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="font-medium">Commission Access</span>
+                          <span>{attestation.commissionAccess}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="font-medium">Enabled</span>
+                          <span>{attestation.enabled}</span>
+                        </div>
+                        <div className="pt-1 flex justify-end gap-2">
+                          <Button size="sm">Attest</Button>
+                          <Button size="sm" variant="destructive">Reject</Button>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+        );
+      })}
+    </Accordion>
+  );
+};
+
+export default MobileAttestationAccordion;

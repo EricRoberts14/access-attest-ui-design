@@ -2,10 +2,10 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useIsMobile } from '@/hooks/use-mobile';
-import MobileAttestationCard from './attestations/MobileAttestationCard';
-import DesktopAttestationTable from './attestations/DesktopAttestationTable';
 import AttestationPagination from './attestations/AttestationPagination';
 import { mockPendingAttestations } from './attestations/mockData';
+import AttestationAccordion from './attestations/AttestationAccordion';
+import MobileAttestationAccordion from './attestations/MobileAttestationAccordion';
 
 const AttestationsTab = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -43,13 +43,9 @@ const AttestationsTab = () => {
       <CardContent>
         <div className="space-y-4">
           {isMobile ? (
-            <div className="space-y-4">
-              {paginatedAttestations.map((attestation) => (
-                <MobileAttestationCard key={attestation.id} attestation={attestation} />
-              ))}
-            </div>
+            <MobileAttestationAccordion attestations={paginatedAttestations} />
           ) : (
-            <DesktopAttestationTable attestations={paginatedAttestations} />
+            <AttestationAccordion attestations={paginatedAttestations} />
           )}
         </div>
       </CardContent>
