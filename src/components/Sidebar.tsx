@@ -59,6 +59,14 @@ const Sidebar = () => {
     // Dispatch event to notify other components
     const event = new CustomEvent('tabChange', { detail: tabName });
     window.dispatchEvent(event);
+    
+    // Add a small delay to ensure the DOM is updated before scrolling
+    setTimeout(() => {
+      const tabsList = document.querySelector('.tabs-list');
+      if (tabsList) {
+        tabsList.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }, 100);
   };
 
   // Change handlers for each tab
