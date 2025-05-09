@@ -70,7 +70,7 @@ const MobileAttestationAccordion = ({ attestations }: MobileAttestationAccordion
               </div>
             </AccordionTrigger>
             <AccordionContent className="pt-2 pb-2 px-3">
-              <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center justify-end mb-3">
                 <div className="flex gap-2">
                   <Button size="sm" onClick={() => handleAttestAll(accountHolder)}>Attest All</Button>
                   <Button size="sm" variant="destructive" onClick={() => handleRejectAll(accountHolder)}>Reject All</Button>
