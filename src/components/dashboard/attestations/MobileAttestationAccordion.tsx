@@ -7,6 +7,7 @@ import { AttestationData } from './types';
 import AttestationStatus from '../AttestationStatus';
 import { Badge } from '@/components/ui/badge';
 import { User } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
 
 interface MobileAttestationAccordionProps {
   attestations: AttestationData[];
@@ -22,6 +23,20 @@ const MobileAttestationAccordion = ({ attestations }: MobileAttestationAccordion
     groups[key].push(attestation);
     return groups;
   }, {});
+  
+  const handleAttestAll = (accountHolder: string) => {
+    toast({
+      title: "Attesting All",
+      description: `Processing attestations for ${accountHolder}`,
+    });
+  };
+
+  const handleRejectAll = (accountHolder: string) => {
+    toast({
+      title: "Rejecting All",
+      description: `Rejecting attestations for ${accountHolder}`,
+    });
+  };
   
   return (
     <Accordion type="single" collapsible className="w-full">
@@ -51,7 +66,14 @@ const MobileAttestationAccordion = ({ attestations }: MobileAttestationAccordion
                 </div>
               </div>
             </AccordionTrigger>
-            <AccordionContent className="px-2 py-2">
+            <AccordionContent className="pt-2 pb-2 px-3">
+              <div className="flex items-center justify-between mb-3">
+                <AttestationStatus status={accountDetails.status} />
+                <div className="flex gap-2">
+                  <Button size="sm" onClick={() => handleAttestAll(accountHolder)}>Attest All</Button>
+                  <Button size="sm" variant="destructive" onClick={() => handleRejectAll(accountHolder)}>Reject All</Button>
+                </div>
+              </div>
               <div className="space-y-3">
                 {accountAttestations.map((attestation) => (
                   <Card key={attestation.id} className="overflow-hidden">

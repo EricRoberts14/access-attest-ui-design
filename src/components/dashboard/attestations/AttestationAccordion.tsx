@@ -6,6 +6,7 @@ import { AttestationData } from './types';
 import AttestationStatus from '../AttestationStatus';
 import { Badge } from '@/components/ui/badge';
 import { User } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
 
 interface AttestationAccordionProps {
   attestations: AttestationData[];
@@ -21,6 +22,20 @@ const AttestationAccordion = ({ attestations }: AttestationAccordionProps) => {
     groups[key].push(attestation);
     return groups;
   }, {});
+  
+  const handleAttestAll = (accountHolder: string) => {
+    toast({
+      title: "Attesting All",
+      description: `Processing attestations for ${accountHolder}`,
+    });
+  };
+
+  const handleRejectAll = (accountHolder: string) => {
+    toast({
+      title: "Rejecting All",
+      description: `Rejecting attestations for ${accountHolder}`,
+    });
+  };
   
   return (
     <Accordion type="single" collapsible className="w-full">
@@ -48,7 +63,17 @@ const AttestationAccordion = ({ attestations }: AttestationAccordionProps) => {
                     )}
                   </div>
                 </div>
-                <AttestationStatus status={accountDetails.status} />
+                <div className="flex items-center gap-2">
+                  <AttestationStatus status={accountDetails.status} />
+                  <Button size="sm" onClick={(e) => {
+                    e.stopPropagation();
+                    handleAttestAll(accountHolder);
+                  }}>Attest All</Button>
+                  <Button size="sm" variant="destructive" onClick={(e) => {
+                    e.stopPropagation();
+                    handleRejectAll(accountHolder);
+                  }}>Reject All</Button>
+                </div>
               </div>
             </AccordionTrigger>
             <AccordionContent className="px-4 py-2">
