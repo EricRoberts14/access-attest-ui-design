@@ -34,12 +34,6 @@ type FormData = {
   entityEmail: string;
   contractType: string;
   commissionAccess: string;
-  permissions: {
-    view: boolean;
-    modify: boolean;
-    delete: boolean;
-    admin: boolean;
-  };
   justification: string;
   attestationConfirmation: boolean;
 };
@@ -51,12 +45,6 @@ const CreateAssociationForm = ({ onClose, existingEntity, prefillEmail }: Create
       entityEmail: existingEntity?.entityEmail || prefillEmail || "",
       contractType: "RIA",
       commissionAccess: "no",
-      permissions: {
-        view: false,
-        modify: false,
-        delete: false,
-        admin: false,
-      },
       justification: "",
       attestationConfirmation: false,
     }
@@ -156,72 +144,6 @@ const CreateAssociationForm = ({ onClose, existingEntity, prefillEmail }: Create
                 </FormItem>
               )}
             />
-
-            <div className="text-xs text-muted-foreground mt-2 mb-4">
-              Next attestation will be due on November 30, 2025
-            </div>
-
-            <div>
-              <Label className="mb-1 block">Permissions</Label>
-              <div className="grid grid-cols-2 gap-2">
-                <FormField
-                  control={form.control}
-                  name="permissions.view"
-                  render={({ field }) => (
-                    <div className="flex items-center space-x-2">
-                      <Checkbox 
-                        id="view" 
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                      />
-                      <Label htmlFor="view" className="text-sm font-normal">View data</Label>
-                    </div>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="permissions.modify"
-                  render={({ field }) => (
-                    <div className="flex items-center space-x-2">
-                      <Checkbox 
-                        id="modify" 
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                      />
-                      <Label htmlFor="modify" className="text-sm font-normal">Modify data</Label>
-                    </div>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="permissions.delete"
-                  render={({ field }) => (
-                    <div className="flex items-center space-x-2">
-                      <Checkbox 
-                        id="delete" 
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                      />
-                      <Label htmlFor="delete" className="text-sm font-normal">Delete data</Label>
-                    </div>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="permissions.admin"
-                  render={({ field }) => (
-                    <div className="flex items-center space-x-2">
-                      <Checkbox 
-                        id="admin" 
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                      />
-                      <Label htmlFor="admin" className="text-sm font-normal">Administrative functions</Label>
-                    </div>
-                  )}
-                />
-              </div>
-            </div>
             
             <FormField
               control={form.control}
@@ -263,6 +185,10 @@ const CreateAssociationForm = ({ onClose, existingEntity, prefillEmail }: Create
                 </FormItem>
               )}
             />
+            
+            <div className="text-xs text-muted-foreground mt-2">
+              Next attestation will be due on November 30, 2025
+            </div>
           </CardContent>
           <CardFooter className="flex justify-between px-2 py-2">
             <Button variant="outline" type="button" onClick={onClose}>Cancel</Button>
