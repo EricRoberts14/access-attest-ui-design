@@ -10,6 +10,7 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import AttestationStatus from './AttestationStatus';
 
 const AttestationsTab = () => {
@@ -19,6 +20,7 @@ const AttestationsTab = () => {
       id: '1',
       entityName: 'Global Tech Partners',
       accountHolder: 'Michael Johnson',
+      accountEmail: 'michael.johnson@globaltech.com',
       contractType: 'RIA',
       commissionAccess: 'Yes',
       expirationDate: 'May 31, 2025',
@@ -29,6 +31,7 @@ const AttestationsTab = () => {
       id: '2',
       entityName: 'Sarah Johnson',
       accountHolder: 'Sarah Johnson',
+      accountEmail: 'sarah.johnson@example.com',
       contractType: 'Agent',
       commissionAccess: 'No',
       expirationDate: 'May 31, 2025',
@@ -39,6 +42,7 @@ const AttestationsTab = () => {
       id: '3',
       entityName: 'Accenture Technologies',
       accountHolder: 'Robert Williams',
+      accountEmail: 'r.williams@accenture.com',
       contractType: 'RIA',
       commissionAccess: 'Yes',
       expirationDate: 'May 31, 2025',
@@ -49,6 +53,7 @@ const AttestationsTab = () => {
       id: '4',
       entityName: 'David Miller',
       accountHolder: 'David Miller',
+      accountEmail: 'david.miller@example.com',
       contractType: 'Agent',
       commissionAccess: 'No',
       expirationDate: 'May 31, 2025',
@@ -59,6 +64,7 @@ const AttestationsTab = () => {
       id: '5',
       entityName: 'Quantum Systems',
       accountHolder: 'Jennifer Adams',
+      accountEmail: 'j.adams@quantum.com',
       contractType: 'RIA',
       commissionAccess: 'Yes',
       expirationDate: 'May 31, 2025',
@@ -69,6 +75,7 @@ const AttestationsTab = () => {
       id: '6',
       entityName: 'Emily Chen',
       accountHolder: 'Emily Chen',
+      accountEmail: 'emily.chen@example.com',
       contractType: 'Agent',
       commissionAccess: 'No',
       expirationDate: 'May 31, 2025',
@@ -79,6 +86,7 @@ const AttestationsTab = () => {
       id: '7',
       entityName: 'Global Innovations Inc.',
       accountHolder: 'Thomas Wilson',
+      accountEmail: 't.wilson@globalinnovations.com',
       contractType: 'RIA',
       commissionAccess: 'Yes',
       expirationDate: 'May 31, 2025',
@@ -89,6 +97,7 @@ const AttestationsTab = () => {
       id: '8',
       entityName: 'Michael Brown',
       accountHolder: 'Michael Brown',
+      accountEmail: 'michael.brown@example.com',
       contractType: 'Agent',
       commissionAccess: 'No',
       expirationDate: 'May 31, 2025',
@@ -111,8 +120,8 @@ const AttestationsTab = () => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Entity Name</TableHead>
                 <TableHead>Account Holder</TableHead>
+                <TableHead>Entity Name</TableHead>
                 <TableHead>Contract Type</TableHead>
                 <TableHead>Expires</TableHead>
                 <TableHead>Status</TableHead>
@@ -124,8 +133,21 @@ const AttestationsTab = () => {
             <TableBody>
               {pendingAttestations.map((attestation) => (
                 <TableRow key={attestation.id}>
-                  <TableCell className="font-medium">{attestation.entityName}</TableCell>
-                  <TableCell>{attestation.accountHolder}</TableCell>
+                  <TableCell className="font-medium">
+                    <HoverCard>
+                      <HoverCardTrigger asChild>
+                        <span className="cursor-help underline decoration-dotted">
+                          {attestation.accountHolder}
+                        </span>
+                      </HoverCardTrigger>
+                      <HoverCardContent className="w-auto">
+                        <div className="text-sm">
+                          <p className="font-medium">{attestation.accountEmail}</p>
+                        </div>
+                      </HoverCardContent>
+                    </HoverCard>
+                  </TableCell>
+                  <TableCell>{attestation.entityName}</TableCell>
                   <TableCell>{attestation.contractType}</TableCell>
                   <TableCell>{attestation.expirationDate}</TableCell>
                   <TableCell>

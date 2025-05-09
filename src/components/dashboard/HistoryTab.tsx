@@ -3,6 +3,7 @@ import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { History } from 'lucide-react';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import {
   Table,
   TableBody,
@@ -27,6 +28,7 @@ const HistoryTab = () => {
       id: '101',
       entityName: 'Acme Corporation',
       accountHolder: 'James Wilson',
+      accountEmail: 'james.wilson@acme.com',
       contractType: 'RIA',
       commissionAccess: 'Yes',
       attestedDate: 'November 25, 2024',
@@ -38,6 +40,7 @@ const HistoryTab = () => {
       id: '102',
       entityName: 'James Smith',
       accountHolder: 'James Smith',
+      accountEmail: 'james.smith@example.com',
       contractType: 'Agent',
       commissionAccess: 'No',
       attestedDate: 'November 23, 2024',
@@ -49,6 +52,7 @@ const HistoryTab = () => {
       id: '103',
       entityName: 'Quantum Systems',
       accountHolder: 'Jennifer Adams',
+      accountEmail: 'j.adams@quantum.com',
       contractType: 'RIA',
       commissionAccess: 'Yes',
       attestedDate: 'November 20, 2024',
@@ -60,6 +64,7 @@ const HistoryTab = () => {
       id: '104',
       entityName: 'Emily Chen',
       accountHolder: 'Emily Chen',
+      accountEmail: 'emily.chen@example.com',
       contractType: 'Agent',
       commissionAccess: 'No',
       attestedDate: 'November 18, 2024',
@@ -71,6 +76,7 @@ const HistoryTab = () => {
       id: '105',
       entityName: 'Global Innovations Inc.',
       accountHolder: 'Thomas Wilson',
+      accountEmail: 't.wilson@globalinnovations.com',
       contractType: 'RIA',
       commissionAccess: 'Yes',
       attestedDate: 'November 15, 2024',
@@ -82,6 +88,7 @@ const HistoryTab = () => {
       id: '106',
       entityName: 'Michael Brown',
       accountHolder: 'Michael Brown',
+      accountEmail: 'michael.brown@example.com',
       contractType: 'Agent',
       commissionAccess: 'No',
       attestedDate: 'November 10, 2024',
@@ -93,6 +100,7 @@ const HistoryTab = () => {
       id: '107',
       entityName: 'Tech Partners LLC',
       accountHolder: 'Richard Thompson',
+      accountEmail: 'r.thompson@techpartners.com',
       contractType: 'RIA',
       commissionAccess: 'Yes',
       attestedDate: 'November 8, 2024',
@@ -104,6 +112,7 @@ const HistoryTab = () => {
       id: '108',
       entityName: 'Jennifer Wilson',
       accountHolder: 'Jennifer Wilson',
+      accountEmail: 'jennifer.wilson@example.com',
       contractType: 'Agent',
       commissionAccess: 'No',
       attestedDate: 'November 5, 2024',
@@ -124,8 +133,8 @@ const HistoryTab = () => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Entity Name</TableHead>
                 <TableHead>Account Holder</TableHead>
+                <TableHead>Entity Name</TableHead>
                 <TableHead>Contract Type</TableHead>
                 <TableHead>Commission Access</TableHead>
                 <TableHead>Enabled</TableHead>
@@ -137,8 +146,21 @@ const HistoryTab = () => {
             <TableBody>
               {historyAttestations.map((item) => (
                 <TableRow key={item.id}>
-                  <TableCell className="font-medium">{item.entityName}</TableCell>
-                  <TableCell>{item.accountHolder}</TableCell>
+                  <TableCell className="font-medium">
+                    <HoverCard>
+                      <HoverCardTrigger asChild>
+                        <span className="cursor-help underline decoration-dotted">
+                          {item.accountHolder}
+                        </span>
+                      </HoverCardTrigger>
+                      <HoverCardContent className="w-auto">
+                        <div className="text-sm">
+                          <p className="font-medium">{item.accountEmail}</p>
+                        </div>
+                      </HoverCardContent>
+                    </HoverCard>
+                  </TableCell>
+                  <TableCell>{item.entityName}</TableCell>
                   <TableCell>{item.contractType}</TableCell>
                   <TableCell>{item.commissionAccess}</TableCell>
                   <TableCell>{item.enabled ? "Enabled" : "Disabled"}</TableCell>

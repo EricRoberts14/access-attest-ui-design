@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { useToast } from "@/hooks/use-toast";
 import AttestationStatus from './AttestationStatus';
 
@@ -13,6 +14,7 @@ type Association = {
   id: number;
   name: string;
   accountHolder: string;
+  accountEmail: string;
   contractType: 'RIA' | 'Agent';
   lastAttested: string;
   status: 'valid' | 'pending' | 'expired';
@@ -28,10 +30,10 @@ const AssociationsTab = ({ onCreateNew }: AssociationsTabProps) => {
   const { toast } = useToast();
   // Sample data
   const [associations, setAssociations] = useState<Association[]>([
-    { id: 1, name: 'Acme Corporation', accountHolder: 'James Wilson', contractType: 'RIA', lastAttested: 'May 1, 2025', status: 'valid', commissionAccess: true, enabled: true },
-    { id: 2, name: 'James Smith', accountHolder: 'James Smith', contractType: 'Agent', lastAttested: 'May 20, 2025', status: 'valid', commissionAccess: false, enabled: true },
-    { id: 3, name: 'Global Tech Partners', accountHolder: 'Michael Johnson', contractType: 'RIA', lastAttested: 'November 30, 2024', status: 'pending', commissionAccess: true, enabled: true },
-    { id: 4, name: 'Sarah Johnson', accountHolder: 'Sarah Johnson', contractType: 'Agent', lastAttested: 'November 25, 2024', status: 'expired', commissionAccess: false, enabled: true },
+    { id: 1, name: 'Acme Corporation', accountHolder: 'James Wilson', accountEmail: 'james.wilson@acme.com', contractType: 'RIA', lastAttested: 'May 1, 2025', status: 'valid', commissionAccess: true, enabled: true },
+    { id: 2, name: 'James Smith', accountHolder: 'James Smith', accountEmail: 'james.smith@example.com', contractType: 'Agent', lastAttested: 'May 20, 2025', status: 'valid', commissionAccess: false, enabled: true },
+    { id: 3, name: 'Global Tech Partners', accountHolder: 'Michael Johnson', accountEmail: 'michael.johnson@globaltech.com', contractType: 'RIA', lastAttested: 'November 30, 2024', status: 'pending', commissionAccess: true, enabled: true },
+    { id: 4, name: 'Sarah Johnson', accountHolder: 'Sarah Johnson', accountEmail: 'sarah.johnson@example.com', contractType: 'Agent', lastAttested: 'November 25, 2024', status: 'expired', commissionAccess: false, enabled: true },
   ]);
   
   // Track which row is being edited
@@ -80,8 +82,8 @@ const AssociationsTab = ({ onCreateNew }: AssociationsTabProps) => {
             <table className="w-full">
               <thead className="bg-muted">
                 <tr>
-                  <th className="text-xs font-medium text-left p-3">Entity Name</th>
                   <th className="text-xs font-medium text-left p-3">Account Holder</th>
+                  <th className="text-xs font-medium text-left p-3">Entity Name</th>
                   <th className="text-xs font-medium text-left p-3">Contract Type</th>
                   <th className="text-xs font-medium text-left p-3">Last Attested</th>
                   <th className="text-xs font-medium text-left p-3">Status</th>
@@ -93,8 +95,21 @@ const AssociationsTab = ({ onCreateNew }: AssociationsTabProps) => {
               <tbody className="divide-y">
                 {associations.map((association) => (
                   <tr key={association.id}>
+                    <td className="p-3 text-sm">
+                      <HoverCard>
+                        <HoverCardTrigger asChild>
+                          <span className="cursor-help underline decoration-dotted">
+                            {association.accountHolder}
+                          </span>
+                        </HoverCardTrigger>
+                        <HoverCardContent className="w-auto">
+                          <div className="text-sm">
+                            <p className="font-medium">{association.accountEmail}</p>
+                          </div>
+                        </HoverCardContent>
+                      </HoverCard>
+                    </td>
                     <td className="p-3 text-sm">{association.name}</td>
-                    <td className="p-3 text-sm">{association.accountHolder}</td>
                     <td className="p-3 text-sm">{association.contractType}</td>
                     <td className="p-3 text-sm">{association.lastAttested}</td>
                     <td className="p-3">
