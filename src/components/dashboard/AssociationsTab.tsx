@@ -19,7 +19,11 @@ type Association = {
   enabled: boolean;
 };
 
-const AssociationsTab = () => {
+interface AssociationsTabProps {
+  onCreateNew?: () => void;
+}
+
+const AssociationsTab = ({ onCreateNew }: AssociationsTabProps) => {
   const { toast } = useToast();
   // Sample data
   const [associations, setAssociations] = useState<Association[]>([
@@ -62,9 +66,12 @@ const AssociationsTab = () => {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Active Associations</CardTitle>
-        <CardDescription>Organizations and individuals with active access permissions</CardDescription>
+      <CardHeader className="flex flex-row items-center justify-between">
+        <div>
+          <CardTitle>Active Associations</CardTitle>
+          <CardDescription>Organizations and individuals with active access permissions</CardDescription>
+        </div>
+        <Button onClick={onCreateNew}>Create New Association</Button>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
