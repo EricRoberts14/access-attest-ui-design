@@ -10,10 +10,7 @@ export const ContractTypeSection: React.FC = () => {
 
   const contractTypeOptions = [
     { id: 'ria', label: 'RIA' },
-    { id: 'agent', label: 'Agent' },
-    { id: 'broker', label: 'Broker' },
-    { id: 'partner', label: 'Partner' },
-    { id: 'consultant', label: 'Consultant' }
+    { id: 'agent', label: 'Agent' }
   ];
 
   const handleCheckboxChange = (checked: boolean, value: string) => {
