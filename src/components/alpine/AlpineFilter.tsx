@@ -34,20 +34,20 @@ const AlpineFilter: React.FC<AlpineFilterProps> = ({ onFilterChange, className =
     <div 
       ref={filterRef}
       className={`${className}`}
-      x-data="{ filter: '' }"
+      data-x-data="{ filter: '' }"
     >
       <div className="relative">
         <Label htmlFor="association-filter" className="sr-only">Filter associations</Label>
         <Input
           id="association-filter"
           type="text"
-          x-model="filter"
+          data-x-model="filter"
           placeholder="Search associations..."
           className="w-full"
         />
         <button 
-          x-show="filter.length > 0"
-          x-on:click="filter = ''"
+          data-x-show="filter.length > 0"
+          data-x-on-click="filter = ''"
           className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
         >
           ×
@@ -55,7 +55,7 @@ const AlpineFilter: React.FC<AlpineFilterProps> = ({ onFilterChange, className =
       </div>
       <div className="text-sm text-muted-foreground mt-1">
         <span>Filtering by: </span>
-        <span x-text="filter || 'none'" className="font-medium"></span>
+        <span data-x-text="filter || 'none'" className="font-medium"></span>
       </div>
     </div>
   );

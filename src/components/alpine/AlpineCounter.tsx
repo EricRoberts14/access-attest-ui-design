@@ -23,22 +23,22 @@ const AlpineCounter: React.FC<AlpineCounterProps> = ({ initialCount = 0, classNa
     <div 
       ref={counterRef}
       className={`p-4 border rounded-md ${className}`}
-      x-data={`{ count: ${initialCount} }`}
+      data-x-data={`{ count: ${initialCount} }`}
     >
       <p className="text-center mb-2">
         <span>Current count: </span>
-        <span x-text="count" className="font-bold"></span>
+        <span data-x-text="count" className="font-bold"></span>
       </p>
       <div className="flex justify-center space-x-2">
         <button 
           className="px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-          x-on:click="count--"
+          data-x-on-click="count--"
         >
           Decrease
         </button>
         <button 
           className="px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-          x-on:click="count++"
+          data-x-on-click="count++"
         >
           Increase
         </button>
