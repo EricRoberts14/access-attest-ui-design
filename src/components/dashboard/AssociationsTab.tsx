@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
@@ -7,7 +8,6 @@ import MobileAssociationAccordion from './associations/MobileAssociationAccordio
 import AssociationsPagination from './associations/AssociationsPagination';
 import { Association, AssociationsTabProps } from './associations/types';
 import { mockAssociations } from './associations/mockData';
-import AlpineFilter from '../alpine/AlpineFilter';
 
 const AssociationsTab = ({ onCreateNew }: AssociationsTabProps) => {
   const { toast } = useToast();
@@ -52,55 +52,38 @@ const AssociationsTab = ({ onCreateNew }: AssociationsTabProps) => {
   };
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-col sm:flex-row justify-between gap-3 items-start sm:items-center">
-        <div className="flex flex-col gap-1 w-full sm:w-auto">
-          <h2 className="text-lg font-semibold">Your Account Associations</h2>
-          <p className="text-sm text-muted-foreground">Manage your associations and access permissions</p>
+    <Card>
+      <CardHeader>
+        <CardTitle>Associations</CardTitle>
+        <CardDescription>Accounts with associations to business</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-4">
+          {isMobile ? (
+            <MobileAssociationAccordion 
+              associations={paginatedAssociations}
+              onCommissionAccessChange={handleCommissionAccessChange}
+              onEnabledChange={handleEnabledChange}
+            />
+          ) : (
+            <AssociationAccordion 
+              associations={paginatedAssociations}
+              onCommissionAccessChange={handleCommissionAccessChange}
+              onEnabledChange={handleEnabledChange}
+            />
+          )}
         </div>
-        
-        {/* Replace or augment the search with Alpine filter component */}
-        <div className="w-full sm:w-64">
-          <AlpineFilter 
-            onFilterChange={(value) => console.log('Filter changed:', value)} 
-            className="mb-2"
-          />
-        </div>
-      </div>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Associations</CardTitle>
-          <CardDescription>Accounts with associations to business</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {isMobile ? (
-              <MobileAssociationAccordion 
-                associations={paginatedAssociations}
-                onCommissionAccessChange={handleCommissionAccessChange}
-                onEnabledChange={handleEnabledChange}
-              />
-            ) : (
-              <AssociationAccordion 
-                associations={paginatedAssociations}
-                onCommissionAccessChange={handleCommissionAccessChange}
-                onEnabledChange={handleEnabledChange}
-              />
-            )}
-          </div>
-        </CardContent>
-        <CardFooter className="flex justify-between">
-          <AssociationsPagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPreviousPage={handlePreviousPage}
-            onNextPage={handleNextPage}
-            onPageChange={setCurrentPage}
-          />
-        </CardFooter>
-      </Card>
-    </div>
+      </CardContent>
+      <CardFooter className="flex justify-between">
+        <AssociationsPagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPreviousPage={handlePreviousPage}
+          onNextPage={handleNextPage}
+          onPageChange={setCurrentPage}
+        />
+      </CardFooter>
+    </Card>
   );
 };
 
