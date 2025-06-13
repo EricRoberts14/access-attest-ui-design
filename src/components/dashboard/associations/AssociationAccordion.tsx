@@ -235,12 +235,14 @@ const AssociationAccordion = ({
                           {accountDetails.userName}
                         </Badge>
                       )}
-                      <AccountClaimStatus 
-                        accountClaimed={accountDetails.accountClaimed || false}
-                        accountEmail={accountDetails.accountEmail}
-                        accountHolder={accountDetails.accountHolder}
-                      />
                     </div>
+                  </div>
+                  <div className="ml-auto">
+                    <AccountClaimStatus 
+                      accountClaimed={accountDetails.accountClaimed || false}
+                      accountEmail={accountDetails.accountEmail}
+                      accountHolder={accountDetails.accountHolder}
+                    />
                   </div>
                 </div>
               </AccordionTrigger>

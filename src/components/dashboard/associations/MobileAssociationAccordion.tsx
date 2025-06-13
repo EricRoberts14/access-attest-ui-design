@@ -220,27 +220,31 @@ const MobileAssociationAccordion = ({
           return (
             <AccordionItem key={accountHolder} value={accountHolder} className="border rounded-md mb-2">
               <AccordionTrigger className="hover:bg-muted/50 px-3 py-2.5 rounded-md">
-                <div className="flex w-full flex-col sm:flex-row sm:items-center text-left">
-                  <div className="flex flex-wrap items-center gap-2 mb-1 sm:mb-0">
-                    <div className="flex items-center gap-1">
-                      <User className="h-4 w-4 text-muted-foreground" />
-                      <span className="font-medium">{accountDetails.accountHolder}</span>
-                    </div>
-                    <div className="flex flex-wrap items-center gap-2">
-                      <Badge variant="outline" className="font-normal text-xs bg-muted/40 hover:bg-muted">
-                        {accountDetails.accountEmail}
-                      </Badge>
-                      {accountDetails.userName && (
-                        <Badge variant="outline" className="font-normal text-xs bg-muted/60 hover:bg-muted">
-                          {accountDetails.userName}
+                <div className="flex w-full items-center justify-between pr-2">
+                  <div className="flex flex-col sm:flex-row sm:items-center text-left">
+                    <div className="flex flex-wrap items-center gap-2 mb-1 sm:mb-0">
+                      <div className="flex items-center gap-1">
+                        <User className="h-4 w-4 text-muted-foreground" />
+                        <span className="font-medium">{accountDetails.accountHolder}</span>
+                      </div>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <Badge variant="outline" className="font-normal text-xs bg-muted/40 hover:bg-muted">
+                          {accountDetails.accountEmail}
                         </Badge>
-                      )}
-                      <AccountClaimStatus 
-                        accountClaimed={accountDetails.accountClaimed || false}
-                        accountEmail={accountDetails.accountEmail}
-                        accountHolder={accountDetails.accountHolder}
-                      />
+                        {accountDetails.userName && (
+                          <Badge variant="outline" className="font-normal text-xs bg-muted/60 hover:bg-muted">
+                            {accountDetails.userName}
+                          </Badge>
+                        )}
+                      </div>
                     </div>
+                  </div>
+                  <div className="ml-auto flex-shrink-0">
+                    <AccountClaimStatus 
+                      accountClaimed={accountDetails.accountClaimed || false}
+                      accountEmail={accountDetails.accountEmail}
+                      accountHolder={accountDetails.accountHolder}
+                    />
                   </div>
                 </div>
               </AccordionTrigger>
