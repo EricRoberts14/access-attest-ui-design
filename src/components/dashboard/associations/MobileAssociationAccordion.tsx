@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
@@ -220,26 +219,24 @@ const MobileAssociationAccordion = ({
           return (
             <AccordionItem key={accountHolder} value={accountHolder} className="border rounded-md mb-2">
               <AccordionTrigger className="hover:bg-muted/50 px-3 py-2.5 rounded-md">
-                <div className="flex w-full items-center justify-between pr-2">
-                  <div className="flex flex-col sm:flex-row sm:items-center text-left">
-                    <div className="flex flex-wrap items-center gap-2 mb-1 sm:mb-0">
-                      <div className="flex items-center gap-1">
-                        <User className="h-4 w-4 text-muted-foreground" />
-                        <span className="font-medium">{accountDetails.accountHolder}</span>
-                      </div>
-                      <div className="flex flex-wrap items-center gap-2">
-                        <Badge variant="outline" className="font-normal text-xs bg-muted/40 hover:bg-muted">
-                          {accountDetails.accountEmail}
+                <div className="flex w-full items-start justify-between pr-2">
+                  <div className="flex flex-col text-left flex-1 min-w-0">
+                    <div className="flex items-center gap-1 mb-2">
+                      <User className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+                      <span className="font-medium truncate">{accountDetails.accountHolder}</span>
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      <Badge variant="outline" className="font-normal text-xs bg-muted/40 hover:bg-muted w-fit">
+                        {accountDetails.accountEmail}
+                      </Badge>
+                      {accountDetails.userName && (
+                        <Badge variant="outline" className="font-normal text-xs bg-muted/60 hover:bg-muted w-fit">
+                          {accountDetails.userName}
                         </Badge>
-                        {accountDetails.userName && (
-                          <Badge variant="outline" className="font-normal text-xs bg-muted/60 hover:bg-muted">
-                            {accountDetails.userName}
-                          </Badge>
-                        )}
-                      </div>
+                      )}
                     </div>
                   </div>
-                  <div className="min-w-[180px] flex-shrink-0">
+                  <div className="flex-shrink-0 ml-2">
                     <AccountClaimStatus 
                       accountClaimed={accountDetails.accountClaimed || false}
                       accountEmail={accountDetails.accountEmail}
