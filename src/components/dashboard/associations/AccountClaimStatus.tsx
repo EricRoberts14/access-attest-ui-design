@@ -22,7 +22,7 @@ const AccountClaimStatus = ({ accountClaimed, accountEmail, accountHolder }: Acc
   };
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center justify-end">
       {accountClaimed ? (
         <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
           <CheckCircle className="h-3 w-3 mr-1" />
@@ -37,7 +37,7 @@ const AccountClaimStatus = ({ accountClaimed, accountEmail, accountHolder }: Acc
           <XCircle className="h-3 w-3 mr-1 group-hover:hidden" />
           <Mail className="h-3 w-3 mr-1 hidden group-hover:block" />
           <span className="group-hover:hidden">Unclaimed</span>
-          <span className="hidden group-hover:block">Resend</span>
+          <span className="hidden group-hover:block">Resend Claim Email</span>
         </Badge>
       )}
     </div>
