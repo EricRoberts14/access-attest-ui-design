@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { CheckCircle, XCircle, Mail } from 'lucide-react';
 
@@ -30,21 +29,16 @@ const AccountClaimStatus = ({ accountClaimed, accountEmail, accountHolder }: Acc
           Claimed
         </Badge>
       ) : (
-        <>
-          <Badge variant="outline" className="bg-orange-50 text-orange-700 border-orange-200">
-            <XCircle className="h-3 w-3 mr-1" />
-            Unclaimed
-          </Badge>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={handleResendClaimEmail}
-            className="h-6 px-2 text-xs"
-          >
-            <Mail className="h-3 w-3 mr-1" />
-            Resend Claim Email
-          </Button>
-        </>
+        <Badge 
+          variant="outline" 
+          className="bg-orange-50 text-orange-700 border-orange-200 cursor-pointer hover:bg-orange-100 transition-colors group"
+          onClick={handleResendClaimEmail}
+        >
+          <XCircle className="h-3 w-3 mr-1 group-hover:hidden" />
+          <Mail className="h-3 w-3 mr-1 hidden group-hover:block" />
+          <span className="group-hover:hidden">Unclaimed</span>
+          <span className="hidden group-hover:block">Resend</span>
+        </Badge>
       )}
     </div>
   );
