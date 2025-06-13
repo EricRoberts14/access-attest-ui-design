@@ -8,6 +8,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { useToast } from "@/hooks/use-toast";
 import { Association } from './types';
 import AttestationStatus from '../AttestationStatus';
+import AccountClaimStatus from './AccountClaimStatus';
 import { Badge } from '@/components/ui/badge';
 import { User, Plus } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -234,6 +235,11 @@ const AssociationAccordion = ({
                           {accountDetails.userName}
                         </Badge>
                       )}
+                      <AccountClaimStatus 
+                        accountClaimed={accountDetails.accountClaimed || false}
+                        accountEmail={accountDetails.accountEmail}
+                        accountHolder={accountDetails.accountHolder}
+                      />
                     </div>
                   </div>
                 </div>

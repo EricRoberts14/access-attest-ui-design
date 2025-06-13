@@ -10,9 +10,9 @@ export type Association = {
   status: 'valid' | 'pending' | 'expired';
   commissionAccess: boolean;
   enabled: boolean;
+  accountClaimed?: boolean; // New field for claim status
 };
 
 export interface AssociationsTabProps {
   onCreateNew?: () => void;
 }
-
