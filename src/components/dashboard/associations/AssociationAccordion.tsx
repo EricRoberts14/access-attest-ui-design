@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
@@ -236,7 +237,7 @@ const AssociationAccordion = ({
                       )}
                     </div>
                   </div>
-                  <div className="ml-6">
+                  <div className="ml-auto">
                     <AccountClaimStatus 
                       accountClaimed={accountDetails.accountClaimed || false}
                       accountEmail={accountDetails.accountEmail}
