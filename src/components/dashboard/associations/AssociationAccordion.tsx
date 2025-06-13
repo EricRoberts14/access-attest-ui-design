@@ -237,7 +237,7 @@ const AssociationAccordion = ({
                       )}
                     </div>
                   </div>
-                  <div className="ml-auto">
+                  <div className="min-w-[200px]">
                     <AccountClaimStatus 
                       accountClaimed={accountDetails.accountClaimed || false}
                       accountEmail={accountDetails.accountEmail}

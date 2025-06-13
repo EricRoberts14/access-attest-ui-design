@@ -239,7 +239,7 @@ const MobileAssociationAccordion = ({
                       </div>
                     </div>
                   </div>
-                  <div className="ml-auto flex-shrink-0">
+                  <div className="min-w-[180px] flex-shrink-0">
                     <AccountClaimStatus 
                       accountClaimed={accountDetails.accountClaimed || false}
                       accountEmail={accountDetails.accountEmail}

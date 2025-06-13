@@ -22,32 +22,33 @@ const AccountClaimStatus = ({ accountClaimed, accountEmail, accountHolder }: Acc
     });
   };
 
-  if (accountClaimed) {
-    return (
-      <div className="flex items-center gap-2">
-        <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
-          <CheckCircle className="h-3 w-3 mr-1" />
-          Claimed
-        </Badge>
-      </div>
-    );
-  }
-
   return (
-    <div className="flex items-center gap-2">
-      <Badge variant="outline" className="bg-orange-50 text-orange-700 border-orange-200">
-        <XCircle className="h-3 w-3 mr-1" />
-        Unclaimed
-      </Badge>
-      <Button
-        variant="outline"
-        size="sm"
-        onClick={handleResendClaimEmail}
-        className="h-6 px-2 text-xs"
-      >
-        <Mail className="h-3 w-3 mr-1" />
-        Resend Claim Email
-      </Button>
+    <div className="flex items-center justify-between w-full">
+      <div className="flex items-center">
+        {accountClaimed ? (
+          <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
+            <CheckCircle className="h-3 w-3 mr-1" />
+            Claimed
+          </Badge>
+        ) : (
+          <Badge variant="outline" className="bg-orange-50 text-orange-700 border-orange-200">
+            <XCircle className="h-3 w-3 mr-1" />
+            Unclaimed
+          </Badge>
+        )}
+      </div>
+      
+      {!accountClaimed && (
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={handleResendClaimEmail}
+          className="h-6 px-2 text-xs ml-2"
+        >
+          <Mail className="h-3 w-3 mr-1" />
+          Resend Claim Email
+        </Button>
+      )}
     </div>
   );
 };
